@@ -1,0 +1,65 @@
+rt {
+    text-align: center; }
+.韻書 {
+    display: grid;
+    grid: auto-flow / repeat(5, auto);
+    justify-items: center;
+    align-items: baseline;
+    justify-content: start;
+    font-size: 1.25em; }
+.攝 {
+    display: contents; }
+.攝 > div:first-child {
+    grid-column: 1; }
+.韻 {
+    display: contents; }
+.平 {
+    grid-column: 2; }
+.上 {
+    grid-column: 3; }
+.去 {
+    grid-column: 4; }
+.入 {
+    grid-column: 5; }
+rt > .鄴 {
+    display: block; }
+.金陵 {
+    display: none; }
+.長安 {
+    display: none; }
+.三十字母 {
+    display: grid;
+    grid: auto-flow / auto repeat(5, auto) auto;
+    justify-items: start;
+    align-items: baseline;
+    justify-content: start;
+    font-size: 1.25em; }
+.三十字母 > * {
+    display: contents; }
+.三十字母 > * > header {
+    grid-column: 1; }
+.三十字母 > * > div {
+    display: contents; }
+.三十字母 > * > div > :nth-child(1) {
+    display: contents; }
+.三十字母 > * > div > :nth-child(1) > * {
+    justify-self: center; }
+.三十字母 > * > div > :nth-child(1) > :nth-child(1) {
+    grid-column: 2; }
+.三十字母 > * > div > :nth-child(1) > :nth-child(2) {
+    grid-column: 3; }
+.三十字母 > * > div > :nth-child(1) > :nth-child(3) {
+    grid-column: 4; }
+.三十字母 > * > div > :nth-child(1) > :nth-child(4) {
+    grid-column: 5; }
+.三十字母 > * > div > :nth-child(1) > :nth-child(5) {
+    grid-column: 6; }
+.三十字母 > * > div > :nth-child(2) {
+    grid-column: 7; }
+.等韻圖 {
+    display: grid;
+    grid: repeat(2, auto) / auto-flow;
+    justify-items: center;
+    align-items: baseline;
+    justify-content: start;
+    font-size: 1.25em; }

@@ -1,0 +1,42 @@
+{
+	"projectName": "mc_pron",
+  "configurations": [
+    {
+      "name": "asm.js Emscripten",
+      "includePath": [
+        "${env.WindowsSdkDir}/include/${env.WindowsSDKVersion}/ucrt",
+        "${env.VCToolsInstallDir}/include",
+        "${env.ProgramW6432}/xlnt/include",
+        "${env.ProgramW6432}/Glium",
+        "${env.Emscripten}/system/include"
+      ],
+      "compilerSwitches": "/std:c++17",
+      "intelliSenseMode": "windows-msvc-x64"
+    },
+    {
+      "name": "ARMv7-A Android",
+      "includePath": [
+      ],
+      "compilerSwitches": "-std=c++17",
+      "intelliSenseMode": "android-clang-arm"
+    },
+    {
+      "name": "ARMv8-A Android",
+      "includePath": [
+      ],
+      "compilerSwitches": "-std=c++17",
+      "intelliSenseMode": "android-clang-arm64"
+    },
+    {
+      "name": "x86 Windows",
+      "includePath": [
+        "${env.WindowsSdkDir}/include/${env.WindowsSDKVersion}/ucrt",
+        "${env.WindowsSdkDir}/include/${env.WindowsSDKVersion}/um",
+        "${env.WindowsSdkDir}/include/${env.WindowsSDKVersion}/shared",
+        "${env.VCToolsInstallDir}/include"
+      ],
+      "compilerSwitches": "/std:c++17",
+      "intelliSenseMode": "windows-msvc-x64"
+    }
+  ]
+}

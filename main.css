@@ -1,0 +1,9 @@
+body {
+    background: #ff6a00;
+    color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    font-family: system-ui; }
+#pronunciation {
+    font-size: 60px;
+    overflow: auto; }
