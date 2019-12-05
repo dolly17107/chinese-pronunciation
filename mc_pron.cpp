@@ -177,7 +177,7 @@ int main() {
                     start.setStartBefore(atom);
                     start.setEndBefore(atom); }
                 target.onpointermove = function(event) {
-                    let end = target.ownerDocument.caretRangeFromPoint($0, $1);
+                    let end = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
                     let atom = null;
                     let node = end.endContainer;
                     for (; node && target != node; node = node.parentNode) {

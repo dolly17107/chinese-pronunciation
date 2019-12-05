@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 327624,
-  "package_uuid": "81f89e5e-cc0e-41cb-aeba-41d6574f03e2"
+  "package_uuid": "e579ef95-c5cd-4db0-9433-8468760196fe"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65760, DYNAMIC_BASE = 5308640, DYNAMICTOP_PTR = 65584;
+var STACK_MAX = 65792, DYNAMIC_BASE = 5308672, DYNAMICTOP_PTR = 65616;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -977,7 +977,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 3792: function($0, $1) {
+ 3792: function() {
   document.getElementById("pronunciation").addEventListener("pointerdown", function(event) {
    let target = event.currentTarget;
    let start = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
@@ -995,7 +995,7 @@ var ASM_CONSTS = {
      start.setEndBefore(atom);
     }
     target.onpointermove = function(event) {
-     let end = target.ownerDocument.caretRangeFromPoint($0, $1);
+     let end = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
      let atom = null;
      let node = end.endContainer;
      for (;node && target != node; node = node.parentNode) {
@@ -1172,7 +1172,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65744;
+ var buffer = 65776;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1198,7 +1198,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65744;
+ var buffer = 65776;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
