@@ -162,7 +162,6 @@ int main() {
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("input"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("compositionend"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("pointerdown"), js::bind([](emscripten::val event) {
-        console_log("pointer down...");
         emscripten::val start = emscripten::val::global("document").call<emscripten::val>("caretRangeFromPoint", event["clientX"], event["clientY"]);
         emscripten::val atom = emscripten::val::null();
         emscripten::val node = start["endContainer"];
@@ -174,8 +173,7 @@ int main() {
             if (atom.as<bool>()) {
                 start.call<void>("setStartBefore", atom);
                 start.call<void>("setEndBefore", atom); }
-            get_element_by_id("pronunciation").call<void>("addEventListener", std::string("pointermove"), js::bind([start](emscripten::val event) {
-                console_log("pointer move...");
+            get_element_by_id("pronunciation").set("onpointermove", js::bind([start](emscripten::val event) {
                 emscripten::val end = emscripten::val::global("document").call<emscripten::val>("caretRangeFromPoint", event["clientX"], event["clientY"]);
                 emscripten::val atom = emscripten::val::null();
                 emscripten::val node = end["endContainer"];
@@ -190,4 +188,6 @@ int main() {
                     emscripten::val::global("document").call<emscripten::val>("getSelection").call<void>("setBaseAndExtent", start["endContainer"], start["endOffset"], end["endContainer"], end["endOffset"]); } },
                 std::placeholders::_1)); } },
         std::placeholders::_1));
-}
+    get_element_by_id("pronunciation").call<void>("addEventListener", std::string("pointerup"), js::bind([](emscripten::val) {
+        get_element_by_id("pronunciation").set("onpointermove", emscripten::val::null()); },
+        std::placeholders::_1)); }

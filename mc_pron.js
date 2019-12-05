@@ -19,7 +19,7 @@ Module.expectedDataFileDownloads++;
   } else {
    throw "using preloaded data can only be done on a web page or in a web worker";
   }
-  var PACKAGE_NAME = "C:/Program Files/mc_pron/mc_pron.data";
+  var PACKAGE_NAME = "C:/Program Files/chinese-pronunciation/mc_pron.data";
   var REMOTE_PACKAGE_BASE = "mc_pron.data";
   if (typeof Module["locateFilePackage"] === "function" && !Module["locateFile"]) {
    Module["locateFile"] = Module["locateFilePackage"];
@@ -133,9 +133,9 @@ Module.expectedDataFileDownloads++;
     for (var i = 0; i < files.length; ++i) {
      DataRequest.prototype.requests[files[i].filename].onload();
     }
-    Module["removeRunDependency"]("datafile_C:/Program Files/mc_pron/mc_pron.data");
+    Module["removeRunDependency"]("datafile_C:/Program Files/chinese-pronunciation/mc_pron.data");
    }
-   Module["addRunDependency"]("datafile_C:/Program Files/mc_pron/mc_pron.data");
+   Module["addRunDependency"]("datafile_C:/Program Files/chinese-pronunciation/mc_pron.data");
    if (!Module.preloadResults) Module.preloadResults = {};
    Module.preloadResults[PACKAGE_NAME] = {
     fromCache: false
@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 327624,
-  "package_uuid": "1f606e59-aed6-4f86-820c-49929f6f0e59"
+  "package_uuid": "550a713e-a445-4f82-bc30-24c387232d07"
  });
 })();
 
@@ -488,8 +488,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1187,
- "maximum": 1187 + 0,
+ "initial": 1188,
+ "maximum": 1188 + 0,
  "element": "anyfunc"
 });
 
@@ -686,7 +686,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65184, DYNAMIC_BASE = 5308064, DYNAMICTOP_PTR = 65008;
+var STACK_MAX = 65536, DYNAMIC_BASE = 5308416, DYNAMICTOP_PTR = 65360;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -1095,7 +1095,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65168;
+ var buffer = 65520;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1121,7 +1121,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65168;
+ var buffer = 65520;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
