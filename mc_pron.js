@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 327624,
-  "package_uuid": "7ec8d5d6-061e-4b52-ba3c-3443028d6cc5"
+  "package_uuid": "81f89e5e-cc0e-41cb-aeba-41d6574f03e2"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65728, DYNAMIC_BASE = 5308608, DYNAMICTOP_PTR = 65552;
+var STACK_MAX = 65760, DYNAMIC_BASE = 5308640, DYNAMICTOP_PTR = 65584;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -1012,6 +1012,7 @@ var ASM_CONSTS = {
       target.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset);
      }
     };
+    event.stopPropagation();
    }
   });
   document.getElementById("pronunciation").addEventListener("pointerup", function(event) {
@@ -1171,7 +1172,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65712;
+ var buffer = 65744;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1197,7 +1198,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65712;
+ var buffer = 65744;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
