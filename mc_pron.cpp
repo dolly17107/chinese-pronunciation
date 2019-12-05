@@ -15,6 +15,7 @@
 #include <emscripten.h>
 #include <emscripten/val.h>
 #include <emscripten/bind.h>
+#include <js.h>
 #include <js/bind.hpp>
 #include "mc_pron.h"
 class utf8_iterator {
@@ -161,33 +162,32 @@ int main() {
     emscripten::val::global("document")["body"].set("innerHTML", file_to_string("main.html"));
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("input"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("compositionend"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
-    get_element_by_id("pronunciation").call<void>("addEventListener", std::string("pointerdown"), js::bind([](emscripten::val event) {
-        emscripten::val start = event["currentTarget"]["ownerDocument"].call<emscripten::val>("caretRangeFromPoint", event["clientX"], event["clientY"]);
-        emscripten::val atom = emscripten::val::null();
-        emscripten::val node = start["endContainer"];
-        for (; node.as<bool>() && event["currentTarget"] != node; node = node["parentNode"]) {
-            if (node.instanceof(emscripten::val::global("HTMLElement")) && !node["isContentEditable"]) {
-                atom = node; } }
-        if (event["currentTarget"] == node) {
-            console_log("positioning...");
-            if (atom.as<bool>()) {
-                start.call<void>("setStartBefore", atom);
-                start.call<void>("setEndBefore", atom); }
-            event["currentTarget"].set("onpointermove", js::bind([start](emscripten::val event) {
-                emscripten::val end = event["currentTarget"]["ownerDocument"].call<emscripten::val>("caretRangeFromPoint", event["clientX"], event["clientY"]);
-                emscripten::val atom = emscripten::val::null();
-                emscripten::val node = end["endContainer"];
-                for (; node.as<bool>() && event["currentTarget"] != node; node = node["parentNode"]) {
-                    if (node.instanceof(emscripten::val::global("HTMLElement")) && !node["isContentEditable"]) {
-                        atom = node; } }
-                if (event["currentTarget"] == node) {
-                    console_log("selecting...");
-                    if (atom.as<bool>()) {
-                        end.call<void>("setStartBefore", atom);
-                        end.call<void>("setEndBefore", atom); }
-                    event["currentTarget"]["ownerDocument"].call<emscripten::val>("getSelection").call<void>("setBaseAndExtent", start["endContainer"], start["endOffset"], end["endContainer"], end["endOffset"]); } },
-                std::placeholders::_1)); } },
-        std::placeholders::_1));
-    get_element_by_id("pronunciation").call<void>("addEventListener", std::string("pointerup"), js::bind([](emscripten::val event) {
-        event["currentTarget"].set("onpointermove", emscripten::val::null()); },
-        std::placeholders::_1)); }
+    R"js(
+        document.getElementById("pronunciation").addEventListener("pointerdown", function(event) {
+            let target = event.currentTarget;
+            let start = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
+            let atom = null;
+            let node = start.endContainer;
+            for (; node && target != node; node = node.parentNode) {
+                if (node instanceof HTMLElement && !node.isContentEditable) {
+                    atom = node; } }
+            if (target == node) {
+                console.log("positioning...");
+                if (atom) {
+                    start.setStartBefore(atom);
+                    start.setEndBefore(atom); }
+                target.onpointermove = function(event) {
+                    let end = target.ownerDocument.caretRangeFromPoint($0, $1);
+                    let atom = null;
+                    let node = end.endContainer;
+                    for (; node && target != node; node = node.parentNode) {
+                        if (node instanceof HTMLElement && !node.isContentEditable) {
+                            atom = node; } }
+                    if (target == node) {
+                        console.log("selecting...");
+                        if (atom) {
+                            end.setStartBefore(atom);
+                            end.setEndBefore(atom); }
+                        target.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); } } } });
+        document.getElementById("pronunciation").addEventListener("pointerup", function(event) {
+            event.currentTarget.onpointermove = null; }); )js"_js_asm(); }

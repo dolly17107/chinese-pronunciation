@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 327624,
-  "package_uuid": "5bb14ea0-3786-46f1-aa63-7eebcda8bad7"
+  "package_uuid": "7ec8d5d6-061e-4b52-ba3c-3443028d6cc5"
  });
 })();
 
@@ -379,6 +379,8 @@ if (Module["thisProgram"]) thisProgram = Module["thisProgram"];
 
 if (Module["quit"]) quit_ = Module["quit"];
 
+var STACK_ALIGN = 16;
+
 function dynamicAlloc(size) {
  var ret = HEAP32[DYNAMICTOP_PTR >> 2];
  var end = ret + size + 15 & -16;
@@ -387,6 +389,11 @@ function dynamicAlloc(size) {
  }
  HEAP32[DYNAMICTOP_PTR >> 2] = end;
  return ret;
+}
+
+function alignMemory(size, factor) {
+ if (!factor) factor = STACK_ALIGN;
+ return Math.ceil(size / factor) * factor;
 }
 
 function getNativeTypeSize(type) {
@@ -488,8 +495,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1188,
- "maximum": 1188 + 0,
+ "initial": 1178,
+ "maximum": 1178 + 0,
  "element": "anyfunc"
 });
 
@@ -686,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65552, DYNAMIC_BASE = 5308432, DYNAMICTOP_PTR = 65376;
+var STACK_MAX = 65728, DYNAMIC_BASE = 5308608, DYNAMICTOP_PTR = 65552;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -969,6 +976,75 @@ var tempDouble;
 
 var tempI64;
 
+var ASM_CONSTS = {
+ 3792: function($0, $1) {
+  document.getElementById("pronunciation").addEventListener("pointerdown", function(event) {
+   let target = event.currentTarget;
+   let start = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
+   let atom = null;
+   let node = start.endContainer;
+   for (;node && target != node; node = node.parentNode) {
+    if (node instanceof HTMLElement && !node.isContentEditable) {
+     atom = node;
+    }
+   }
+   if (target == node) {
+    console.log("positioning...");
+    if (atom) {
+     start.setStartBefore(atom);
+     start.setEndBefore(atom);
+    }
+    target.onpointermove = function(event) {
+     let end = target.ownerDocument.caretRangeFromPoint($0, $1);
+     let atom = null;
+     let node = end.endContainer;
+     for (;node && target != node; node = node.parentNode) {
+      if (node instanceof HTMLElement && !node.isContentEditable) {
+       atom = node;
+      }
+     }
+     if (target == node) {
+      console.log("selecting...");
+      if (atom) {
+       end.setStartBefore(atom);
+       end.setEndBefore(atom);
+      }
+      target.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset);
+     }
+    };
+   }
+  });
+  document.getElementById("pronunciation").addEventListener("pointerup", function(event) {
+   event.currentTarget.onpointermove = null;
+  });
+ }
+};
+
+var _readAsmConstArgsArray = [];
+
+function readAsmConstArgs(sigPtr, buf) {
+ var args = _readAsmConstArgsArray;
+ args.length = 0;
+ while (1) {
+  var ch = HEAPU8[sigPtr++];
+  if (!ch) return args;
+  if (ch === "d".charCodeAt(0) || ch === "f".charCodeAt(0)) {
+   buf = alignMemory(buf, 8);
+   args.push(HEAPF64[buf >> 3]);
+   buf += 8;
+  } else if (ch === "i".charCodeAt(0)) {
+   buf = alignMemory(buf, 4);
+   args.push(HEAP32[buf >> 2]);
+   buf += 4;
+  }
+ }
+}
+
+function _emscripten_asm_const_iii(code, sigPtr, argbuf) {
+ var args = readAsmConstArgs(sigPtr, argbuf);
+ return ASM_CONSTS[code].apply(null, args);
+}
+
 function console_log(str) {
  console.log(UTF8ToString(str));
 }
@@ -1095,7 +1171,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65536;
+ var buffer = 65712;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1121,7 +1197,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65536;
+ var buffer = 65712;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -5273,12 +5349,6 @@ function __emval_call_void_method(caller, handle, methodName, args) {
  caller(handle, methodName, null, args);
 }
 
-function __emval_equals(first, second) {
- first = requireHandle(first);
- second = requireHandle(second);
- return first == second;
-}
-
 function emval_get_global() {
  if (typeof globalThis === "object") {
   return globalThis;
@@ -5867,96 +5937,96 @@ function intArrayFromString(stringy, dontAddNull, length) {
 
 var asmLibraryArg = {
  "r": ___cxa_allocate_exception,
- "A": ___cxa_begin_catch,
- "K": ___cxa_end_catch,
+ "z": ___cxa_begin_catch,
+ "H": ___cxa_end_catch,
  "c": ___cxa_find_matching_catch_2,
  "h": ___cxa_find_matching_catch_3,
  "t": ___cxa_free_exception,
- "O": ___cxa_rethrow,
+ "L": ___cxa_rethrow,
  "s": ___cxa_throw,
  "Ja": ___cxa_uncaught_exceptions,
- "fa": ___lock,
+ "da": ___lock,
  "Ia": ___map_file,
- "f": ___resumeException,
- "ea": ___syscall221,
+ "e": ___resumeException,
+ "ca": ___syscall221,
  "Ha": ___syscall5,
  "Ga": ___syscall54,
  "Fa": ___syscall91,
- "J": ___unlock,
+ "G": ___unlock,
  "Aa": __embind_register_bool,
  "p": __embind_register_class,
  "o": __embind_register_class_constructor,
  "n": __embind_register_class_function,
  "za": __embind_register_emval,
- "ca": __embind_register_float,
- "B": __embind_register_integer,
+ "aa": __embind_register_float,
+ "A": __embind_register_integer,
  "y": __embind_register_memory_view,
- "ba": __embind_register_std_string,
+ "$": __embind_register_std_string,
  "ya": __embind_register_std_wstring,
  "xa": __embind_register_void,
- "aa": __emval_as,
- "I": __emval_call_method,
- "N": __emval_call_void_method,
- "wa": __emval_decref,
- "va": __emval_equals,
- "$": __emval_get_global,
+ "wa": __emval_as,
+ "K": __emval_call_method,
+ "_": __emval_call_void_method,
+ "va": __emval_decref,
+ "Z": __emval_get_global,
  "ua": __emval_get_method_caller,
  "ta": __emval_get_property,
- "z": __emval_incref,
+ "J": __emval_incref,
  "sa": __emval_instanceof,
- "E": __emval_new_cstring,
+ "C": __emval_new_cstring,
  "ra": __emval_not,
  "qa": __emval_run_destructors,
  "pa": __emval_set_property,
  "oa": __emval_take_value,
- "_": _abort,
- "Z": console_log,
- "na": _emscripten_memcpy_big,
- "ma": _emscripten_resize_heap,
+ "Y": _abort,
+ "na": console_log,
+ "ma": _emscripten_asm_const_iii,
+ "la": _emscripten_memcpy_big,
+ "ka": _emscripten_resize_heap,
  "Ea": _environ_get,
  "Da": _environ_sizes_get,
- "da": _fd_close,
+ "ba": _fd_close,
  "Ca": _fd_read,
- "ka": _fd_seek,
+ "ia": _fd_seek,
  "Ba": _fd_write,
  "b": _getTempRet0,
- "H": invoke_diii,
- "Y": invoke_fiii,
+ "X": invoke_diii,
+ "W": invoke_fiii,
  "q": invoke_i,
- "e": invoke_ii,
+ "f": invoke_ii,
  "d": invoke_iii,
  "m": invoke_iiii,
  "l": invoke_iiiii,
  "u": invoke_iiiiii,
  "v": invoke_iiiiiii,
- "X": invoke_iiiiiiii,
+ "V": invoke_iiiiiiii,
  "x": invoke_iiiiiiiiiii,
- "L": invoke_iiiiiiiiiiii,
- "G": invoke_iiiiiiiiiiiii,
- "ja": invoke_iiji,
- "ia": invoke_jiiii,
+ "I": invoke_iiiiiiiiiiii,
+ "F": invoke_iiiiiiiiiiiii,
+ "ha": invoke_iiji,
+ "ga": invoke_jiiii,
  "j": invoke_v,
  "a": invoke_vi,
  "g": invoke_vii,
  "k": invoke_viii,
  "i": invoke_viiii,
- "D": invoke_viiiii,
- "M": invoke_viiiiii,
+ "E": invoke_viiiii,
+ "U": invoke_viiiiii,
  "w": invoke_viiiiiii,
- "W": invoke_viiiiiiii,
- "V": invoke_viiiiiiiii,
- "C": invoke_viiiiiiiiii,
- "U": invoke_viiiiiiiiiii,
- "T": invoke_viiiiiiiiiiii,
- "S": invoke_viiiiiiiiiiiii,
- "R": invoke_viiiiiiiiiiiiii,
- "F": invoke_viiiiiiiiiiiiiii,
- "Q": invoke_viiiiiiiiiiiiiiii,
- "la": invoke_viiiiiiiiiiiiiiiii,
- "ha": invoke_viijii,
+ "T": invoke_viiiiiiii,
+ "S": invoke_viiiiiiiii,
+ "B": invoke_viiiiiiiiii,
+ "R": invoke_viiiiiiiiiii,
+ "Q": invoke_viiiiiiiiiiii,
+ "P": invoke_viiiiiiiiiiiii,
+ "O": invoke_viiiiiiiiiiiiii,
+ "D": invoke_viiiiiiiiiiiiiii,
+ "N": invoke_viiiiiiiiiiiiiiii,
+ "ja": invoke_viiiiiiiiiiiiiiiii,
+ "fa": invoke_viijii,
  "memory": wasmMemory,
- "P": _setTempRet0,
- "ga": _strftime_l,
+ "M": _setTempRet0,
+ "ea": _strftime_l,
  "table": wasmTable
 };
 
@@ -6472,17 +6542,6 @@ function invoke_iiiii(index, a1, a2, a3, a4) {
  }
 }
 
-function invoke_diii(index, a1, a2, a3) {
- var sp = stackSave();
- try {
-  return dynCall_diii(index, a1, a2, a3);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
 function invoke_iiiiiiii(index, a1, a2, a3, a4, a5, a6, a7) {
  var sp = stackSave();
  try {
@@ -6520,6 +6579,17 @@ function invoke_fiii(index, a1, a2, a3) {
  var sp = stackSave();
  try {
   return dynCall_fiii(index, a1, a2, a3);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_diii(index, a1, a2, a3) {
+ var sp = stackSave();
+ try {
+  return dynCall_diii(index, a1, a2, a3);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
