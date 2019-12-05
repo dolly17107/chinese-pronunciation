@@ -20,8 +20,18 @@ html, body, body :not(svg|*), body ::before, body ::after {
     box-sizing: border-box; }
 style, script {
     display: none; }
-[contenteditable] {
+[contenteditable="false"] {
+    -webkit-user-modify: read-only; }
+[contenteditable="plaintext-only"] {
+    -webkit-user-modify: read-write-plaintext-only; }
+[contenteditable="true"] {
     -webkit-user-modify: read-write; }
+[lang="en"] {
+    -webkit-locale: "en"; }
+[lang="zh-CN"] {
+    -webkit-locale: "zh-CN"; }
+[lang="zh-HANT"] {
+    -webkit-locale: "zh-HANT"; }
 div, svg {
     display: block; }
 ruby > rt {
