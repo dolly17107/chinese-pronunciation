@@ -165,22 +165,22 @@ int main() {
         emscripten::val start = emscripten::val::global("document").call<emscripten::val>("caretRangeFromPoint", event["clientX"], event["clientY"]);
         emscripten::val atom = emscripten::val::null();
         emscripten::val node = start["endContainer"];
-        for (; node.as<bool>() && event["target"] != node; node = node["parentNode"]) {
+        for (; node.as<bool>() && event["currentTarget"] != node; node = node["parentNode"]) {
             if (node.instanceof(emscripten::val::global("HTMLElement")) && !node["isContentEditable"]) {
                 atom = node; } }
-        if (event["target"] == node) {
+        if (event["currentTarget"] == node) {
             console_log("positioning...");
             if (atom.as<bool>()) {
                 start.call<void>("setStartBefore", atom);
                 start.call<void>("setEndBefore", atom); }
-            get_element_by_id("pronunciation").set("onpointermove", js::bind([start](emscripten::val event) {
+            event["currentTarget"].set("onpointermove", js::bind([start](emscripten::val event) {
                 emscripten::val end = emscripten::val::global("document").call<emscripten::val>("caretRangeFromPoint", event["clientX"], event["clientY"]);
                 emscripten::val atom = emscripten::val::null();
                 emscripten::val node = end["endContainer"];
-                for (; node.as<bool>() && event["target"] != node; node = node["parentNode"]) {
+                for (; node.as<bool>() && event["currentTarget"] != node; node = node["parentNode"]) {
                     if (node.instanceof(emscripten::val::global("HTMLElement")) && !node["isContentEditable"]) {
                         atom = node; } }
-                if (event["target"] == node) {
+                if (event["currentTarget"] == node) {
                     console_log("selecting...");
                     if (atom.as<bool>()) {
                         end.call<void>("setStartBefore", atom);
