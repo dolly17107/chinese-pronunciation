@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 327795,
-  "package_uuid": "2930256a-ee43-4a31-9be8-b9acc28673e0"
+  "package_uuid": "0c563c4e-3677-4ecf-b1f2-30fb7bbfef17"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 66320, DYNAMIC_BASE = 5309200, DYNAMICTOP_PTR = 66144;
+var STACK_MAX = 66336, DYNAMIC_BASE = 5309216, DYNAMICTOP_PTR = 66160;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -1022,7 +1022,7 @@ var ASM_CONSTS = {
  },
  5520: function() {
   document.addEventListener("selectionchange", function(event) {
-   event.currentTarget.getElementsByClassName("selection").forEach(function(element) {
+   Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
     element.classList.remove("selection");
    });
    let selection = event.currentTarget.getSelection();
@@ -1188,7 +1188,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66304;
+ var buffer = 66320;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1214,7 +1214,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66304;
+ var buffer = 66320;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {

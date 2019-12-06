@@ -195,7 +195,7 @@ int main() {
             target.onpointermove = null; }); )js"_js_asm();
     R"js(
         document.addEventListener("selectionchange", function(event) {
-            event.currentTarget.getElementsByClassName("selection").forEach(function(element) {
+            Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
                 element.classList.remove("selection"); });
             let selection = event.currentTarget.getSelection();
             if (0 != selection.rangeCount) {
