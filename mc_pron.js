@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 327624,
-  "package_uuid": "698f2479-e2f9-4a29-8630-9fe9de4a040a"
+  "package_uuid": "cf74c7fa-54c6-4b9c-856d-b38ad4992efc"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65824, DYNAMIC_BASE = 5308704, DYNAMICTOP_PTR = 65648;
+var STACK_MAX = 65808, DYNAMIC_BASE = 5308688, DYNAMICTOP_PTR = 65632;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -1009,7 +1009,7 @@ var ASM_CONSTS = {
        end.setStartBefore(atom);
        end.setEndBefore(atom);
       }
-      target.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset);
+      target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset);
      }
     };
     event.preventDefault();
@@ -1173,7 +1173,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65808;
+ var buffer = 65792;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1199,7 +1199,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65808;
+ var buffer = 65792;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
