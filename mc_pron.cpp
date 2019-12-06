@@ -188,7 +188,8 @@ int main() {
                         if (atom) {
                             end.setStartBefore(atom);
                             end.setEndBefore(atom); }
-                        target.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); } }
+                        target.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); } };
+                event.preventDefault();
                 event.stopPropagation(); } });
         document.getElementById("pronunciation").addEventListener("pointerup", function(event) {
             event.currentTarget.onpointermove = null; }); )js"_js_asm(); }
