@@ -199,6 +199,6 @@ int main() {
                 element.classList.remove("selection"); });
             let selection = event.currentTarget.getSelection();
             if (0 != selection.rangeCount) {
-            event.currentTarget.getElementsByTagName("*").forEach(function(element) {
-                if (selection.containsNode(element)) {
-                    element.classList.add("selection"); } }); } }); )js"_js_asm(); }
+                Array.from(event.currentTarget.getElementsByTagName("*")).forEach(function(element) {
+                    if (selection.containsNode(element)) {
+                        element.classList.add("selection"); } }); } }); )js"_js_asm(); }
