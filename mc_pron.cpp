@@ -163,8 +163,8 @@ int main() {
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("input"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("compositionend"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
     R"js(
-        document.getElementById("pronunciation").addEventListener("pointerdown", function(event) {
-            let target = event.currentTarget;
+        let target = document.getElementById("pronunciation");
+        target.addEventListener("pointerdown", function(event) {
             let start = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
             let atom = null;
             let node = start.endContainer;
@@ -191,5 +191,14 @@ int main() {
                         target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); } };
                 event.preventDefault();
                 event.stopPropagation(); } });
-        document.getElementById("pronunciation").addEventListener("pointerup", function(event) {
-            event.currentTarget.onpointermove = null; }); )js"_js_asm(); }
+        target.addEventListener("pointerup", function(event) {
+            target.onpointermove = null; }); )js"_js_asm();
+    R"js(
+        document.addEventListener("selectionchange", function(event) {
+            event.currentTarget.getElementsByClassName("selection").forEach(function(element) {
+                element.classList.remove("selection"); });
+            let selection = event.currentTarget.getSelection();
+            if (0 != selection.rangeCount) {
+            event.currentTarget.getElementsByTagName("*").forEach(function(element) {
+                if (selection.containsNode(element)) {
+                    element.classList.add("selection"); } }); } }); )js"_js_asm(); }

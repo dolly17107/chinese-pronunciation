@@ -7,3 +7,9 @@ body {
 #pronunciation {
     font-size: 60px;
     overflow: auto; }
+morpheme-::selection, morpheme- *::selection {
+    background-color: unset;
+    color: unset; }
+morpheme-.selection {
+    background-color: #ffffff;
+    color: #000000; }

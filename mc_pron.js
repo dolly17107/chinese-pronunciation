@@ -168,31 +168,31 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/main.css",
    "start": 268943,
-   "end": 269131,
+   "end": 269302,
    "audio": 0
   }, {
    "filename": "/yun/qieyun.html",
-   "start": 269131,
-   "end": 314424,
+   "start": 269302,
+   "end": 314595,
    "audio": 0
   }, {
    "filename": "/yun/rimetable.html",
-   "start": 314424,
-   "end": 315629,
+   "start": 314595,
+   "end": 315800,
    "audio": 0
   }, {
    "filename": "/yun/yun.css",
-   "start": 315629,
-   "end": 317341,
+   "start": 315800,
+   "end": 317512,
    "audio": 0
   }, {
    "filename": "/yun/zimu.html",
-   "start": 317341,
-   "end": 327624,
+   "start": 317512,
+   "end": 327795,
    "audio": 0
   } ],
-  "remote_package_size": 327624,
-  "package_uuid": "cf74c7fa-54c6-4b9c-856d-b38ad4992efc"
+  "remote_package_size": 327795,
+  "package_uuid": "8bafd5e9-ef0d-4d5c-a64c-c27c94774901"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65808, DYNAMIC_BASE = 5308688, DYNAMICTOP_PTR = 65632;
+var STACK_MAX = 66304, DYNAMIC_BASE = 5309184, DYNAMICTOP_PTR = 66128;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -978,8 +978,8 @@ var tempI64;
 
 var ASM_CONSTS = {
  3792: function() {
-  document.getElementById("pronunciation").addEventListener("pointerdown", function(event) {
-   let target = event.currentTarget;
+  let target = document.getElementById("pronunciation");
+  target.addEventListener("pointerdown", function(event) {
    let start = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
    let atom = null;
    let node = start.endContainer;
@@ -1016,8 +1016,23 @@ var ASM_CONSTS = {
     event.stopPropagation();
    }
   });
-  document.getElementById("pronunciation").addEventListener("pointerup", function(event) {
-   event.currentTarget.onpointermove = null;
+  target.addEventListener("pointerup", function(event) {
+   target.onpointermove = null;
+  });
+ },
+ 5520: function() {
+  document.addEventListener("selectionchange", function(event) {
+   event.currentTarget.getElementsByClassName("selection").forEach(function(element) {
+    element.classList.remove("selection");
+   });
+   let selection = event.currentTarget.getSelection();
+   if (0 != selection.rangeCount) {
+    event.currentTarget.getElementsByTagName("*").forEach(function(element) {
+     if (selection.containsNode(element)) {
+      element.classList.add("selection");
+     }
+    });
+   }
   });
  }
 };
@@ -1173,7 +1188,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65792;
+ var buffer = 66288;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1199,7 +1214,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65792;
+ var buffer = 66288;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -5947,10 +5962,10 @@ var asmLibraryArg = {
  "L": ___cxa_rethrow,
  "s": ___cxa_throw,
  "Ja": ___cxa_uncaught_exceptions,
- "da": ___lock,
+ "ea": ___lock,
  "Ia": ___map_file,
  "e": ___resumeException,
- "ca": ___syscall221,
+ "da": ___syscall221,
  "Ha": ___syscall5,
  "Ga": ___syscall54,
  "Fa": ___syscall91,
@@ -5960,17 +5975,17 @@ var asmLibraryArg = {
  "o": __embind_register_class_constructor,
  "n": __embind_register_class_function,
  "za": __embind_register_emval,
- "aa": __embind_register_float,
+ "ba": __embind_register_float,
  "A": __embind_register_integer,
  "y": __embind_register_memory_view,
- "$": __embind_register_std_string,
+ "aa": __embind_register_std_string,
  "ya": __embind_register_std_wstring,
  "xa": __embind_register_void,
  "wa": __emval_as,
  "K": __emval_call_method,
- "_": __emval_call_void_method,
+ "$": __emval_call_void_method,
  "va": __emval_decref,
- "Z": __emval_get_global,
+ "_": __emval_get_global,
  "ua": __emval_get_method_caller,
  "ta": __emval_get_property,
  "J": __emval_incref,
@@ -5980,16 +5995,16 @@ var asmLibraryArg = {
  "qa": __emval_run_destructors,
  "pa": __emval_set_property,
  "oa": __emval_take_value,
- "Y": _abort,
+ "Z": _abort,
  "na": console_log,
- "ma": _emscripten_asm_const_iii,
- "la": _emscripten_memcpy_big,
- "ka": _emscripten_resize_heap,
+ "Y": _emscripten_asm_const_iii,
+ "ma": _emscripten_memcpy_big,
+ "la": _emscripten_resize_heap,
  "Ea": _environ_get,
  "Da": _environ_sizes_get,
- "ba": _fd_close,
+ "ca": _fd_close,
  "Ca": _fd_read,
- "ia": _fd_seek,
+ "ja": _fd_seek,
  "Ba": _fd_write,
  "b": _getTempRet0,
  "X": invoke_diii,
@@ -6005,8 +6020,8 @@ var asmLibraryArg = {
  "x": invoke_iiiiiiiiiii,
  "I": invoke_iiiiiiiiiiii,
  "F": invoke_iiiiiiiiiiiii,
- "ha": invoke_iiji,
- "ga": invoke_jiiii,
+ "ia": invoke_iiji,
+ "ha": invoke_jiiii,
  "j": invoke_v,
  "a": invoke_vi,
  "g": invoke_vii,
@@ -6024,11 +6039,11 @@ var asmLibraryArg = {
  "O": invoke_viiiiiiiiiiiiii,
  "D": invoke_viiiiiiiiiiiiiii,
  "N": invoke_viiiiiiiiiiiiiiii,
- "ja": invoke_viiiiiiiiiiiiiiiii,
- "fa": invoke_viijii,
+ "ka": invoke_viiiiiiiiiiiiiiiii,
+ "ga": invoke_viijii,
  "memory": wasmMemory,
  "M": _setTempRet0,
- "ea": _strftime_l,
+ "fa": _strftime_l,
  "table": wasmTable
 };
 
