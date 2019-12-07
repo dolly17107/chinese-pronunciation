@@ -89,11 +89,10 @@ void list_phonemes(std::unordered_multimap<std::string, baxter_sagart_oc_entry> 
         list.call<emscripten::val>("appendChild", span); });
     ruby["childNodes"][1]["firstChild"].call<void>("replaceWith", list); }
 emscripten::val character_to_ruby(std::unordered_multimap<std::string, baxter_sagart_oc_entry> const& bsoc_dictionary_by_字, std::string character) {
-    emscripten::val ruby = create_element("ruby");
-    ruby.set("contentEditable", std::string("false"));
-    ruby.call<emscripten::val>("appendChild", create_text_node(character));
+    emscripten::val rb = create_element("grapheme-");
+    rb.call<emscripten::val>("appendChild", create_text_node(character));
     baxter_sagart_oc_entry const& entry = std::get<1>(*std::get<0>(bsoc_dictionary_by_字.equal_range(character)));
-    emscripten::val rt = create_element("rt");
+    emscripten::val rt = create_element("phoneme-");
     rt.call<emscripten::val>("appendChild", create_text_node(predict_鄴(entry.mc_initial, entry.mc_final, entry.mc_四聲)));
     rt.call<void>("addEventListener", std::string("focus"), js::bind([&bsoc_dictionary_by_字](emscripten::val event) {
         list_phonemes(bsoc_dictionary_by_字, event["target"]["parentNode"]); },
@@ -102,6 +101,9 @@ emscripten::val character_to_ruby(std::unordered_multimap<std::string, baxter_sa
         select_phoneme(bsoc_dictionary_by_字, event["target"]["firstChild"]); },
         std::placeholders::_1));
     rt.set("tabIndex", 0);
+    emscripten::val ruby = create_element("morpheme-");
+    ruby.set("contentEditable", std::string("false"));
+    ruby.call<emscripten::val>("appendChild", rb);
     ruby.call<emscripten::val>("appendChild", rt);
     return ruby; }
 emscripten::val text_to_rubys(std::unordered_multimap<std::string, baxter_sagart_oc_entry> const& bsoc_dictionary_by_字, std::string text) {

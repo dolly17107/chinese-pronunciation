@@ -7,6 +7,16 @@ body {
 #pronunciation {
     font-size: 60px;
     overflow: auto; }
+morpheme- {
+    display: inline-flex;
+    flex-flow: column-reverse; }
+morpheme- > grapheme- {
+    order: 0;
+    text-align: center; }
+morpheme- > phoneme- {
+    order: 1;
+    font-size: 0.5em;
+    text-align: center; }
 morpheme-::selection, morpheme- *::selection {
     background-color: unset;
     color: unset; }
