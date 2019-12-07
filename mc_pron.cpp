@@ -187,9 +187,12 @@ int main() {
             target.onpointermove = function(event) {
                 let end = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
                 target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); };
+            target.onpointermove(event);
             event.preventDefault();
             event.stopPropagation(); });
         target.addEventListener("pointerup", function(event) {
+            target.onpointermove = null; });
+        target.addEventListener("pointerleave", function(event) {
             target.onpointermove = null; }); )js"_js_asm();
     R"js(
         document.addEventListener("selectionchange", function(event) {
