@@ -194,7 +194,7 @@ int main() {
         target.addEventListener("pointerup", function(event) {
             target.onpointermove = null; });
         target.addEventListener("pointerleave", function(event) {
-            target.onpointermove = null; }); )js"_js_asm(reinterpret_cast<uint32_t>(handler));
+            target.onpointermove = null; }); )js"_js_asm(reinterpret_cast<uint32_t&>(handler));
     R"js(
         document.addEventListener("selectionchange", function(event) {
             Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {

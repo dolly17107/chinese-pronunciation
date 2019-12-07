@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 328040,
-  "package_uuid": "0a9611cc-ab9f-4136-902c-280612b08188"
+  "package_uuid": "a84b76a0-0980-423c-a0b6-e37f9ccd2816"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 66304, DYNAMIC_BASE = 5309184, DYNAMICTOP_PTR = 66128;
+var STACK_MAX = 66384, DYNAMIC_BASE = 5309264, DYNAMICTOP_PTR = 66208;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -977,7 +977,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 3808: function() {
+ 3760: function($0) {
   let caretPositionFromPoint = function(viewport, x, y) {
    let position = viewport.document.caretRangeFromPoint(x, y);
    let atom = null;
@@ -1000,6 +1000,8 @@ var ASM_CONSTS = {
    return position;
   };
   let target = document.getElementById("pronunciation");
+  target.addEventListener("input", requireHandle($0));
+  target.addEventListener("compositionend", requireHandle($0));
   target.addEventListener("pointerdown", function(event) {
    let start = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
    target.onpointermove = function(event) {
@@ -1017,7 +1019,7 @@ var ASM_CONSTS = {
    target.onpointermove = null;
   });
  },
- 5488: function() {
+ 5568: function() {
   document.addEventListener("selectionchange", function(event) {
    Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
     element.classList.remove("selection");
@@ -1185,7 +1187,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66288;
+ var buffer = 66368;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1211,7 +1213,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66288;
+ var buffer = 66368;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
