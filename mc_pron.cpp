@@ -162,8 +162,7 @@ int main() {
     style.set("innerHTML", file_to_string("main.css"));
     emscripten::val::global("document")["head"].call<emscripten::val>("appendChild", style);
     emscripten::val::global("document")["body"].set("innerHTML", file_to_string("main.html"));
-    get_element_by_id("pronunciation").call<void>("addEventListener", std::string("input"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
-    get_element_by_id("pronunciation").call<void>("addEventListener", std::string("compositionend"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
+    emscripten::val handler = js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1);
     R"js(
         let caretPositionFromPoint = function(viewport, x, y) {
             let position = viewport.document.caretRangeFromPoint(x, y);
@@ -182,6 +181,8 @@ int main() {
                     position.setEndAfter(atom); } }
             return position; };
         let target = document.getElementById("pronunciation");
+        target.addEventListener("input", requireHandle($0));
+        target.addEventListener("compositionend", requireHandle($0));
         target.addEventListener("pointerdown", function(event) {
             let start = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
             target.onpointermove = function(event) {
@@ -193,7 +194,7 @@ int main() {
         target.addEventListener("pointerup", function(event) {
             target.onpointermove = null; });
         target.addEventListener("pointerleave", function(event) {
-            target.onpointermove = null; }); )js"_js_asm();
+            target.onpointermove = null; }); )js"_js_asm(reinterpret_cast<uint32_t>(handler));
     R"js(
         document.addEventListener("selectionchange", function(event) {
             Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
