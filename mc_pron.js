@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 328015,
-  "package_uuid": "849de6ec-b263-4ad6-ad3f-cbfd484f33eb"
+  "package_uuid": "4f6127aa-4653-4a07-8d27-2820310acdbf"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 66352, DYNAMIC_BASE = 5309232, DYNAMICTOP_PTR = 66176;
+var STACK_MAX = 65904, DYNAMIC_BASE = 5308784, DYNAMICTOP_PTR = 65728;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -978,49 +978,36 @@ var tempI64;
 
 var ASM_CONSTS = {
  3808: function() {
-  let target = document.getElementById("pronunciation");
-  target.addEventListener("pointerdown", function(event) {
-   let start = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
+  let caretPositionFromPoint = function(viewport, x, y) {
+   let position = viewport.document.caretRangeFromPoint(x, y);
    let atom = null;
-   let node = start.endContainer;
-   for (;node && target != node; node = node.parentNode) {
-    if (node instanceof HTMLElement && !node.isContentEditable) {
+   let node = position.endContainer;
+   for (;node; node = node.parentNode) {
+    if (node instanceof Element && "morpheme-" == node.tagName.toLowerCase()) {
      atom = node;
     }
    }
-   if (target == node) {
-    console.log("positioning...");
-    if (atom) {
-     start.setStartBefore(atom);
-     start.setEndBefore(atom);
-    }
-    target.onpointermove = function(event) {
-     let end = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
-     let atom = null;
-     let node = end.endContainer;
-     for (;node && target != node; node = node.parentNode) {
-      if (node instanceof HTMLElement && !node.isContentEditable) {
-       atom = node;
-      }
-     }
-     if (target == node) {
-      console.log("selecting...");
-      if (atom) {
-       end.setStartBefore(atom);
-       end.setEndBefore(atom);
-      }
-      target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset);
-     }
-    };
-    event.preventDefault();
-    event.stopPropagation();
+   if (atom) {
+    position.setStartBefore(atom);
+    position.setEndBefore(atom);
    }
+   return position;
+  };
+  let target = document.getElementById("pronunciation");
+  target.addEventListener("pointerdown", function(event) {
+   let start = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
+   target.onpointermove = function(event) {
+    let end = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
+    target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset);
+   };
+   event.preventDefault();
+   event.stopPropagation();
   });
   target.addEventListener("pointerup", function(event) {
    target.onpointermove = null;
   });
  },
- 5536: function() {
+ 5088: function() {
   document.addEventListener("selectionchange", function(event) {
    Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
     element.classList.remove("selection");
@@ -1188,7 +1175,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66336;
+ var buffer = 65888;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1214,7 +1201,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66336;
+ var buffer = 65888;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {

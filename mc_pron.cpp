@@ -165,34 +165,25 @@ int main() {
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("input"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
     get_element_by_id("pronunciation").call<void>("addEventListener", std::string("compositionend"), js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1));
     R"js(
+        let caretPositionFromPoint = function(viewport, x, y) {
+            let position = viewport.document.caretRangeFromPoint(x, y);
+            let atom = null;
+            let node = position.endContainer;
+            for (; node; node = node.parentNode) {
+                if (node instanceof Element && "morpheme-" == node.tagName.toLowerCase()) {
+                    atom = node; } }
+            if (atom) {
+                position.setStartBefore(atom);
+                position.setEndBefore(atom); }
+            return position; };
         let target = document.getElementById("pronunciation");
         target.addEventListener("pointerdown", function(event) {
-            let start = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
-            let atom = null;
-            let node = start.endContainer;
-            for (; node && target != node; node = node.parentNode) {
-                if (node instanceof HTMLElement && !node.isContentEditable) {
-                    atom = node; } }
-            if (target == node) {
-                console.log("positioning...");
-                if (atom) {
-                    start.setStartBefore(atom);
-                    start.setEndBefore(atom); }
-                target.onpointermove = function(event) {
-                    let end = target.ownerDocument.caretRangeFromPoint(event.clientX, event.clientY);
-                    let atom = null;
-                    let node = end.endContainer;
-                    for (; node && target != node; node = node.parentNode) {
-                        if (node instanceof HTMLElement && !node.isContentEditable) {
-                            atom = node; } }
-                    if (target == node) {
-                        console.log("selecting...");
-                        if (atom) {
-                            end.setStartBefore(atom);
-                            end.setEndBefore(atom); }
-                        target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); } };
-                event.preventDefault();
-                event.stopPropagation(); } });
+            let start = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
+            target.onpointermove = function(event) {
+                let end = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
+                target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); };
+            event.preventDefault();
+            event.stopPropagation(); });
         target.addEventListener("pointerup", function(event) {
             target.onpointermove = null; }); )js"_js_asm();
     R"js(
