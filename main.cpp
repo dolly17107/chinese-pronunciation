@@ -158,10 +158,6 @@ int main() {
     std::unordered_multimap<std::string, baxter_sagart_oc_entry> bsoc_dictionary_by_字;
     for (baxter_sagart_oc_entry const& entry : bsoc_dictionary) {
         bsoc_dictionary_by_字.insert(make_pair(entry.字, entry)); }
-    emscripten::val style = create_element("style");
-    style.set("innerHTML", file_to_string("main.css"));
-    emscripten::val::global("document")["head"].call<emscripten::val>("appendChild", style);
-    emscripten::val::global("document")["body"].set("innerHTML", file_to_string("main.html"));
     emscripten::val handler = js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1);
     R"js(
         let caretPositionFromPoint = function(viewport, x, y) {

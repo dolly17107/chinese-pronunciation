@@ -19,8 +19,8 @@ Module.expectedDataFileDownloads++;
   } else {
    throw "using preloaded data can only be done on a web page or in a web worker";
   }
-  var PACKAGE_NAME = "C:/Program Files/chinese-pronunciation/mc_pron.data";
-  var REMOTE_PACKAGE_BASE = "mc_pron.data";
+  var PACKAGE_NAME = "C:/Program Files/chinese-pronunciation/main.data";
+  var REMOTE_PACKAGE_BASE = "main.data";
   if (typeof Module["locateFilePackage"] === "function" && !Module["locateFile"]) {
    Module["locateFile"] = Module["locateFilePackage"];
    err("warning: you defined Module.locateFilePackage, that has been renamed to Module.locateFile (using your locateFilePackage for now)");
@@ -92,7 +92,6 @@ Module.expectedDataFileDownloads++;
    function assert(check, msg) {
     if (!check) throw msg + new Error().stack;
    }
-   Module["FS_createPath"]("/", "yun", true, true);
    function DataRequest(start, end, audio) {
     this.start = start;
     this.end = end;
@@ -133,9 +132,9 @@ Module.expectedDataFileDownloads++;
     for (var i = 0; i < files.length; ++i) {
      DataRequest.prototype.requests[files[i].filename].onload();
     }
-    Module["removeRunDependency"]("datafile_C:/Program Files/chinese-pronunciation/mc_pron.data");
+    Module["removeRunDependency"]("datafile_C:/Program Files/chinese-pronunciation/main.data");
    }
-   Module["addRunDependency"]("datafile_C:/Program Files/chinese-pronunciation/mc_pron.data");
+   Module["addRunDependency"]("datafile_C:/Program Files/chinese-pronunciation/main.data");
    if (!Module.preloadResults) Module.preloadResults = {};
    Module.preloadResults[PACKAGE_NAME] = {
     fromCache: false
@@ -160,39 +159,9 @@ Module.expectedDataFileDownloads++;
    "start": 0,
    "end": 268482,
    "audio": 0
-  }, {
-   "filename": "/main.html",
-   "start": 268482,
-   "end": 268943,
-   "audio": 0
-  }, {
-   "filename": "/main.css",
-   "start": 268943,
-   "end": 269547,
-   "audio": 0
-  }, {
-   "filename": "/yun/qieyun.html",
-   "start": 269547,
-   "end": 314840,
-   "audio": 0
-  }, {
-   "filename": "/yun/rimetable.html",
-   "start": 314840,
-   "end": 316045,
-   "audio": 0
-  }, {
-   "filename": "/yun/yun.css",
-   "start": 316045,
-   "end": 317757,
-   "audio": 0
-  }, {
-   "filename": "/yun/zimu.html",
-   "start": 317757,
-   "end": 328040,
-   "audio": 0
   } ],
-  "remote_package_size": 328040,
-  "package_uuid": "a84b76a0-0980-423c-a0b6-e37f9ccd2816"
+  "remote_package_size": 268482,
+  "package_uuid": "18eccc8c-5600-47c3-88ea-9f55deb2ceeb"
  });
 })();
 
@@ -495,8 +464,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1178,
- "maximum": 1178 + 0,
+ "initial": 1177,
+ "maximum": 1177 + 0,
  "element": "anyfunc"
 });
 
@@ -693,7 +662,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 66384, DYNAMIC_BASE = 5309264, DYNAMICTOP_PTR = 66208;
+var STACK_MAX = 66352, DYNAMIC_BASE = 5309232, DYNAMICTOP_PTR = 66176;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -882,7 +851,7 @@ function isDataURI(filename) {
  return String.prototype.startsWith ? filename.startsWith(dataURIPrefix) : filename.indexOf(dataURIPrefix) === 0;
 }
 
-var wasmBinaryFile = "mc_pron.wasm";
+var wasmBinaryFile = "main.wasm";
 
 if (!isDataURI(wasmBinaryFile)) {
  wasmBinaryFile = locateFile(wasmBinaryFile);
@@ -977,7 +946,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 3760: function($0) {
+ 3728: function($0) {
   let caretPositionFromPoint = function(viewport, x, y) {
    let position = viewport.document.caretRangeFromPoint(x, y);
    let atom = null;
@@ -1019,7 +988,7 @@ var ASM_CONSTS = {
    target.onpointermove = null;
   });
  },
- 5568: function() {
+ 5536: function() {
   document.addEventListener("selectionchange", function(event) {
    Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
     element.classList.remove("selection");
@@ -1187,7 +1156,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66368;
+ var buffer = 66336;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1213,7 +1182,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66368;
+ var buffer = 66336;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
