@@ -38,7 +38,7 @@ ruby > rt {
     display: block;
     font-size: 0.5em; }
 ::selection {
-    background: #000000;
+    background: #000000fe;
     color: #ffffff; }
 /*::-webkit-scrollbar {
     display: none; }*/
@@ -158,7 +158,7 @@ body {
 /*img {
     filter: invert(100%) hue-rotate(180deg); }*/
 ::selection {
-    background: #ffffff;
+    background: #fffffffe;
     color: #000000; }
 a {
     color: #c9e9ff; }
