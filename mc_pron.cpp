@@ -173,8 +173,13 @@ int main() {
                 if (node instanceof Element && "morpheme-" == node.tagName.toLowerCase()) {
                     atom = node; } }
             if (atom) {
-                position.setStartBefore(atom);
-                position.setEndBefore(atom); }
+                let rect = atom.getBoundingClientRect();
+                if (-rect.x + x <= 0.5 * rect.width) {
+                    position.setStartBefore(atom);
+                    position.setEndBefore(atom); }
+                else {
+                    position.setStartAfter(atom);
+                    position.setEndAfter(atom); } }
             return position; };
         let target = document.getElementById("pronunciation");
         target.addEventListener("pointerdown", function(event) {

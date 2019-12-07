@@ -192,7 +192,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 328015,
-  "package_uuid": "4f6127aa-4653-4a07-8d27-2820310acdbf"
+  "package_uuid": "14005fbe-8ca4-4b90-8720-59a234992ade"
  });
 })();
 
@@ -693,7 +693,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65904, DYNAMIC_BASE = 5308784, DYNAMICTOP_PTR = 65728;
+var STACK_MAX = 66160, DYNAMIC_BASE = 5309040, DYNAMICTOP_PTR = 65984;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -988,8 +988,14 @@ var ASM_CONSTS = {
     }
    }
    if (atom) {
-    position.setStartBefore(atom);
-    position.setEndBefore(atom);
+    let rect = atom.getBoundingClientRect();
+    if (-rect.x + x <= .5 * rect.width) {
+     position.setStartBefore(atom);
+     position.setEndBefore(atom);
+    } else {
+     position.setStartAfter(atom);
+     position.setEndAfter(atom);
+    }
    }
    return position;
   };
@@ -1007,7 +1013,7 @@ var ASM_CONSTS = {
    target.onpointermove = null;
   });
  },
- 5088: function() {
+ 5344: function() {
   document.addEventListener("selectionchange", function(event) {
    Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
     element.classList.remove("selection");
@@ -1175,7 +1181,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65888;
+ var buffer = 66144;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1201,7 +1207,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65888;
+ var buffer = 66144;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
