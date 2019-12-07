@@ -166,16 +166,20 @@ int main() {
             rubyizer.addEventListener("compositionend", function(event) {
                 rubyize(event.currentTarget); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(rubyize_text_val));
     R"js(
+        const select = function(node, selection) {
+            if (node instanceof Element && selection.containsNode(node)) {
+                if (!node.classList.contains("selection")) {
+                    node.classList.add("selection"); } }
+            node.childNodes.forEach(function(node) {
+                if (selection.containsNode(node, true)) {
+                    select(node, selection); } }); };
         document.addEventListener("selectionchange", function(event) {
             const selection = event.currentTarget.getSelection();
             Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
                 if (!selection.containsNode(element)) {
                     element.classList.remove("selection"); } });
             if (0 != selection.rangeCount) {
-                Array.from(selection.getRangeAt(0).commonAncestorContainer.getElementsByTagName("*")).forEach(function(element) {
-                    if (selection.containsNode(element)) {
-                        if (!element.classList.contains("selection")) {
-                            element.classList.add("selection"); } } }); } });
+                select(selection.getRangeAt(0).commonAncestorContainer, selection); } });
         const caretPositionFromPoint = function(viewport, x, y) {
             let position = viewport.document.caretRangeFromPoint(x, y);
             let atom = null;
