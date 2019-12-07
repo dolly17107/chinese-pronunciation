@@ -161,7 +161,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "3f8ec60f-3641-4f15-a5fb-37cdde6ec4fa"
+  "package_uuid": "61687ade-129f-401b-8ced-a125aab618ee"
  });
 })();
 
@@ -662,7 +662,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 65600, DYNAMIC_BASE = 5308480, DYNAMICTOP_PTR = 65424;
+var STACK_MAX = 65744, DYNAMIC_BASE = 5308624, DYNAMICTOP_PTR = 65568;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -970,14 +970,18 @@ var ASM_CONSTS = {
  },
  4400: function() {
   document.addEventListener("selectionchange", function(event) {
-   Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
-    element.classList.remove("selection");
-   });
    const selection = event.currentTarget.getSelection();
+   Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
+    if (!selection.containsNode(element)) {
+     element.classList.remove("selection");
+    }
+   });
    if (0 != selection.rangeCount) {
-    Array.from(event.currentTarget.getElementsByTagName("*")).forEach(function(element) {
+    Array.from(selection.commonAncestorContainer.getElementsByTagName("*")).forEach(function(element) {
      if (selection.containsNode(element)) {
-      element.classList.add("selection");
+      if (element.classList.contains("selection")) {
+       element.classList.add("selection");
+      }
      }
     });
    }
@@ -1020,7 +1024,7 @@ var ASM_CONSTS = {
    event.currentTarget.onpointermove = null;
   });
  },
- 6624: function() {
+ 6768: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1172,7 +1176,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65584;
+ var buffer = 65728;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1198,7 +1202,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 65584;
+ var buffer = 65728;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {

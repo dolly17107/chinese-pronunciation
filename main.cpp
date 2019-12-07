@@ -167,13 +167,15 @@ int main() {
                 rubyize(event.currentTarget); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(rubyize_text_val));
     R"js(
         document.addEventListener("selectionchange", function(event) {
-            Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
-                element.classList.remove("selection"); });
             const selection = event.currentTarget.getSelection();
+            Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
+                if (!selection.containsNode(element)) {
+                    element.classList.remove("selection"); } });
             if (0 != selection.rangeCount) {
-                Array.from(event.currentTarget.getElementsByTagName("*")).forEach(function(element) {
+                Array.from(selection.commonAncestorContainer.getElementsByTagName("*")).forEach(function(element) {
                     if (selection.containsNode(element)) {
-                        element.classList.add("selection"); } }); } });
+                        if (element.classList.contains("selection")) {
+                            element.classList.add("selection"); } } }); } });
         const caretPositionFromPoint = function(viewport, x, y) {
             let position = viewport.document.caretRangeFromPoint(x, y);
             let atom = null;
