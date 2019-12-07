@@ -192,15 +192,15 @@ int main() {
             return position; };
         document.addEventListener("pointerdown", function(event) {
             const start = caretPositionFromPoint(event.view, event.clientX, event.clientY);
-            event.currentTarget.ownerDocument.onpointermove = function(event) {
+            event.currentTarget.onpointermove = function(event) {
                 let end = caretPositionFromPoint(event.view, event.clientX, event.clientY);
-                event.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); };
-            event.currentTarget.ownerDocument.onpointermove(event);
+                event.currentTarget.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); };
+            event.currentTarget.onpointermove(event);
             event.preventDefault();
             event.stopPropagation(); });
         document.addEventListener("pointerup", function(event) {
-            event.view.onpointermove = null; });
+            event.currentTarget.onpointermove = null; });
         document.addEventListener("pointerleave", function(event) {
-            event.view.onpointermove = null; }); )js"_js_asm();
+            event.currentTarget.onpointermove = null; }); )js"_js_asm();
     R"js(
         document.getElementsByTagName("spinner-")[0].remove(); )js"_js_asm(); }
