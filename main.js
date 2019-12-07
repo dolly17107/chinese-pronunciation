@@ -161,7 +161,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "18eccc8c-5600-47c3-88ea-9f55deb2ceeb"
+  "package_uuid": "6a85fc2e-1f60-46fe-a188-804054ae88ab"
  });
 })();
 
@@ -662,7 +662,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 66352, DYNAMIC_BASE = 5309232, DYNAMICTOP_PTR = 66176;
+var STACK_MAX = 66432, DYNAMIC_BASE = 5309312, DYNAMICTOP_PTR = 66256;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -1002,6 +1002,9 @@ var ASM_CONSTS = {
     });
    }
   });
+ },
+ 6128: function() {
+  document.getElementsByTagName("spinner-")[0].remove();
  }
 };
 
@@ -1156,7 +1159,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66336;
+ var buffer = 66416;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1182,7 +1185,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66336;
+ var buffer = 66416;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -5927,7 +5930,7 @@ var asmLibraryArg = {
  "c": ___cxa_find_matching_catch_2,
  "h": ___cxa_find_matching_catch_3,
  "t": ___cxa_free_exception,
- "L": ___cxa_rethrow,
+ "M": ___cxa_rethrow,
  "s": ___cxa_throw,
  "Ja": ___cxa_uncaught_exceptions,
  "ea": ___lock,
@@ -5965,7 +5968,7 @@ var asmLibraryArg = {
  "oa": __emval_take_value,
  "Z": _abort,
  "na": console_log,
- "Y": _emscripten_asm_const_iii,
+ "L": _emscripten_asm_const_iii,
  "ma": _emscripten_memcpy_big,
  "la": _emscripten_resize_heap,
  "Ea": _environ_get,
@@ -5975,8 +5978,8 @@ var asmLibraryArg = {
  "ja": _fd_seek,
  "Ba": _fd_write,
  "b": _getTempRet0,
- "X": invoke_diii,
- "W": invoke_fiii,
+ "Y": invoke_diii,
+ "X": invoke_fiii,
  "q": invoke_i,
  "f": invoke_ii,
  "d": invoke_iii,
@@ -5984,7 +5987,7 @@ var asmLibraryArg = {
  "l": invoke_iiiii,
  "u": invoke_iiiiii,
  "v": invoke_iiiiiii,
- "V": invoke_iiiiiiii,
+ "W": invoke_iiiiiiii,
  "x": invoke_iiiiiiiiiii,
  "I": invoke_iiiiiiiiiiii,
  "F": invoke_iiiiiiiiiiiii,
@@ -5996,21 +5999,21 @@ var asmLibraryArg = {
  "k": invoke_viii,
  "i": invoke_viiii,
  "E": invoke_viiiii,
- "U": invoke_viiiiii,
+ "V": invoke_viiiiii,
  "w": invoke_viiiiiii,
- "T": invoke_viiiiiiii,
- "S": invoke_viiiiiiiii,
+ "U": invoke_viiiiiiii,
+ "T": invoke_viiiiiiiii,
  "B": invoke_viiiiiiiiii,
- "R": invoke_viiiiiiiiiii,
- "Q": invoke_viiiiiiiiiiii,
- "P": invoke_viiiiiiiiiiiii,
- "O": invoke_viiiiiiiiiiiiii,
+ "S": invoke_viiiiiiiiiii,
+ "R": invoke_viiiiiiiiiiii,
+ "Q": invoke_viiiiiiiiiiiii,
+ "P": invoke_viiiiiiiiiiiiii,
  "D": invoke_viiiiiiiiiiiiiii,
- "N": invoke_viiiiiiiiiiiiiiii,
+ "O": invoke_viiiiiiiiiiiiiiii,
  "ka": invoke_viiiiiiiiiiiiiiiii,
  "ga": invoke_viijii,
  "memory": wasmMemory,
- "M": _setTempRet0,
+ "N": _setTempRet0,
  "fa": _strftime_l,
  "table": wasmTable
 };

@@ -199,4 +199,6 @@ int main() {
             if (0 != selection.rangeCount) {
                 Array.from(event.currentTarget.getElementsByTagName("*")).forEach(function(element) {
                     if (selection.containsNode(element)) {
-                        element.classList.add("selection"); } }); } }); )js"_js_asm(); }
+                        element.classList.add("selection"); } }); } }); )js"_js_asm();
+    R"js(
+        document.getElementsByTagName("spinner-")[0].remove(); )js"_js_asm(); }
