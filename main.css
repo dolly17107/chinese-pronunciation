@@ -10,14 +10,15 @@ body {
     touch-action: pan-y; }
 morpheme- {
     display: inline-flex;
-    flex-flow: column-reverse; }
+    flex-flow: column-reverse nowrap;
+    align-items: center; }
 morpheme- > grapheme- {
     order: 0;
-    text-align: center; }
+    flex: 0 0 auto; }
 morpheme- > phoneme- {
     order: 1;
     font-size: 0.5em;
-    text-align: center; }
+    flex: 0 0 auto; }
 morpheme-::selection, morpheme- *::selection {
     background-color: unset;
     color: unset; }
