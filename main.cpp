@@ -118,7 +118,7 @@ emscripten::val text_to_rubys(std::unordered_multimap<std::string, baxter_sagart
             fragment.call<emscripten::val>("appendChild", character_to_ruby(bsoc_dictionary_by_字, std::string(*iterator)));
             ++iterator; } }
     return fragment; }
-void rubyize(std::unordered_multimap<std::string, baxter_sagart_oc_entry> const& bsoc_dictionary_by_字, emscripten::val text) {
+void rubyize_text(std::unordered_multimap<std::string, baxter_sagart_oc_entry> const& bsoc_dictionary_by_字, emscripten::val text) {
     std::string str = text["data"].as<std::string>();
     utf8_iterator alphanumeric_start(str);
     while (alphanumeric_start.valid() && 0 == bsoc_dictionary_by_字.count(std::string(*alphanumeric_start))) {
@@ -145,22 +145,36 @@ void onbeforeinput(std::unordered_multimap<std::string, baxter_sagart_oc_entry> 
         emscripten::val ruby = text_to_rubys(bsoc_dictionary_by_字, text);
         replace_ranges_with_fragment(ruby, event.call<emscripten::val>("getTargetRanges"));
         event.call<void>("preventDefault"); } }
-void oninput(std::unordered_multimap<std::string, baxter_sagart_oc_entry> const& bsoc_dictionary_by_字, emscripten::val event) {
-    if (!event["isComposing"]) {
-        console_log("updating...");
-        emscripten::val target = event["target"];
-        emscripten::val::global("Array").call<emscripten::val>("from", target["childNodes"]).call<void>("forEach", js::bind([&bsoc_dictionary_by_字](emscripten::val node, emscripten::val index, emscripten::val list) {
-            if (node.instanceof(emscripten::val::global("Text"))) {
-                rubyize(bsoc_dictionary_by_字, node); } },
-            std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)); } }
 int main() {
     std::vector<baxter_sagart_oc_entry> bsoc_dictionary = deserialize<std::vector<baxter_sagart_oc_entry>>(file_to_string("BaxterSagartOC2015-10-13"));
     std::unordered_multimap<std::string, baxter_sagart_oc_entry> bsoc_dictionary_by_字;
     for (baxter_sagart_oc_entry const& entry : bsoc_dictionary) {
         bsoc_dictionary_by_字.insert(make_pair(entry.字, entry)); }
-    emscripten::val handler = js::bind(oninput, bsoc_dictionary_by_字, std::placeholders::_1);
+    emscripten::val rubyize_text_val = js::bind(rubyize_text, bsoc_dictionary_by_字, std::placeholders::_1);
     R"js(
-        let caretPositionFromPoint = function(viewport, x, y) {
+        const rubyize_text = requireHandle($0);
+        const rubyize = function(rubyizer) {
+            console.log("updating...");
+            Array.from(rubyizer.childNodes).forEach(function(node) {
+                if (node instanceof Text) {
+                    rubyize_text(node); } }); };
+        Array.from(document.getElementsByTagName("rubyizer-")).forEach(function(rubyizer) {
+            rubyize(rubyizer);
+            rubyizer.addEventListener("input", function(event) {
+                if (!event.isComposing) {
+                    rubyize(event.currentTarget); } });
+            rubyizer.addEventListener("compositionend", function(event) {
+                rubyize(event.currentTarget); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(rubyize_text_val));
+    R"js(
+        document.addEventListener("selectionchange", function(event) {
+            Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
+                element.classList.remove("selection"); });
+            const selection = event.currentTarget.getSelection();
+            if (0 != selection.rangeCount) {
+                Array.from(event.currentTarget.getElementsByTagName("*")).forEach(function(element) {
+                    if (selection.containsNode(element)) {
+                        element.classList.add("selection"); } }); } });
+        const caretPositionFromPoint = function(viewport, x, y) {
             let position = viewport.document.caretRangeFromPoint(x, y);
             let atom = null;
             let node = position.endContainer;
@@ -168,7 +182,7 @@ int main() {
                 if (node instanceof Element && "morpheme-" == node.tagName.toLowerCase()) {
                     atom = node; } }
             if (atom) {
-                let rect = atom.getBoundingClientRect();
+                const rect = atom.getBoundingClientRect();
                 if (-rect.x + x <= 0.5 * rect.width) {
                     position.setStartBefore(atom);
                     position.setEndBefore(atom); }
@@ -176,29 +190,17 @@ int main() {
                     position.setStartAfter(atom);
                     position.setEndAfter(atom); } }
             return position; };
-        let target = document.getElementById("pronunciation");
-        target.addEventListener("input", requireHandle($0));
-        target.addEventListener("compositionend", requireHandle($0));
-        target.addEventListener("pointerdown", function(event) {
-            let start = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
-            target.onpointermove = function(event) {
-                let end = caretPositionFromPoint(target.ownerDocument.defaultView, event.clientX, event.clientY);
-                target.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); };
-            target.onpointermove(event);
+        document.addEventListener("pointerdown", function(event) {
+            const start = caretPositionFromPoint(event.view, event.clientX, event.clientY);
+            event.currentTarget.ownerDocument.onpointermove = function(event) {
+                let end = caretPositionFromPoint(event.view, event.clientX, event.clientY);
+                event.currentTarget.ownerDocument.getSelection().setBaseAndExtent(start.endContainer, start.endOffset, end.endContainer, end.endOffset); };
+            event.currentTarget.ownerDocument.onpointermove(event);
             event.preventDefault();
             event.stopPropagation(); });
-        target.addEventListener("pointerup", function(event) {
-            target.onpointermove = null; });
-        target.addEventListener("pointerleave", function(event) {
-            target.onpointermove = null; }); )js"_js_asm(reinterpret_cast<uint32_t&>(handler));
-    R"js(
-        document.addEventListener("selectionchange", function(event) {
-            Array.from(event.currentTarget.getElementsByClassName("selection")).forEach(function(element) {
-                element.classList.remove("selection"); });
-            let selection = event.currentTarget.getSelection();
-            if (0 != selection.rangeCount) {
-                Array.from(event.currentTarget.getElementsByTagName("*")).forEach(function(element) {
-                    if (selection.containsNode(element)) {
-                        element.classList.add("selection"); } }); } }); )js"_js_asm();
+        document.addEventListener("pointerup", function(event) {
+            event.view.onpointermove = null; });
+        document.addEventListener("pointerleave", function(event) {
+            event.view.onpointermove = null; }); )js"_js_asm();
     R"js(
         document.getElementsByTagName("spinner-")[0].remove(); )js"_js_asm(); }

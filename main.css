@@ -5,7 +5,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     font-family: system-ui; }
-#pronunciation {
+#textarea {
     font-size: 60px;
     overflow: auto;
     touch-action: pan-y; }
