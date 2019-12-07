@@ -172,9 +172,9 @@ int main() {
                 if (!selection.containsNode(element)) {
                     element.classList.remove("selection"); } });
             if (0 != selection.rangeCount) {
-                Array.from(selection.commonAncestorContainer.getElementsByTagName("*")).forEach(function(element) {
+                Array.from(selection.getRangeAt(0).commonAncestorContainer.getElementsByTagName("*")).forEach(function(element) {
                     if (selection.containsNode(element)) {
-                        if (element.classList.contains("selection")) {
+                        if (!element.classList.contains("selection")) {
                             element.classList.add("selection"); } } }); } });
         const caretPositionFromPoint = function(viewport, x, y) {
             let position = viewport.document.caretRangeFromPoint(x, y);
