@@ -6,7 +6,8 @@ body {
     font-family: system-ui; }
 #pronunciation {
     font-size: 60px;
-    overflow: auto; }
+    overflow: auto;
+    touch-action: pan-y; }
 morpheme- {
     display: inline-flex;
     flex-flow: column-reverse; }
