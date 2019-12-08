@@ -150,9 +150,10 @@ void onbeforeinput(emscripten::val event) {
         event.call<void>("preventDefault"); } }
 int main() {
     console_log("_0");
-    emscripten::val const string_allocator_val([](emscripten::val length) {
+    emscripten::val const string_allocator_val = js::bind([](emscripten::val length) {
         sbgy = std::string(length.as<uint32_t>(), 0);
-        return emscripten::val(reinterpret_cast<uintptr_t>(sbgy->data())); });
+        return emscripten::val(reinterpret_cast<uintptr_t>(sbgy->data())); },
+        std::placeholders::_1);
     console_log("_1");
     R"js(
         let string_allocator = requireHandle($0);
@@ -168,7 +169,7 @@ int main() {
     for (baxter_sagart_oc_entry const& entry : *bsoc_dictionary) {
         bsoc_dictionary_by_字->insert(make_pair(entry.字, entry)); }
     console_log("_3");
-    emscripten::val const rubyize_text_val([](emscripten::val text) { rubyize_text(text); });
+    emscripten::val const rubyize_text_val = js::bind(rubyize_text, std::placeholders::_1);
     console_log("_4");
     R"js(
         const rubyize_text = requireHandle($0);
