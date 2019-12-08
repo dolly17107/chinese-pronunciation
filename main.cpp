@@ -157,7 +157,7 @@ int main() {
         let string_allocator = requireHandle($0);
         fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
             return response.arrayBuffer(); }).then(function(arrayBuffer) {
-            let charArray = Uint8Array(arrayBuffer);
+            let charArray = new Uint8Array(arrayBuffer);
             let stringData = string_allocator(charArray.length);
             (new Uint8Array(buffer, stringData, charArray.length)).set(charArray); }); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(string_allocator_val));

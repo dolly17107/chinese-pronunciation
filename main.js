@@ -161,7 +161,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "0e13ff6b-6515-4d68-985e-76f50b7a00b1"
+  "package_uuid": "5ecab5e4-60ef-4180-b69c-32890e4bb187"
  });
 })();
 
@@ -662,7 +662,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 64864, DYNAMIC_BASE = 5307744, DYNAMICTOP_PTR = 64688;
+var STACK_MAX = 64880, DYNAMIC_BASE = 5307760, DYNAMICTOP_PTR = 64704;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -951,12 +951,12 @@ var ASM_CONSTS = {
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.arrayBuffer();
   }).then(function(arrayBuffer) {
-   let charArray = Uint8Array(arrayBuffer);
+   let charArray = new Uint8Array(arrayBuffer);
    let stringData = string_allocator(charArray.length);
    new Uint8Array(buffer, stringData, charArray.length).set(charArray);
   });
  },
- 4128: function($0) {
+ 4144: function($0) {
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
    Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -977,7 +977,7 @@ var ASM_CONSTS = {
    });
   });
  },
- 4800: function() {
+ 4816: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -1041,7 +1041,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 7600: function() {
+ 7616: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1193,7 +1193,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 64848;
+ var buffer = 64864;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1219,7 +1219,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 64848;
+ var buffer = 64864;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
