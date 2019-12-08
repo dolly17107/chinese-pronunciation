@@ -161,7 +161,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "0450d543-4b55-45ac-af7d-3180c9291c5d"
+  "package_uuid": "652d6530-201b-41e6-bda1-d24f4bca9e5a"
  });
 })();
 
@@ -464,8 +464,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1173,
- "maximum": 1173 + 0,
+ "initial": 1025,
+ "maximum": 1025 + 0,
  "element": "anyfunc"
 });
 
@@ -662,7 +662,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 66176, DYNAMIC_BASE = 5309056, DYNAMICTOP_PTR = 66e3;
+var STACK_MAX = 56416, DYNAMIC_BASE = 5299296, DYNAMICTOP_PTR = 56240;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -946,10 +946,19 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 3680: function($0) {
+ 3040: function($0) {
+  let string_allocator = requireHandle($0);
+  fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
+   return response.arrayBuffer();
+  }).then(function(arrayBuffer) {
+   let charArray = Uint8Array(arrayBuffer);
+   let stringData = string_allocator(charArray.length);
+   Uint8Array(buffer, stringData, charArray.length).set(charArray);
+  });
+ },
+ 3792: function($0) {
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
-   console.log("updating...");
    Array.from(rubyizer.childNodes).forEach(function(node) {
     if (node instanceof Text) {
      rubyize_text(node);
@@ -968,7 +977,7 @@ var ASM_CONSTS = {
    });
   });
  },
- 4400: function() {
+ 4464: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -1032,7 +1041,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 7200: function() {
+ 7264: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1184,7 +1193,7 @@ function ___cxa_find_matching_catch_2() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66160;
+ var buffer = 56400;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -1210,7 +1219,7 @@ function ___cxa_find_matching_catch_3() {
  }
  var typeArray = Array.prototype.slice.call(arguments);
  var pointer = ___cxa_is_pointer_type(throwntype);
- var buffer = 66160;
+ var buffer = 56400;
  HEAP32[buffer >> 2] = thrown;
  thrown = buffer;
  for (var i = 0; i < typeArray.length; i++) {
@@ -5305,11 +5314,10 @@ function __embind_register_void(rawType, name) {
  });
 }
 
-function requireHandle(handle) {
- if (!handle) {
-  throwBindingError("Cannot use deleted val. handle = " + handle);
+function __emval_incref(handle) {
+ if (handle > 4) {
+  emval_handle_array[handle].refcount += 1;
  }
- return emval_handle_array[handle].value;
 }
 
 function requireRegisteredType(rawType, humanName) {
@@ -5318,145 +5326,6 @@ function requireRegisteredType(rawType, humanName) {
   throwBindingError(humanName + " has unknown type " + getTypeName(rawType));
  }
  return impl;
-}
-
-function __emval_as(handle, returnType, destructorsRef) {
- handle = requireHandle(handle);
- returnType = requireRegisteredType(returnType, "emval::as");
- var destructors = [];
- var rd = __emval_register(destructors);
- HEAP32[destructorsRef >> 2] = rd;
- return returnType["toWireType"](destructors, handle);
-}
-
-function __emval_allocateDestructors(destructorsRef) {
- var destructors = [];
- HEAP32[destructorsRef >> 2] = __emval_register(destructors);
- return destructors;
-}
-
-var emval_symbols = {};
-
-function getStringOrSymbol(address) {
- var symbol = emval_symbols[address];
- if (symbol === undefined) {
-  return readLatin1String(address);
- } else {
-  return symbol;
- }
-}
-
-var emval_methodCallers = [];
-
-function __emval_call_method(caller, handle, methodName, destructorsRef, args) {
- caller = emval_methodCallers[caller];
- handle = requireHandle(handle);
- methodName = getStringOrSymbol(methodName);
- return caller(handle, methodName, __emval_allocateDestructors(destructorsRef), args);
-}
-
-function __emval_call_void_method(caller, handle, methodName, args) {
- caller = emval_methodCallers[caller];
- handle = requireHandle(handle);
- methodName = getStringOrSymbol(methodName);
- caller(handle, methodName, null, args);
-}
-
-function emval_get_global() {
- if (typeof globalThis === "object") {
-  return globalThis;
- }
- return function() {
-  return Function;
- }()("return this")();
-}
-
-function __emval_get_global(name) {
- if (name === 0) {
-  return __emval_register(emval_get_global());
- } else {
-  name = getStringOrSymbol(name);
-  return __emval_register(emval_get_global()[name]);
- }
-}
-
-function __emval_addMethodCaller(caller) {
- var id = emval_methodCallers.length;
- emval_methodCallers.push(caller);
- return id;
-}
-
-function __emval_lookupTypes(argCount, argTypes, argWireTypes) {
- var a = new Array(argCount);
- for (var i = 0; i < argCount; ++i) {
-  a[i] = requireRegisteredType(HEAP32[(argTypes >> 2) + i], "parameter " + i);
- }
- return a;
-}
-
-function __emval_get_method_caller(argCount, argTypes) {
- var types = __emval_lookupTypes(argCount, argTypes);
- var retType = types[0];
- var signatureName = retType.name + "_$" + types.slice(1).map(function(t) {
-  return t.name;
- }).join("_") + "$";
- var params = [ "retType" ];
- var args = [ retType ];
- var argsList = "";
- for (var i = 0; i < argCount - 1; ++i) {
-  argsList += (i !== 0 ? ", " : "") + "arg" + i;
-  params.push("argType" + i);
-  args.push(types[1 + i]);
- }
- var functionName = makeLegalFunctionName("methodCaller_" + signatureName);
- var functionBody = "return function " + functionName + "(handle, name, destructors, args) {\n";
- var offset = 0;
- for (var i = 0; i < argCount - 1; ++i) {
-  functionBody += "    var arg" + i + " = argType" + i + ".readValueFromPointer(args" + (offset ? "+" + offset : "") + ");\n";
-  offset += types[i + 1]["argPackAdvance"];
- }
- functionBody += "    var rv = handle[name](" + argsList + ");\n";
- for (var i = 0; i < argCount - 1; ++i) {
-  if (types[i + 1]["deleteObject"]) {
-   functionBody += "    argType" + i + ".deleteObject(arg" + i + ");\n";
-  }
- }
- if (!retType.isVoid) {
-  functionBody += "    return retType.toWireType(destructors, rv);\n";
- }
- functionBody += "};\n";
- params.push(functionBody);
- var invokerFunction = new_(Function, params).apply(null, args);
- return __emval_addMethodCaller(invokerFunction);
-}
-
-function __emval_get_property(handle, key) {
- handle = requireHandle(handle);
- key = requireHandle(key);
- return __emval_register(handle[key]);
-}
-
-function __emval_incref(handle) {
- if (handle > 4) {
-  emval_handle_array[handle].refcount += 1;
- }
-}
-
-function __emval_new_cstring(v) {
- return __emval_register(getStringOrSymbol(v));
-}
-
-function __emval_run_destructors(handle) {
- var destructors = emval_handle_array[handle].value;
- runDestructors(destructors);
- __emval_decref(handle);
-}
-
-function __emval_set_property(handle, key, value) {
- handle = requireHandle(handle);
- key = requireHandle(key);
- value = requireHandle(value);
- handle[key] = value;
 }
 
 function __emval_take_value(type, argv) {
@@ -5938,94 +5807,85 @@ function intArrayFromString(stringy, dontAddNull, length) {
 }
 
 var asmLibraryArg = {
- "r": ___cxa_allocate_exception,
- "z": ___cxa_begin_catch,
- "H": ___cxa_end_catch,
+ "u": ___cxa_allocate_exception,
+ "w": ___cxa_begin_catch,
+ "E": ___cxa_end_catch,
  "c": ___cxa_find_matching_catch_2,
  "h": ___cxa_find_matching_catch_3,
- "t": ___cxa_free_exception,
- "M": ___cxa_rethrow,
- "s": ___cxa_throw,
- "Ga": ___cxa_uncaught_exceptions,
- "ea": ___lock,
- "Fa": ___map_file,
- "e": ___resumeException,
- "da": ___syscall221,
- "Ea": ___syscall5,
- "Da": ___syscall54,
- "Ca": ___syscall91,
- "G": ___unlock,
- "xa": __embind_register_bool,
- "p": __embind_register_class,
- "o": __embind_register_class_constructor,
- "n": __embind_register_class_function,
- "wa": __embind_register_emval,
- "ba": __embind_register_float,
- "A": __embind_register_integer,
- "y": __embind_register_memory_view,
- "aa": __embind_register_std_string,
- "va": __embind_register_std_wstring,
- "ua": __embind_register_void,
- "ta": __emval_as,
- "K": __emval_call_method,
- "$": __emval_call_void_method,
- "sa": __emval_decref,
- "_": __emval_get_global,
- "ra": __emval_get_method_caller,
- "qa": __emval_get_property,
- "J": __emval_incref,
- "F": __emval_new_cstring,
- "pa": __emval_run_destructors,
- "oa": __emval_set_property,
- "na": __emval_take_value,
- "Z": _abort,
- "L": _emscripten_asm_const_iii,
- "ma": _emscripten_memcpy_big,
- "la": _emscripten_resize_heap,
- "Ba": _environ_get,
- "Aa": _environ_sizes_get,
- "ca": _fd_close,
- "za": _fd_read,
- "ja": _fd_seek,
- "ya": _fd_write,
+ "C": ___cxa_free_exception,
+ "aa": ___cxa_rethrow,
+ "v": ___cxa_throw,
+ "xa": ___cxa_uncaught_exceptions,
+ "$": ___lock,
+ "wa": ___map_file,
+ "f": ___resumeException,
+ "_": ___syscall221,
+ "va": ___syscall5,
+ "ua": ___syscall54,
+ "ta": ___syscall91,
+ "D": ___unlock,
+ "oa": __embind_register_bool,
+ "n": __embind_register_class,
+ "m": __embind_register_class_constructor,
+ "l": __embind_register_class_function,
+ "na": __embind_register_emval,
+ "Y": __embind_register_float,
+ "x": __embind_register_integer,
+ "t": __embind_register_memory_view,
+ "X": __embind_register_std_string,
+ "ma": __embind_register_std_wstring,
+ "la": __embind_register_void,
+ "ka": __emval_decref,
+ "ja": __emval_incref,
+ "W": __emval_take_value,
+ "V": _abort,
+ "G": _emscripten_asm_const_iii,
+ "ia": _emscripten_memcpy_big,
+ "ha": _emscripten_resize_heap,
+ "sa": _environ_get,
+ "ra": _environ_sizes_get,
+ "Z": _fd_close,
+ "qa": _fd_read,
+ "fa": _fd_seek,
+ "pa": _fd_write,
  "b": _getTempRet0,
- "Y": invoke_diii,
- "X": invoke_fiii,
- "q": invoke_i,
- "f": invoke_ii,
+ "U": invoke_diii,
+ "T": invoke_fiii,
+ "o": invoke_i,
+ "e": invoke_ii,
  "d": invoke_iii,
- "m": invoke_iiii,
- "l": invoke_iiiii,
- "u": invoke_iiiiii,
- "v": invoke_iiiiiii,
- "W": invoke_iiiiiiii,
- "x": invoke_iiiiiiiiiii,
- "I": invoke_iiiiiiiiiiii,
- "E": invoke_iiiiiiiiiiiii,
- "ia": invoke_iiji,
- "ha": invoke_jiiii,
+ "k": invoke_iiii,
+ "j": invoke_iiiii,
+ "S": invoke_iiiiii,
+ "z": invoke_iiiiiii,
+ "R": invoke_iiiiiiii,
+ "s": invoke_iiiiiiiiiii,
+ "F": invoke_iiiiiiiiiiii,
+ "B": invoke_iiiiiiiiiiiii,
+ "ea": invoke_iiji,
+ "da": invoke_jiiii,
  "i": invoke_v,
  "a": invoke_vi,
  "g": invoke_vii,
- "k": invoke_viii,
- "j": invoke_viiii,
- "D": invoke_viiiii,
- "V": invoke_viiiiii,
- "w": invoke_viiiiiii,
- "U": invoke_viiiiiiii,
- "T": invoke_viiiiiiiii,
- "B": invoke_viiiiiiiiii,
- "S": invoke_viiiiiiiiiii,
- "R": invoke_viiiiiiiiiiii,
- "Q": invoke_viiiiiiiiiiiii,
- "P": invoke_viiiiiiiiiiiiii,
- "C": invoke_viiiiiiiiiiiiiii,
- "O": invoke_viiiiiiiiiiiiiiii,
- "ka": invoke_viiiiiiiiiiiiiiiii,
- "ga": invoke_viijii,
+ "p": invoke_viii,
+ "q": invoke_viiii,
+ "Q": invoke_viiiii,
+ "P": invoke_viiiiii,
+ "r": invoke_viiiiiii,
+ "O": invoke_viiiiiiii,
+ "N": invoke_viiiiiiiii,
+ "y": invoke_viiiiiiiiii,
+ "M": invoke_viiiiiiiiiii,
+ "L": invoke_viiiiiiiiiiii,
+ "K": invoke_viiiiiiiiiiiii,
+ "J": invoke_viiiiiiiiiiiiii,
+ "A": invoke_viiiiiiiiiiiiiii,
+ "I": invoke_viiiiiiiiiiiiiiii,
+ "ga": invoke_viiiiiiiiiiiiiiiii,
+ "ca": invoke_viijii,
  "memory": wasmMemory,
- "N": _setTempRet0,
- "fa": _strftime_l,
+ "H": _setTempRet0,
+ "ba": _strftime_l,
  "table": wasmTable
 };
 
@@ -6034,253 +5894,253 @@ var asm = createWasm();
 Module["asm"] = asm;
 
 var ___wasm_call_ctors = Module["___wasm_call_ctors"] = function() {
- return Module["asm"]["Ha"].apply(null, arguments);
+ return Module["asm"]["ya"].apply(null, arguments);
 };
 
 var _malloc = Module["_malloc"] = function() {
- return Module["asm"]["Ia"].apply(null, arguments);
+ return Module["asm"]["za"].apply(null, arguments);
 };
 
 var _main = Module["_main"] = function() {
- return Module["asm"]["Ja"].apply(null, arguments);
+ return Module["asm"]["Aa"].apply(null, arguments);
 };
 
 var ___errno_location = Module["___errno_location"] = function() {
- return Module["asm"]["Ka"].apply(null, arguments);
+ return Module["asm"]["Ba"].apply(null, arguments);
 };
 
 var _free = Module["_free"] = function() {
- return Module["asm"]["La"].apply(null, arguments);
+ return Module["asm"]["Ca"].apply(null, arguments);
 };
 
 var _setThrew = Module["_setThrew"] = function() {
- return Module["asm"]["Ma"].apply(null, arguments);
+ return Module["asm"]["Da"].apply(null, arguments);
 };
 
 var __ZSt18uncaught_exceptionv = Module["__ZSt18uncaught_exceptionv"] = function() {
- return Module["asm"]["Na"].apply(null, arguments);
+ return Module["asm"]["Ea"].apply(null, arguments);
 };
 
 var ___cxa_can_catch = Module["___cxa_can_catch"] = function() {
- return Module["asm"]["Oa"].apply(null, arguments);
+ return Module["asm"]["Fa"].apply(null, arguments);
 };
 
 var ___cxa_is_pointer_type = Module["___cxa_is_pointer_type"] = function() {
- return Module["asm"]["Pa"].apply(null, arguments);
+ return Module["asm"]["Ga"].apply(null, arguments);
 };
 
 var ___getTypeName = Module["___getTypeName"] = function() {
- return Module["asm"]["Qa"].apply(null, arguments);
+ return Module["asm"]["Ha"].apply(null, arguments);
 };
 
 var ___embind_register_native_and_builtin_types = Module["___embind_register_native_and_builtin_types"] = function() {
- return Module["asm"]["Ra"].apply(null, arguments);
+ return Module["asm"]["Ia"].apply(null, arguments);
 };
 
 var dynCall_diii = Module["dynCall_diii"] = function() {
- return Module["asm"]["Sa"].apply(null, arguments);
+ return Module["asm"]["Ja"].apply(null, arguments);
 };
 
 var dynCall_fiii = Module["dynCall_fiii"] = function() {
- return Module["asm"]["Ta"].apply(null, arguments);
+ return Module["asm"]["Ka"].apply(null, arguments);
 };
 
 var dynCall_i = Module["dynCall_i"] = function() {
- return Module["asm"]["Ua"].apply(null, arguments);
+ return Module["asm"]["La"].apply(null, arguments);
 };
 
 var dynCall_ii = Module["dynCall_ii"] = function() {
- return Module["asm"]["Va"].apply(null, arguments);
+ return Module["asm"]["Ma"].apply(null, arguments);
 };
 
 var dynCall_iii = Module["dynCall_iii"] = function() {
- return Module["asm"]["Wa"].apply(null, arguments);
+ return Module["asm"]["Na"].apply(null, arguments);
 };
 
 var dynCall_iiii = Module["dynCall_iiii"] = function() {
- return Module["asm"]["Xa"].apply(null, arguments);
+ return Module["asm"]["Oa"].apply(null, arguments);
 };
 
 var dynCall_iiiii = Module["dynCall_iiiii"] = function() {
- return Module["asm"]["Ya"].apply(null, arguments);
+ return Module["asm"]["Pa"].apply(null, arguments);
 };
 
 var dynCall_iiiiii = Module["dynCall_iiiiii"] = function() {
- return Module["asm"]["Za"].apply(null, arguments);
+ return Module["asm"]["Qa"].apply(null, arguments);
 };
 
 var dynCall_iiiiiii = Module["dynCall_iiiiiii"] = function() {
- return Module["asm"]["_a"].apply(null, arguments);
+ return Module["asm"]["Ra"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiii = Module["dynCall_iiiiiiii"] = function() {
- return Module["asm"]["$a"].apply(null, arguments);
+ return Module["asm"]["Sa"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiii = Module["dynCall_iiiiiiiiiii"] = function() {
- return Module["asm"]["ab"].apply(null, arguments);
+ return Module["asm"]["Ta"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiiii = Module["dynCall_iiiiiiiiiiii"] = function() {
- return Module["asm"]["bb"].apply(null, arguments);
+ return Module["asm"]["Ua"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiii"] = function() {
- return Module["asm"]["cb"].apply(null, arguments);
+ return Module["asm"]["Va"].apply(null, arguments);
 };
 
 var dynCall_iiji = Module["dynCall_iiji"] = function() {
- return Module["asm"]["db"].apply(null, arguments);
+ return Module["asm"]["Wa"].apply(null, arguments);
 };
 
 var dynCall_jiiii = Module["dynCall_jiiii"] = function() {
- return Module["asm"]["eb"].apply(null, arguments);
+ return Module["asm"]["Xa"].apply(null, arguments);
 };
 
 var dynCall_v = Module["dynCall_v"] = function() {
- return Module["asm"]["fb"].apply(null, arguments);
+ return Module["asm"]["Ya"].apply(null, arguments);
 };
 
 var dynCall_vi = Module["dynCall_vi"] = function() {
- return Module["asm"]["gb"].apply(null, arguments);
+ return Module["asm"]["Za"].apply(null, arguments);
 };
 
 var dynCall_vii = Module["dynCall_vii"] = function() {
- return Module["asm"]["hb"].apply(null, arguments);
+ return Module["asm"]["_a"].apply(null, arguments);
 };
 
 var dynCall_viii = Module["dynCall_viii"] = function() {
- return Module["asm"]["ib"].apply(null, arguments);
+ return Module["asm"]["$a"].apply(null, arguments);
 };
 
 var dynCall_viiii = Module["dynCall_viiii"] = function() {
- return Module["asm"]["jb"].apply(null, arguments);
+ return Module["asm"]["ab"].apply(null, arguments);
 };
 
 var dynCall_viiiii = Module["dynCall_viiiii"] = function() {
- return Module["asm"]["kb"].apply(null, arguments);
+ return Module["asm"]["bb"].apply(null, arguments);
 };
 
 var dynCall_viiiiii = Module["dynCall_viiiiii"] = function() {
- return Module["asm"]["lb"].apply(null, arguments);
+ return Module["asm"]["cb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiii = Module["dynCall_viiiiiii"] = function() {
- return Module["asm"]["mb"].apply(null, arguments);
+ return Module["asm"]["db"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiii = Module["dynCall_viiiiiiii"] = function() {
- return Module["asm"]["nb"].apply(null, arguments);
+ return Module["asm"]["eb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiii = Module["dynCall_viiiiiiiii"] = function() {
- return Module["asm"]["ob"].apply(null, arguments);
+ return Module["asm"]["fb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiii = Module["dynCall_viiiiiiiiii"] = function() {
- return Module["asm"]["pb"].apply(null, arguments);
+ return Module["asm"]["gb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiiii = Module["dynCall_viiiiiiiiiii"] = function() {
- return Module["asm"]["qb"].apply(null, arguments);
+ return Module["asm"]["hb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiiiii = Module["dynCall_viiiiiiiiiiii"] = function() {
- return Module["asm"]["rb"].apply(null, arguments);
+ return Module["asm"]["ib"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiii"] = function() {
- return Module["asm"]["sb"].apply(null, arguments);
+ return Module["asm"]["jb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiii"] = function() {
- return Module["asm"]["tb"].apply(null, arguments);
+ return Module["asm"]["kb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiiii"] = function() {
- return Module["asm"]["ub"].apply(null, arguments);
+ return Module["asm"]["lb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiiiii"] = function() {
- return Module["asm"]["vb"].apply(null, arguments);
+ return Module["asm"]["mb"].apply(null, arguments);
 };
 
 var dynCall_viiiiiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiiiiii"] = function() {
- return Module["asm"]["wb"].apply(null, arguments);
+ return Module["asm"]["nb"].apply(null, arguments);
 };
 
 var dynCall_viijii = Module["dynCall_viijii"] = function() {
- return Module["asm"]["xb"].apply(null, arguments);
+ return Module["asm"]["ob"].apply(null, arguments);
 };
 
 var stackSave = Module["stackSave"] = function() {
- return Module["asm"]["yb"].apply(null, arguments);
+ return Module["asm"]["pb"].apply(null, arguments);
 };
 
 var stackAlloc = Module["stackAlloc"] = function() {
- return Module["asm"]["zb"].apply(null, arguments);
+ return Module["asm"]["qb"].apply(null, arguments);
 };
 
 var stackRestore = Module["stackRestore"] = function() {
- return Module["asm"]["Ab"].apply(null, arguments);
+ return Module["asm"]["rb"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = function() {
- return Module["asm"]["Bb"].apply(null, arguments);
+ return Module["asm"]["sb"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiii = Module["dynCall_iiiiiiiiii"] = function() {
- return Module["asm"]["Cb"].apply(null, arguments);
+ return Module["asm"]["tb"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiiii"] = function() {
- return Module["asm"]["Db"].apply(null, arguments);
+ return Module["asm"]["ub"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiiiii"] = function() {
- return Module["asm"]["Eb"].apply(null, arguments);
+ return Module["asm"]["vb"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiiiiii"] = function() {
- return Module["asm"]["Fb"].apply(null, arguments);
+ return Module["asm"]["wb"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiiiiiii"] = function() {
- return Module["asm"]["Gb"].apply(null, arguments);
+ return Module["asm"]["xb"].apply(null, arguments);
 };
 
 var dynCall_iiiiiiiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiiiiiiii"] = function() {
- return Module["asm"]["Hb"].apply(null, arguments);
+ return Module["asm"]["yb"].apply(null, arguments);
 };
 
 var dynCall_jiji = Module["dynCall_jiji"] = function() {
- return Module["asm"]["Ib"].apply(null, arguments);
+ return Module["asm"]["zb"].apply(null, arguments);
 };
 
 var dynCall_iidiiii = Module["dynCall_iidiiii"] = function() {
- return Module["asm"]["Jb"].apply(null, arguments);
+ return Module["asm"]["Ab"].apply(null, arguments);
 };
 
 var dynCall_iiiiij = Module["dynCall_iiiiij"] = function() {
- return Module["asm"]["Kb"].apply(null, arguments);
+ return Module["asm"]["Bb"].apply(null, arguments);
 };
 
 var dynCall_iiiiid = Module["dynCall_iiiiid"] = function() {
- return Module["asm"]["Lb"].apply(null, arguments);
+ return Module["asm"]["Cb"].apply(null, arguments);
 };
 
 var dynCall_iiiiijj = Module["dynCall_iiiiijj"] = function() {
- return Module["asm"]["Mb"].apply(null, arguments);
+ return Module["asm"]["Db"].apply(null, arguments);
 };
 
 var dynCall_iiiiiijj = Module["dynCall_iiiiiijj"] = function() {
- return Module["asm"]["Nb"].apply(null, arguments);
+ return Module["asm"]["Eb"].apply(null, arguments);
 };
 
-function invoke_ii(index, a1) {
+function invoke_vi(index, a1) {
  var sp = stackSave();
  try {
-  return dynCall_ii(index, a1);
+  dynCall_vi(index, a1);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
@@ -6299,65 +6159,10 @@ function invoke_iii(index, a1, a2) {
  }
 }
 
-function invoke_vi(index, a1) {
+function invoke_ii(index, a1) {
  var sp = stackSave();
  try {
-  dynCall_vi(index, a1);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_viiii(index, a1, a2, a3, a4) {
- var sp = stackSave();
- try {
-  dynCall_viiii(index, a1, a2, a3, a4);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_viii(index, a1, a2, a3) {
- var sp = stackSave();
- try {
-  dynCall_viii(index, a1, a2, a3);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_iiiiii(index, a1, a2, a3, a4, a5) {
- var sp = stackSave();
- try {
-  return dynCall_iiiiii(index, a1, a2, a3, a4, a5);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_iiiiiii(index, a1, a2, a3, a4, a5, a6) {
- var sp = stackSave();
- try {
-  return dynCall_iiiiiii(index, a1, a2, a3, a4, a5, a6);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_iiii(index, a1, a2, a3) {
- var sp = stackSave();
- try {
-  return dynCall_iiii(index, a1, a2, a3);
+  return dynCall_ii(index, a1);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
@@ -6376,10 +6181,43 @@ function invoke_vii(index, a1, a2) {
  }
 }
 
+function invoke_iiii(index, a1, a2, a3) {
+ var sp = stackSave();
+ try {
+  return dynCall_iiii(index, a1, a2, a3);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_viii(index, a1, a2, a3) {
+ var sp = stackSave();
+ try {
+  dynCall_viii(index, a1, a2, a3);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
 function invoke_v(index) {
  var sp = stackSave();
  try {
   dynCall_v(index);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_viiii(index, a1, a2, a3, a4) {
+ var sp = stackSave();
+ try {
+  dynCall_viiii(index, a1, a2, a3, a4);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
@@ -6530,17 +6368,6 @@ function invoke_viiiiiiiiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a1
  }
 }
 
-function invoke_iiiii(index, a1, a2, a3, a4) {
- var sp = stackSave();
- try {
-  return dynCall_iiiii(index, a1, a2, a3, a4);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
 function invoke_iiiiiiii(index, a1, a2, a3, a4, a5, a6, a7) {
  var sp = stackSave();
  try {
@@ -6556,6 +6383,17 @@ function invoke_iiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) {
  var sp = stackSave();
  try {
   return dynCall_iiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_iiiii(index, a1, a2, a3, a4) {
+ var sp = stackSave();
+ try {
+  return dynCall_iiiii(index, a1, a2, a3, a4);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
@@ -6607,10 +6445,32 @@ function invoke_i(index) {
  }
 }
 
+function invoke_iiiiiii(index, a1, a2, a3, a4, a5, a6) {
+ var sp = stackSave();
+ try {
+  return dynCall_iiiiiii(index, a1, a2, a3, a4, a5, a6);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
 function invoke_iiiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11) {
  var sp = stackSave();
  try {
   return dynCall_iiiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_iiiiii(index, a1, a2, a3, a4, a5) {
+ var sp = stackSave();
+ try {
+  return dynCall_iiiiii(index, a1, a2, a3, a4, a5);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
