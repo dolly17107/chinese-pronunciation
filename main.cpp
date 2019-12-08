@@ -149,28 +149,23 @@ void onbeforeinput(emscripten::val event) {
         replace_ranges_with_fragment(ruby, event.call<emscripten::val>("getTargetRanges"));
         event.call<void>("preventDefault"); } }
 int main() {
-    console_log("_0");
     emscripten::val const string_allocator_val = js::bind([](emscripten::val length) {
         sbgy = std::string(length.as<uint32_t>(), 0);
         return emscripten::val(reinterpret_cast<uintptr_t>(sbgy->data())); },
         std::placeholders::_1);
-    console_log("_1");
     R"js(
         let string_allocator = requireHandle($0);
         fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
             return response.arrayBuffer(); }).then(function(arrayBuffer) {
             let charArray = Uint8Array(arrayBuffer);
             let stringData = string_allocator(charArray.length);
-            Uint8Array(buffer, stringData, charArray.length).set(charArray); }); )js"_js_asm(
+            (new Uint8Array(buffer, stringData, charArray.length)).set(charArray); }); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(string_allocator_val));
-    console_log("_2");
     bsoc_dictionary = deserialize<std::vector<baxter_sagart_oc_entry>>(file_to_string("BaxterSagartOC2015-10-13"));
     bsoc_dictionary_by_字 = std::make_optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>>();
     for (baxter_sagart_oc_entry const& entry : *bsoc_dictionary) {
         bsoc_dictionary_by_字->insert(make_pair(entry.字, entry)); }
-    console_log("_3");
     emscripten::val const rubyize_text_val = js::bind(rubyize_text, std::placeholders::_1);
-    console_log("_4");
     R"js(
         const rubyize_text = requireHandle($0);
         const rubyize = function(rubyizer) {
@@ -185,7 +180,6 @@ int main() {
             rubyizer.addEventListener("compositionend", function(event) {
                 rubyize(event.currentTarget); }); }); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(rubyize_text_val));
-    console_log("_5");
     R"js(
         const select = function(node, selection) {
             if (node instanceof Element && selection.containsNode(node)) {
