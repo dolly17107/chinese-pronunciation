@@ -3,12 +3,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
-#include <algorithm>
-#include <regex>
-#include <iostream>
-#include <exception>
 #include <js.h>
-#include <filesystem.h>
 enum class 字母{ 不, 芳, 並, 明, 端, 透, 定, 泥, 知, 徹, 澄, 日, 見, 溪, 羣, 來, 疑, 精, 清, 從, 審, 穿, 禪, 照, 心, 邪, 曉, 匣, 喻, 影 };
 std::unordered_map<std::string_view, 字母> const 字母_by_ipa{
     {"p", 字母::不},
@@ -377,4 +372,4 @@ int main() {
             return response.text(); }).then(function(sbgy_xml) {
             let sbgy = (new DOMParser()).parseFromString(sbgy_xml, "application/xml");
             sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(function(voice_part) {
-                console.log(voice_part); }); }); )js"_js_asm(); }
+                console.log(voice_part.attributes.getNamedItem("ipa").value, voice_part.getElementsByTagName("word_head")[0].childNodes[0].data, voice_part.querySelector("fanqie").childNodes[0].data); }); }); )js"_js_asm(); }
