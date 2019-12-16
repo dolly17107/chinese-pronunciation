@@ -205,8 +205,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 275,
- "maximum": 275 + 0,
+ "initial": 274,
+ "maximum": 274 + 0,
  "element": "anyfunc"
 });
 
@@ -328,7 +328,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var DYNAMIC_BASE = 5312304, DYNAMICTOP_PTR = 69264;
+var DYNAMIC_BASE = 5312048, DYNAMICTOP_PTR = 69008;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -569,10 +569,10 @@ function createWasm() {
 }
 
 var ASM_CONSTS = {
- 8688: function($0) {
+ 8432: function($0) {
   console.log($0 + " matches!");
  },
- 8736: function($0) {
+ 8480: function($0) {
   let receiver = requireHandle($0);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
@@ -583,16 +583,16 @@ var ASM_CONSTS = {
    });
   });
  },
- 26576: function($0) {
+ 26320: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 26800: function($0) {
+ 26544: function($0) {
   return __emval_register(requireHandle($0).getElementsByTagName("word_head")[0].childNodes[0].data);
  },
- 26912: function($0) {
+ 26656: function($0) {
   return __emval_register(requireHandle($0).querySelector("fanqie").textContent);
  },
- 65200: function($0) {
+ 64944: function($0) {
   console.log(UTF8ToString($0));
  }
 };

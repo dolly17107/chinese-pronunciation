@@ -110,7 +110,7 @@ namespace 轉等_distributions {
             {"", 轉等::內三}, {"j", 轉等::內四},
             {"l", 轉等::內三}, {"nʑ", 轉等::內三}}[ipa_initial].value_or([小韻]() {
                 std::vector<std::tuple<std::string_view, 轉等>> table = {
-                    {"祇 卑 陴 彌 詑 𤿎 𢔌 渳 婢 諀 企 枳 避 臂 譬 企 縊 馶", 轉等::內四},
+                    {"祇 𤰞 陴 彌 詑 𤿎 𢔌 渳 婢 諀 企 枳 避 臂 譬 企 縊 馶", 轉等::內四},
                     {"隓 闚 𩓸 跬 觖 恚 瞡 孈", 轉等::內四},
                     {"糜 鈹 陂 竒 犧 㩻 宜 皮 羈 漪 靡 彼 被 技 倚 掎 綺 螘 㱟 𪖪 帔 賁 髲 寄 芰 議 倚 戲 㞆", 轉等::內三},
                     {"嬀 𪎮 逶 虧 危 毀 委 跪 詭 硊 跪 䞈 餧 僞 毀", 轉等::內三},
@@ -129,7 +129,9 @@ namespace 轉等_distributions {
                     {"愔 坅", 轉等::內四},
                     {"琴 欽 吟 歆 金 音 噤 錦 僸 稟 㱃 品 𩖄 廞 𦧈 禁 蔭 吟", 轉等::內三},
                     {"揖", 轉等::內四},
-                    {"及 急 岌 泣 吸 邑 𩾳 鵖", 轉等::內三}};
+                    {"及 急 岌 泣 吸 邑 𩾳 鵖", 轉等::內三},
+                    {"恘䬌", 轉等::內四},
+                    {"憂牛丘鳩不休𧚍浮謀", 轉等::內三}};
                 std::vector<轉等> matches;
                 std::for_each(table.begin(), table.end(), [小韻, &matches](std::tuple<std::string_view, 轉等> entry) {
                     if (std::string_view::npos != std::get<0>(entry).find(小韻)) {
@@ -209,7 +211,7 @@ std::unordered_map<std::string_view, 呼轉等攝入> const 呼轉等攝入_by_i
     {"ɔk", {呼::開, 轉等_distributions::外二, 攝::通江, 1}},
     {"ĭe", {呼::開, 轉等_distributions::內αβ, 攝::止蟹, 0}},
     {"i", {呼::開, 轉等_distributions::內αβ, 攝::止蟹, 0}},
-    {"ĭə", {呼::開, 轉等_distributions::內β, 攝::止蟹, 0}},
+    {"ĭə", {呼::開, 轉等_distributions::內αβ, 攝::止蟹, 0}},
     {"ĭəi", {呼::開, 轉等_distributions::內三, 攝::止蟹, 0}},
     {"ĭwe", {呼::合_gliding, 轉等_distributions::內αβ, 攝::止蟹, 0}},
     {"wi", {呼::合_gliding, 轉等_distributions::內αβ, 攝::止蟹, 0}},
@@ -234,12 +236,16 @@ std::unordered_map<std::string_view, 呼轉等攝入> const 呼轉等攝入_by_i
     {"ət", {呼::開, 轉等_distributions::內一, 攝::臻山, 1}},
     {"ĭĕn", {呼::開, 轉等_distributions::內αβ, 攝::臻山, 0}},
     {"ĭĕt", {呼::開, 轉等_distributions::內αβ, 攝::臻山, 1}},
+    {"ĭen", {呼::開, 轉等_distributions::內αβ, 攝::臻山, 0}},
+    {"ĭet", {呼::開, 轉等_distributions::內αβ, 攝::臻山, 1}},
     {"ĭən", {呼::開, 轉等_distributions::內三, 攝::臻山, 0}},
     {"ĭət", {呼::開, 轉等_distributions::內三, 攝::臻山, 1}},
     {"uən", {呼::合_gliding, 轉等_distributions::內一, 攝::臻山, 0}},
     {"uət", {呼::合_gliding, 轉等_distributions::內一, 攝::臻山, 1}},
     {"ĭwĕn", {呼::合_gliding, 轉等_distributions::內αβ, 攝::臻山, 0}},
     {"ĭwĕt", {呼::合_gliding, 轉等_distributions::內αβ, 攝::臻山, 1}},
+    {"ĭuĕn", {呼::合_gliding, 轉等_distributions::內αβ, 攝::臻山, 0}},
+    {"ĭuĕt", {呼::合_gliding, 轉等_distributions::內αβ, 攝::臻山, 1}},
     {"ĭuən", {呼::合_gliding, 轉等_distributions::內三, 攝::臻山, 0}},
     {"ĭuət", {呼::合_gliding, 轉等_distributions::內三, 攝::臻山, 1}},
     {"ɑn", {呼::開, 轉等_distributions::外一, 攝::臻山, 0}},
@@ -319,8 +325,8 @@ std::unordered_map<std::string_view, 呼轉等攝入> const 呼轉等攝入_by_i
     {"ɑp", {呼::開, 轉等_distributions::外一, 攝::深咸, 1}},
     {"ɐm", {呼::開, 轉等_distributions::外二, 攝::深咸, 0}},
     {"ɐp", {呼::開, 轉等_distributions::外二, 攝::深咸, 1}},
-    {"ɐm", {呼::開, 轉等_distributions::外二, 攝::深咸, 0}},
-    {"ɐp", {呼::開, 轉等_distributions::外二, 攝::深咸, 1}},
+    {"am", {呼::開, 轉等_distributions::外二, 攝::深咸, 0}},
+    {"ap", {呼::開, 轉等_distributions::外二, 攝::深咸, 1}},
     {"ĭɛm", {呼::開, 轉等_distributions::外αβ, 攝::深咸, 0}},
     {"ĭɛp", {呼::開, 轉等_distributions::外αβ, 攝::深咸, 1}},
     {"ĭɐm", {呼::開, 轉等_distributions::外三, 攝::深咸, 0}},
