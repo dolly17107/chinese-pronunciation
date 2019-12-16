@@ -328,7 +328,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var DYNAMIC_BASE = 5345904, DYNAMICTOP_PTR = 102864;
+var DYNAMIC_BASE = 5312304, DYNAMICTOP_PTR = 69264;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -592,7 +592,7 @@ var ASM_CONSTS = {
  26912: function($0) {
   return __emval_register(requireHandle($0).querySelector("fanqie").childNodes[0].data);
  },
- 98800: function($0) {
+ 65200: function($0) {
   console.log(UTF8ToString($0));
  }
 };
