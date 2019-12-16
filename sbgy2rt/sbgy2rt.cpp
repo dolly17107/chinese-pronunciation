@@ -499,7 +499,7 @@ struct 字母呼轉等攝四聲 {
     std::vector<字母呼轉等攝四聲> 字母呼轉等攝四聲s;
     for (uint32_t i = 0; i <= ipa.size(); i++) {
         for (uint32_t j = i; j <= ipa.size(); j++) {
-            std::array<std::string_view, 3> ipa_parts = {ipa.substr(0, i), ipa.substr(i, j), ipa.substr(j, ipa.size() + -j)};
+            std::array<std::string_view, 3> ipa_parts = {ipa.substr(0, i), ipa.substr(i, -i + j), ipa.substr(j, -j + ipa.size())};
             if (字母_by_ipa.count(ipa_parts[0]) && 呼轉等攝入_by_ipa.count(ipa_parts[1]) && 四聲_by_ipa.count(ipa_parts[2])) {
                 字母呼轉等攝四聲s.push_back({
                     字母_by_ipa.at(ipa_parts[0]),
