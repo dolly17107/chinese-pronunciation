@@ -517,6 +517,7 @@ struct 小韻 {
     std::string ipa;
     std::string character;
     std::string 反切; };
+int main() {
     //std::unordered_map<字母呼轉等攝四聲, 小韻> rt;
     emscripten::val receiver = js::bind([/*&rt*/](emscripten::val voice_part) {
         小韻 小韻;
@@ -527,9 +528,10 @@ struct 小韻 {
         std::string output = 小韻.character + " " + 小韻.反切 + " " + 小韻.ipa + " " + std::string(magic_enum::enum_name(gg.字母)) + std::string(magic_enum::enum_name(gg.呼)) + std::string(magic_enum::enum_name(gg.轉等)) + std::string(magic_enum::enum_name(gg.攝)) + std::string(magic_enum::enum_name(gg.四聲));
         R"js( console.log(UTF8ToString($0)); )js"_js_asm(reinterpret_cast<int>(output.c_str()));
         /*rt.push_back(std::make_tuple(gg, 小韻));*/ }, std::placeholders::_1);
-int main() {
     R"js(
+        let receiver = requireHandle($0);
         fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
             return response.text(); }).then(function(sbgy_xml) {
             let sbgy = (new DOMParser()).parseFromString(sbgy_xml, "application/xml");
-            sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(requireHandle($0)); }); )js"_js_asm(reinterpret_cast<uint32_t&>(receiver)); }
+            sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(function(voice_part) {
+                receiver(voice_part); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(receiver)); }

@@ -205,8 +205,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 276,
- "maximum": 276 + 0,
+ "initial": 275,
+ "maximum": 275 + 0,
  "element": "anyfunc"
 });
 
@@ -328,7 +328,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var DYNAMIC_BASE = 5345792, DYNAMICTOP_PTR = 102752;
+var DYNAMIC_BASE = 5345904, DYNAMICTOP_PTR = 102864;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -573,23 +573,26 @@ var ASM_CONSTS = {
   console.log($0 + " matches!");
  },
  8736: function($0) {
+  let receiver = requireHandle($0);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
   }).then(function(sbgy_xml) {
    let sbgy = new DOMParser().parseFromString(sbgy_xml, "application/xml");
-   sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(requireHandle($0));
+   sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(function(voice_part) {
+    receiver(voice_part);
+   });
   });
  },
- 26496: function($0) {
+ 26576: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 26720: function($0) {
+ 26800: function($0) {
   return __emval_register(requireHandle($0).getElementsByTagName("word_head")[0].childNodes[0].data);
  },
- 26832: function($0) {
+ 26912: function($0) {
   return __emval_register(requireHandle($0).querySelector("fanqie").childNodes[0].data);
  },
- 98720: function($0) {
+ 98800: function($0) {
   console.log(UTF8ToString($0));
  }
 };
@@ -2213,15 +2216,15 @@ var asmLibraryArg = {
  "m": __embind_register_std_string,
  "t": __embind_register_std_wstring,
  "v": __embind_register_void,
- "p": __emval_as,
- "y": __emval_call_method,
+ "y": __emval_as,
+ "w": __emval_call_method,
  "a": __emval_decref,
- "o": __emval_get_method_caller,
- "w": __emval_get_property,
+ "x": __emval_get_method_caller,
+ "o": __emval_get_property,
  "e": __emval_incref,
- "x": __emval_new_cstring,
- "k": __emval_run_destructors,
- "n": __emval_take_value,
+ "p": __emval_new_cstring,
+ "n": __emval_run_destructors,
+ "k": __emval_take_value,
  "h": _emscripten_asm_const_iii,
  "q": _emscripten_memcpy_big,
  "r": _emscripten_resize_heap,
