@@ -205,8 +205,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 275,
- "maximum": 275 + 0,
+ "initial": 276,
+ "maximum": 276 + 0,
  "element": "anyfunc"
 });
 
@@ -328,7 +328,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var DYNAMIC_BASE = 5345824, DYNAMICTOP_PTR = 102784;
+var DYNAMIC_BASE = 5345792, DYNAMICTOP_PTR = 102752;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -2213,15 +2213,15 @@ var asmLibraryArg = {
  "m": __embind_register_std_string,
  "t": __embind_register_std_wstring,
  "v": __embind_register_void,
- "y": __emval_as,
- "w": __emval_call_method,
+ "p": __emval_as,
+ "y": __emval_call_method,
  "a": __emval_decref,
- "x": __emval_get_method_caller,
- "o": __emval_get_property,
+ "o": __emval_get_method_caller,
+ "w": __emval_get_property,
  "e": __emval_incref,
- "p": __emval_new_cstring,
- "n": __emval_run_destructors,
- "k": __emval_take_value,
+ "x": __emval_new_cstring,
+ "k": __emval_run_destructors,
+ "n": __emval_take_value,
  "h": _emscripten_asm_const_iii,
  "q": _emscripten_memcpy_big,
  "r": _emscripten_resize_heap,
