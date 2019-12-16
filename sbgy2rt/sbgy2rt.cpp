@@ -525,7 +525,8 @@ int main() {
         小韻.character = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).getElementsByTagName("word_head")[0].childNodes[0].data); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         小韻.反切 = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).querySelector("fanqie").childNodes[0].data); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         字母呼轉等攝四聲 gg = to_字母呼轉等攝四聲(小韻.ipa, 小韻.character);
-        R"js( console.log($0); )js"_js_asm(小韻.character + " " + 小韻.反切 + " " + 小韻.ipa + " " + std::string(magic_enum::enum_name(gg.字母)) + std::string(magic_enum::enum_name(gg.呼)) + std::string(magic_enum::enum_name(gg.轉等)) + std::string(magic_enum::enum_name(gg.攝)) + std::string(magic_enum::enum_name(gg.四聲)));
+        std::string output = 小韻.character + " " + 小韻.反切 + " " + 小韻.ipa + " " + std::string(magic_enum::enum_name(gg.字母)) + std::string(magic_enum::enum_name(gg.呼)) + std::string(magic_enum::enum_name(gg.轉等)) + std::string(magic_enum::enum_name(gg.攝)) + std::string(magic_enum::enum_name(gg.四聲));
+        R"js( console.log(UTF8ToString($0)); )js"_js_asm(reinterpret_cast<int>(output.c_str()));
         /*rt.push_back(std::make_tuple(gg, 小韻));*/ }, std::placeholders::_1);
     R"js(
         fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
