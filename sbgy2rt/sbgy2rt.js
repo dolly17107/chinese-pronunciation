@@ -590,7 +590,7 @@ var ASM_CONSTS = {
   return __emval_register(requireHandle($0).getElementsByTagName("word_head")[0].childNodes[0].data);
  },
  26912: function($0) {
-  return __emval_register(requireHandle($0).querySelector("fanqie").childNodes[0].data);
+  return __emval_register(requireHandle($0).querySelector("fanqie").textContent);
  },
  65200: function($0) {
   console.log(UTF8ToString($0));
