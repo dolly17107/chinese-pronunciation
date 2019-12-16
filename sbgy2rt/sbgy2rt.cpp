@@ -528,7 +528,7 @@ int main() {
     R"js(
         firstOriginalText = function(element) {
             let string = "";
-            element.some(function(text) {
+            Array.from(element.childNodes).some(function(text) {
                 if (text instanceof Text) {
                     string += text.data; }
                 else if (text instanceof Element) {
