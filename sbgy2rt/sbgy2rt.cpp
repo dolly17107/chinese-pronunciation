@@ -525,11 +525,23 @@ struct 小韻 {
     std::string 反切; };
 int main() {
     //std::unordered_map<字母呼轉等攝四聲, 小韻> rt;
+    R"js(
+        firstOriginalText = function(element) {
+            let string = "";
+            element.some(function(text) {
+                if (text instanceof Text) {
+                    string += text.data; }
+                else if (text instanceof Element) {
+                    if ("original_text" == text.tagName) {
+                        string += text.childNodes[0].data; }
+                    else {
+                        return true; } } });
+            return string; }; )js"_js_asm();
     emscripten::val receiver = js::bind([/*&rt*/](emscripten::val voice_part) {
         小韻 小韻;
         小韻.ipa = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
-        小韻.character = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).getElementsByTagName("word_head")[0].childNodes[0].data); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
-        小韻.反切 = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).querySelector("fanqie").textContent); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
+        小韻.character = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(firstOriginalText(requireHandle($0).getElementsByTagName("word_head")[0]).replace(/\s/g, "")); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
+        小韻.反切 = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(firstOriginalText(requireHandle($0).querySelector("fanqie")).replace(/\s/g, "")); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         字母呼轉等攝四聲 gg = to_字母呼轉等攝四聲(小韻.ipa, 小韻.character);
         std::string output = 小韻.character + " " + 小韻.反切 + " " + 小韻.ipa + " " + std::string(magic_enum::enum_name(gg.字母)) + std::string(magic_enum::enum_name(gg.呼)) + std::string(magic_enum::enum_name(gg.轉等)) + std::string(magic_enum::enum_name(gg.攝)) + std::string(magic_enum::enum_name(gg.四聲));
         R"js( console.log(UTF8ToString($0)); )js"_js_asm(reinterpret_cast<int>(output.c_str()));
