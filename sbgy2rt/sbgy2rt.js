@@ -328,7 +328,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var DYNAMIC_BASE = 5312592, DYNAMICTOP_PTR = 69552;
+var DYNAMIC_BASE = 5312720, DYNAMICTOP_PTR = 69680;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -573,23 +573,23 @@ var ASM_CONSTS = {
   console.log($0 + " matches!");
  },
  8480: function() {
-  firstOriginalText = function(element) {
+  originalTextContent = function(element) {
    let string = "";
-   Array.from(element.childNodes).some(function(text) {
+   element.childNodes.forEach(function(text) {
     if (text instanceof Text) {
      string += text.data;
     } else if (text instanceof Element) {
      if ("original_text" == text.tagName) {
       string += text.childNodes[0].data;
      } else {
-      return true;
+      string += originalTextContent(text);
      }
     }
    });
    return string;
   };
  },
- 8992: function($0) {
+ 9008: function($0) {
   let receiver = requireHandle($0);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
@@ -600,16 +600,17 @@ var ASM_CONSTS = {
    });
   });
  },
- 26832: function($0) {
+ 26848: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 27056: function($0) {
-  return __emval_register(firstOriginalText(requireHandle($0).getElementsByTagName("word_head")[0]).replace(/\s/g, ""));
+ 27072: function($0) {
+  const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
+  return __emval_register(/\s+/.test(word_head.childNode[0].data) ? word_head.childNode[1].childNode[0].data : word_head.childNode[0].data);
  },
- 27184: function($0) {
-  return __emval_register(firstOriginalText(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
+ 27312: function($0) {
+  return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 65488: function($0) {
+ 65616: function($0) {
   console.log(UTF8ToString($0));
  }
 };
