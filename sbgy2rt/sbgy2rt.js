@@ -328,7 +328,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var DYNAMIC_BASE = 5312720, DYNAMICTOP_PTR = 69680;
+var DYNAMIC_BASE = 5312736, DYNAMICTOP_PTR = 69696;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -605,12 +605,12 @@ var ASM_CONSTS = {
  },
  27072: function($0) {
   const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
-  return __emval_register(/\s+/.test(word_head.childNode[0].data) ? word_head.childNode[1].childNode[0].data : word_head.childNode[0].data);
+  return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data);
  },
- 27312: function($0) {
+ 27328: function($0) {
   return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 65616: function($0) {
+ 65632: function($0) {
   console.log(UTF8ToString($0));
  }
 };

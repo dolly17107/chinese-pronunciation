@@ -542,7 +542,7 @@ int main() {
         小韻.ipa = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         小韻.character = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js(
             const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
-            return __emval_register(/\s+/.test(word_head.childNode[0].data) ? word_head.childNode[1].childNode[0].data : word_head.childNode[0].data); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
+            return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         小韻.反切 = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, "")); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         字母呼轉等攝四聲 gg = to_字母呼轉等攝四聲(小韻.ipa, 小韻.character);
         std::string output = 小韻.character + " " + 小韻.反切 + " " + 小韻.ipa + " " + std::string(magic_enum::enum_name(gg.字母)) + std::string(magic_enum::enum_name(gg.呼)) + std::string(magic_enum::enum_name(gg.轉等)) + std::string(magic_enum::enum_name(gg.攝)) + std::string(magic_enum::enum_name(gg.四聲));
