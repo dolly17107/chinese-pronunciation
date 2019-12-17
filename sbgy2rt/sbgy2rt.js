@@ -328,7 +328,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var DYNAMIC_BASE = 5312736, DYNAMICTOP_PTR = 69696;
+var DYNAMIC_BASE = 5312752, DYNAMICTOP_PTR = 69712;
 
 var INITIAL_TOTAL_MEMORY = Module["TOTAL_MEMORY"] || 16777216;
 
@@ -569,10 +569,10 @@ function createWasm() {
 }
 
 var ASM_CONSTS = {
- 8432: function($0) {
+ 8448: function($0) {
   console.log($0 + " matches!");
  },
- 8480: function() {
+ 8496: function() {
   originalTextContent = function(element) {
    let string = "";
    element.childNodes.forEach(function(text) {
@@ -589,7 +589,7 @@ var ASM_CONSTS = {
    return string;
   };
  },
- 9008: function($0) {
+ 9024: function($0) {
   let receiver = requireHandle($0);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
@@ -600,17 +600,17 @@ var ASM_CONSTS = {
    });
   });
  },
- 26848: function($0) {
+ 26864: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 27072: function($0) {
+ 27088: function($0) {
   const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
   return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data);
  },
- 27328: function($0) {
+ 27344: function($0) {
   return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 65632: function($0) {
+ 65648: function($0) {
   console.log(UTF8ToString($0));
  }
 };

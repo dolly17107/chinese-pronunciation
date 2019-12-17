@@ -307,7 +307,7 @@ std::unordered_map<std::string_view, 呼轉等攝入> const 呼轉等攝入_by_i
     {"ĭwɐŋ", {呼::合_gliding, 轉等_distributions::外β, 攝::宕梗, 0}},
     {"ĭwɐk", {呼::合_gliding, 轉等_distributions::外β, 攝::宕梗, 1}},
     {"ĭwɛŋ", {呼::合_gliding, 轉等_distributions::外αβ, 攝::宕梗, 0}},
-    {"ĭwɛŋ", {呼::合_gliding, 轉等_distributions::外αβ, 攝::宕梗, 0}},
+    {"ĭwɛk", {呼::合_gliding, 轉等_distributions::外αβ, 攝::宕梗, 0}},
     {"iweŋ", {呼::合_gliding, 轉等_distributions::外四, 攝::宕梗, 0}},
     {"iwek", {呼::合_gliding, 轉等_distributions::外四, 攝::宕梗, 1}},
     {"əu", {呼::開, 轉等_distributions::內一, 攝::流效, 0}},
