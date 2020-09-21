@@ -9,6 +9,7 @@
 #include <js.h>
 #include <emscripten/val.h>
 #include <js/bind.hpp>
+// For ipa, see http://kanji-database.sourceforge.net/dict/sbgy/index.html.
 enum class 字母{ 不, 芳, 並, 明, 端, 透, 定, 泥, 知, 徹, 澄, 日, 見, 溪, 羣, 來, 疑, 精, 清, 從, 審, 穿, 禪, 照, 心, 邪, 曉, 匣, 喻, 影 };
 std::unordered_map<std::string_view, 字母> const 字母_by_ipa{
     {"p", 字母::不}, {"pʰ", 字母::芳}, {"bʰ", 字母::並}, {"m", 字母::明},
