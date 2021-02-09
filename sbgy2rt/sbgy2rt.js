@@ -422,7 +422,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 73280, DYNAMIC_BASE = 5316160, DYNAMICTOP_PTR = 73104;
+var STACK_MAX = 34848, DYNAMIC_BASE = 5277728, DYNAMICTOP_PTR = 34672;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -691,10 +691,10 @@ function createWasm() {
 }
 
 var ASM_CONSTS = {
- 10832: function($0) {
+ 9936: function($0) {
   console.log($0 + " matches!");
  },
- 10880: function() {
+ 9984: function() {
   originalTextContent = function(element) {
    let string = "";
    element.childNodes.forEach(function(text) {
@@ -711,7 +711,7 @@ var ASM_CONSTS = {
    return string;
   };
  },
- 11408: function($0) {
+ 10512: function($0) {
   let receiver = requireHandle($0);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
@@ -722,20 +722,20 @@ var ASM_CONSTS = {
    });
   });
  },
- 29488: function($0) {
+ 28592: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 29712: function($0) {
+ 28816: function($0) {
   const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
   return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data);
  },
- 29968: function($0) {
+ 29072: function($0) {
   return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 68272: function($0) {
+ 29840: function($0) {
   console.log(UTF8ToString($0));
  },
- 68320: function() {
+ 29888: function() {
   console.log("Repeat!");
  }
 };
@@ -929,7 +929,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 73264;
+ var thrownBuf = 34832;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -960,7 +960,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 73264;
+ var thrownBuf = 34832;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
