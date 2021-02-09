@@ -578,7 +578,7 @@ int main() {
     std::for_each(ghhh_字母s.begin(), ghhh_字母s.end(), [](字母 ghhh_字母) {
         std::string name = std::string(magic_enum::enum_name(ghhh_字母));
         R"js( console.log(UTF8ToString($0)); )js"_js_asm(reinterpret_cast<int>(name.c_str())); });
-        R"js( console.log("2 string_view::find"); )js"_js_asm();
+        R"js( console.log("2 if equal whitespace"); )js"_js_asm();
     /*字母呼轉等攝四聲 gg;
     for (gg.攝 = 攝::通江; (std::uint32_t)gg.攝 < 8; gg.攝 = (攝)((std::uint32_t)gg.攝 + 1)) {
         for (std::uint32_t 轉 = 0; 轉 < 2; 轉++) {
