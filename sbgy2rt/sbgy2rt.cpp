@@ -535,8 +535,8 @@ struct 小韻 {
     std::string ipa;
     std::string character;
     std::string 反切; };
+std::unordered_map<字母呼轉等攝四聲, 小韻> rt;
 int main() {
-    std::unordered_map<字母呼轉等攝四聲, 小韻> rt;
     R"js(
         originalTextContent = function(element) {
             let string = "";
@@ -549,7 +549,7 @@ int main() {
                     else {
                         string += originalTextContent(text); } } });
             return string; }; )js"_js_asm();
-    emscripten::val receiver = js::bind([&rt](emscripten::val voice_part) {
+    emscripten::val receiver = js::bind([/*&rt*/](emscripten::val voice_part) {
         小韻 小韻;
         小韻.ipa = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         小韻.character = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js(
@@ -574,6 +574,10 @@ int main() {
                 receiver(voice_part); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(receiver));
     // 內轉第一開
 
+    auto ghhh_字母s = magic_enum::enum_values<字母>();
+    std::for_each(ghhh_字母s.begin(), ghhh_字母s.end(), [](字母 ghhh_字母) {
+        std::string name = std::string(magic_enum::enum_name(ghhh_字母));
+        R"js( console.log(UTF8ToString($0)); )js"_js_asm(reinterpret_cast<int>(name.c_str())); });
     /*字母呼轉等攝四聲 gg;
     for (gg.攝 = 攝::通江; (std::uint32_t)gg.攝 < 8; gg.攝 = (攝)((std::uint32_t)gg.攝 + 1)) {
         for (std::uint32_t 轉 = 0; 轉 < 2; 轉++) {

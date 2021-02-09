@@ -210,8 +210,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 300,
- "maximum": 300 + 0,
+ "initial": 301,
+ "maximum": 301 + 0,
  "element": "anyfunc"
 });
 
@@ -422,7 +422,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 72240, DYNAMIC_BASE = 5315120, DYNAMICTOP_PTR = 72064;
+var STACK_MAX = 73280, DYNAMIC_BASE = 5316160, DYNAMICTOP_PTR = 73104;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -691,10 +691,10 @@ function createWasm() {
 }
 
 var ASM_CONSTS = {
- 9808: function($0) {
+ 10832: function($0) {
   console.log($0 + " matches!");
  },
- 9856: function() {
+ 10880: function() {
   originalTextContent = function(element) {
    let string = "";
    element.childNodes.forEach(function(text) {
@@ -711,7 +711,7 @@ var ASM_CONSTS = {
    return string;
   };
  },
- 10384: function($0) {
+ 11408: function($0) {
   let receiver = requireHandle($0);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
@@ -722,20 +722,20 @@ var ASM_CONSTS = {
    });
   });
  },
- 28464: function($0) {
+ 29488: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 28688: function($0) {
+ 29712: function($0) {
   const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
   return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data);
  },
- 28944: function($0) {
+ 29968: function($0) {
   return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 67248: function($0) {
+ 68272: function($0) {
   console.log(UTF8ToString($0));
  },
- 67296: function() {
+ 68320: function() {
   console.log("Repeat!");
  }
 };
@@ -929,7 +929,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 72224;
+ var thrownBuf = 73264;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -960,7 +960,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 72224;
+ var thrownBuf = 73264;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -2581,7 +2581,7 @@ var asmLibraryArg = {
  "h": __embind_register_class_function,
  "_": __embind_register_emval,
  "L": __embind_register_float,
- "p": __embind_register_integer,
+ "q": __embind_register_integer,
  "o": __embind_register_memory_view,
  "K": __embind_register_std_string,
  "v": __embind_register_std_wstring,
@@ -2595,13 +2595,13 @@ var asmLibraryArg = {
  "T": __emval_new_cstring,
  "S": __emval_run_destructors,
  "R": __emval_take_value,
- "r": _emscripten_asm_const_iii,
+ "p": _emscripten_asm_const_iii,
  "Q": _emscripten_memcpy_big,
  "P": _emscripten_resize_heap,
  "d": _getTempRet0,
  "k": invoke_ii,
  "l": invoke_iii,
- "q": invoke_iiii,
+ "r": invoke_iiii,
  "I": invoke_v,
  "a": invoke_vi,
  "n": invoke_vii,
