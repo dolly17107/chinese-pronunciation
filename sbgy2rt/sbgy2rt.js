@@ -422,7 +422,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 34848, DYNAMIC_BASE = 5277728, DYNAMICTOP_PTR = 34672;
+var STACK_MAX = 34896, DYNAMIC_BASE = 5277776, DYNAMICTOP_PTR = 34720;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -722,20 +722,23 @@ var ASM_CONSTS = {
    });
   });
  },
- 28592: function($0) {
+ 10976: function() {
+  console.log("2 string_view::find");
+ },
+ 28640: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 28816: function($0) {
+ 28864: function($0) {
   const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
   return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data);
  },
- 29072: function($0) {
+ 29120: function($0) {
   return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 29840: function($0) {
+ 29888: function($0) {
   console.log(UTF8ToString($0));
  },
- 29888: function() {
+ 29936: function() {
   console.log("Repeat!");
  }
 };
@@ -929,7 +932,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 34832;
+ var thrownBuf = 34880;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -960,7 +963,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 34832;
+ var thrownBuf = 34880;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
