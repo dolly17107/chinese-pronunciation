@@ -210,8 +210,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 302,
- "maximum": 302 + 0,
+ "initial": 311,
+ "maximum": 311 + 0,
  "element": "anyfunc"
 });
 
@@ -422,7 +422,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 35360, DYNAMIC_BASE = 5278240, DYNAMICTOP_PTR = 35184;
+var STACK_MAX = 35856, DYNAMIC_BASE = 5278736, DYNAMICTOP_PTR = 35680;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -691,10 +691,10 @@ function createWasm() {
 }
 
 var ASM_CONSTS = {
- 9840: function($0) {
+ 9808: function($0) {
   console.log($0 + " matches!");
  },
- 9888: function() {
+ 9856: function() {
   originalTextContent = function(element) {
    let string = "";
    element.childNodes.forEach(function(text) {
@@ -711,7 +711,7 @@ var ASM_CONSTS = {
    return string;
   };
  },
- 10416: function($0) {
+ 10384: function($0) {
   let receiver = requireHandle($0);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
@@ -720,41 +720,43 @@ var ASM_CONSTS = {
    sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(function(voice_part) {
     receiver(voice_part);
    });
+  }).then(function() {
+   printer();
   });
  },
- 10880: function() {
-  return __emval_register(document.createElement("dolly17107-rime-table-pages"));
- },
- 10976: function($0) {
-  document.body.append(requireHandle($0));
- },
- 28640: function($0) {
+ 28496: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 28864: function($0) {
+ 28720: function($0) {
   const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
   return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data);
  },
- 29120: function($0) {
+ 28976: function($0) {
   return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 29888: function($0) {
+ 29744: function($0) {
   console.log(UTF8ToString($0));
  },
- 29936: function() {
+ 29792: function() {
   console.log("Repeat!");
  },
- 30384: function() {
+ 30416: function() {
+  return __emval_register(document.createElement("dolly17107-rime-table-pages"));
+ },
+ 30528: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-page"));
  },
- 30608: function() {
+ 30752: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-homophone"));
  },
- 30704: function($0, $1) {
+ 30848: function($0, $1) {
   requireHandle($0).append(UTF8ToString($1));
  },
- 30768: function($0, $1) {
+ 30896: function($0, $1) {
   requireHandle($0).append(requireHandle($1));
+ },
+ 30944: function($0) {
+  document.body.append(requireHandle($0));
  }
 };
 
@@ -947,7 +949,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 35344;
+ var thrownBuf = 35840;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -978,7 +980,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 35344;
+ var thrownBuf = 35840;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];

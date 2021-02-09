@@ -586,32 +586,33 @@ int main() {
             R"js(
                 console.log("Repeat!"); )js"_js_asm(); }
         /*rt.push_back(std::make_tuple(gg, 小韻));*/ }, std::placeholders::_1);
+    // 內轉第一開
+    emscripten::val printer = js::bind([]() {
+        emscripten::val pages = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-pages")); )js"_js_asm_int()));
+        auto ghhh_攝s = magic_enum::enum_values<攝>();
+        std::for_each(ghhh_攝s.begin(), ghhh_攝s.end(), [pages](攝 ghhh_攝) {
+            auto ghhh_轉s = magic_enum::enum_values<轉>();
+            std::for_each(ghhh_轉s.begin(), ghhh_轉s.end(), [ghhh_攝, pages](轉 ghhh_轉) {
+                auto ghhh_呼s = magic_enum::enum_values<呼>();
+                std::for_each(ghhh_呼s.begin(), ghhh_呼s.end(), [ghhh_攝, ghhh_轉, pages](呼 ghhh_呼) {
+                    emscripten::val page = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-page")); )js"_js_asm_int()));
+                    auto ghhh_四聲s = magic_enum::enum_values<四聲>();
+                    std::for_each(ghhh_四聲s.begin(), ghhh_四聲s.end(), [ghhh_攝, ghhh_轉, ghhh_呼, page](四聲 ghhh_四聲) {
+                        auto ghhh_等s = magic_enum::enum_values<等>();
+                        std::for_each(ghhh_等s.begin(), ghhh_等s.end(), [ghhh_攝, ghhh_轉, ghhh_呼, ghhh_四聲, page](等 ghhh_等) {
+                            auto ghhh_字母s = magic_enum::enum_values<字母>();
+                            std::for_each(ghhh_字母s.begin(), ghhh_字母s.end(), [ghhh_攝, ghhh_轉, ghhh_呼, ghhh_四聲, ghhh_等, page](字母 ghhh_字母) {
+                                字母呼轉等攝四聲 ghhh = {ghhh_字母, ghhh_呼, 轉_and_等_to_轉等(ghhh_轉, ghhh_等), ghhh_攝, ghhh_四聲};
+                                std::string button = rt[ghhh].character;
+                                emscripten::val homophone = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-homophone")); )js"_js_asm_int()));
+                                R"js( requireHandle($0).append(UTF8ToString($1)); )js"_js_asm(reinterpret_cast<uint32_t&>(homophone), reinterpret_cast<int>(button.c_str()));
+                                R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(page), reinterpret_cast<uint32_t&>(homophone)); }); }); });
+                    R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(pages), reinterpret_cast<uint32_t&>(page)); }); }); });
+        R"js( document.body.append(requireHandle($0)); )js"_js_asm(reinterpret_cast<uint32_t&>(pages)); });
     R"js(
         let receiver = requireHandle($0);
         fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
             return response.text(); }).then(function(sbgy_xml) {
             let sbgy = (new DOMParser()).parseFromString(sbgy_xml, "application/xml");
             sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(function(voice_part) {
-                receiver(voice_part); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(receiver));
-    // 內轉第一開
-    emscripten::val pages = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-pages")); )js"_js_asm_int()));
-    auto ghhh_攝s = magic_enum::enum_values<攝>();
-    std::for_each(ghhh_攝s.begin(), ghhh_攝s.end(), [pages](攝 ghhh_攝) {
-        auto ghhh_轉s = magic_enum::enum_values<轉>();
-        std::for_each(ghhh_轉s.begin(), ghhh_轉s.end(), [ghhh_攝, pages](轉 ghhh_轉) {
-            auto ghhh_呼s = magic_enum::enum_values<呼>();
-            std::for_each(ghhh_呼s.begin(), ghhh_呼s.end(), [ghhh_攝, ghhh_轉, pages](呼 ghhh_呼) {
-                emscripten::val page = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-page")); )js"_js_asm_int()));
-                auto ghhh_四聲s = magic_enum::enum_values<四聲>();
-                std::for_each(ghhh_四聲s.begin(), ghhh_四聲s.end(), [ghhh_攝, ghhh_轉, ghhh_呼, page](四聲 ghhh_四聲) {
-                    auto ghhh_等s = magic_enum::enum_values<等>();
-                    std::for_each(ghhh_等s.begin(), ghhh_等s.end(), [ghhh_攝, ghhh_轉, ghhh_呼, ghhh_四聲, page](等 ghhh_等) {
-                        auto ghhh_字母s = magic_enum::enum_values<字母>();
-                        std::for_each(ghhh_字母s.begin(), ghhh_字母s.end(), [ghhh_攝, ghhh_轉, ghhh_呼, ghhh_四聲, ghhh_等, page](字母 ghhh_字母) {
-                            字母呼轉等攝四聲 ghhh = {ghhh_字母, ghhh_呼, 轉_and_等_to_轉等(ghhh_轉, ghhh_等), ghhh_攝, ghhh_四聲};
-                            std::string button = rt[ghhh].character;
-                            emscripten::val homophone = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-homophone")); )js"_js_asm_int()));
-                            R"js( requireHandle($0).append(UTF8ToString($1)); )js"_js_asm(reinterpret_cast<uint32_t&>(homophone), reinterpret_cast<int>(button.c_str()));
-                            R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(page), reinterpret_cast<uint32_t&>(homophone)); }); }); });
-                R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(pages), reinterpret_cast<uint32_t&>(page)); }); }); });
-    R"js( document.body.append(requireHandle($0)); )js"_js_asm(reinterpret_cast<uint32_t&>(pages)); }
+                receiver(voice_part); }); }).then(function() { printer(); }); )js"_js_asm(reinterpret_cast<uint32_t&>(receiver), reinterpret_cast<uint32_t&>(printer)); }
