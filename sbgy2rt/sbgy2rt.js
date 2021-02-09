@@ -210,8 +210,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 296,
- "maximum": 296 + 0,
+ "initial": 300,
+ "maximum": 300 + 0,
  "element": "anyfunc"
 });
 
@@ -422,7 +422,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 72176, DYNAMIC_BASE = 5315056, DYNAMICTOP_PTR = 72e3;
+var STACK_MAX = 72240, DYNAMIC_BASE = 5315120, DYNAMICTOP_PTR = 72064;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -734,6 +734,9 @@ var ASM_CONSTS = {
  },
  67248: function($0) {
   console.log(UTF8ToString($0));
+ },
+ 67296: function() {
+  console.log("Repeat!");
  }
 };
 
@@ -926,7 +929,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 72160;
+ var thrownBuf = 72224;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -957,7 +960,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 72160;
+ var thrownBuf = 72224;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -2579,7 +2582,7 @@ var asmLibraryArg = {
  "_": __embind_register_emval,
  "L": __embind_register_float,
  "p": __embind_register_integer,
- "n": __embind_register_memory_view,
+ "o": __embind_register_memory_view,
  "K": __embind_register_std_string,
  "v": __embind_register_std_wstring,
  "Z": __embind_register_void,
@@ -2597,15 +2600,15 @@ var asmLibraryArg = {
  "P": _emscripten_resize_heap,
  "d": _getTempRet0,
  "k": invoke_ii,
- "m": invoke_iii,
+ "l": invoke_iii,
  "q": invoke_iiii,
  "I": invoke_v,
  "a": invoke_vi,
- "o": invoke_vii,
+ "n": invoke_vii,
  "u": invoke_viii,
  "b": invoke_viiii,
  "H": invoke_viiiii,
- "l": invoke_viiiiii,
+ "m": invoke_viiiiii,
  "G": invoke_viiiiiii,
  "F": invoke_viiiiiiii,
  "E": invoke_viiiiiiiii,

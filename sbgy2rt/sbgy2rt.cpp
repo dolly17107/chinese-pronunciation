@@ -502,6 +502,17 @@ struct 字母呼轉等攝四聲 {
     轉等 轉等;
     攝 攝;
     四聲 四聲; };
+bool operator==(字母呼轉等攝四聲 const& lhs, 字母呼轉等攝四聲 const& rhs) {
+    return lhs.字母 == rhs.字母 && lhs.呼 == rhs.呼 && lhs.轉等 == rhs.轉等 && lhs.攝 == rhs.攝 && lhs.四聲 == rhs.四聲; }
+template<> struct std::hash<字母呼轉等攝四聲> {
+    std::size_t operator()(字母呼轉等攝四聲 const& v) const noexcept {
+        std::size_t seed = 0;
+        seed = std::hash<字母>{}(v.字母) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        seed = std::hash<呼>{}(v.呼) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        seed = std::hash<轉等>{}(v.轉等) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        seed = std::hash<攝>{}(v.攝) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        seed = std::hash<四聲>{}(v.四聲) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        return seed; } };
 字母呼轉等攝四聲 to_字母呼轉等攝四聲(std::string_view ipa, std::string_view 小韻) {
     std::vector<字母呼轉等攝四聲> 字母呼轉等攝四聲s;
     for (uint32_t i = 0; i <= ipa.size(); i++) {
@@ -525,7 +536,7 @@ struct 小韻 {
     std::string character;
     std::string 反切; };
 int main() {
-    //std::unordered_map<字母呼轉等攝四聲, 小韻> rt;
+    std::unordered_map<字母呼轉等攝四聲, 小韻> rt;
     R"js(
         originalTextContent = function(element) {
             let string = "";
@@ -538,7 +549,7 @@ int main() {
                     else {
                         string += originalTextContent(text); } } });
             return string; }; )js"_js_asm();
-    emscripten::val receiver = js::bind([/*&rt*/](emscripten::val voice_part) {
+    emscripten::val receiver = js::bind([&rt](emscripten::val voice_part) {
         小韻 小韻;
         小韻.ipa = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value); )js"_js_asm_int(reinterpret_cast<uint32_t&>(voice_part)))).as<std::string>();
         小韻.character = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js(
@@ -548,6 +559,11 @@ int main() {
         字母呼轉等攝四聲 gg = to_字母呼轉等攝四聲(小韻.ipa, 小韻.character);
         std::string output = 小韻.character + " " + 小韻.反切 + " " + 小韻.ipa + " " + std::string(magic_enum::enum_name(gg.字母)) + std::string(magic_enum::enum_name(gg.呼)) + std::string(magic_enum::enum_name(gg.轉等)) + std::string(magic_enum::enum_name(gg.攝)) + std::string(magic_enum::enum_name(gg.四聲));
         R"js( console.log(UTF8ToString($0)); )js"_js_asm(reinterpret_cast<int>(output.c_str()));
+        if (rt.count(gg) == 0) {
+            rt.insert({gg, 小韻}); }
+        else {
+            R"js(
+                console.log("Repeat!"); )js"_js_asm(); }
         /*rt.push_back(std::make_tuple(gg, 小韻));*/ }, std::placeholders::_1);
     R"js(
         let receiver = requireHandle($0);
@@ -555,4 +571,22 @@ int main() {
             return response.text(); }).then(function(sbgy_xml) {
             let sbgy = (new DOMParser()).parseFromString(sbgy_xml, "application/xml");
             sbgy.querySelectorAll("book > volume > rhyme > voice_part").forEach(function(voice_part) {
-                receiver(voice_part); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(receiver)); }
+                receiver(voice_part); }); }); )js"_js_asm(reinterpret_cast<uint32_t&>(receiver));
+    // 內轉第一開
+
+    /*字母呼轉等攝四聲 gg;
+    for (gg.攝 = 攝::通江; (std::uint32_t)gg.攝 < 8; gg.攝 = (攝)((std::uint32_t)gg.攝 + 1)) {
+        for (std::uint32_t 轉 = 0; 轉 < 2; 轉++) {
+            for (gg.呼 = 呼::開; (std::uint32_t)gg.呼 < 3; gg.呼 = (呼)((std::uint32_t)gg.呼 + 1)) {
+                std::array<std::string, 16>{"通", "江", "止", "蟹", "臻", "山", "Ｘ", "假", "宕", "梗", "流", "效", "深", "咸", "曾", "?"}[2 * (std::uint32_t)gg.攝 + 轉] + std::array<std::string, 3>{"開", "合_gliding", "合_mono"}[(std::uint32_t)gg.呼];
+                for (gg.四聲 = 四聲::平; (std::uint32_t)gg.四聲 < 4; gg.四聲 = (四聲)((std::uint32_t)gg.四聲 + 1)) {
+                    for (std::uint32_t 等 = 0; 等 < 4; 等++) {
+                        gg.轉等 = (轉等)(4 * 轉 + 等);
+                        for (gg.字母 = 字母::不; (std::uint32_t)gg.字母 < 30; gg.字母 = (字母)((std::uint32_t)gg.字母 + 1)) {
+                        }
+                    }
+                }
+            }
+        }
+    }*/
+     }
