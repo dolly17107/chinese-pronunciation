@@ -422,7 +422,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 35856, DYNAMIC_BASE = 5278736, DYNAMICTOP_PTR = 35680;
+var STACK_MAX = 35904, DYNAMIC_BASE = 5278784, DYNAMICTOP_PTR = 35728;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -711,8 +711,9 @@ var ASM_CONSTS = {
    return string;
   };
  },
- 10384: function($0) {
+ 10384: function($0, $1) {
   let receiver = requireHandle($0);
+  let printer = requireHandle($1);
   fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
    return response.text();
   }).then(function(sbgy_xml) {
@@ -724,38 +725,38 @@ var ASM_CONSTS = {
    printer();
   });
  },
- 28496: function($0) {
+ 28544: function($0) {
   return __emval_register(requireHandle($0).attributes.getNamedItem("ipa").value);
  },
- 28720: function($0) {
+ 28768: function($0) {
   const word_head = requireHandle($0).getElementsByTagName("word_head")[0];
   return __emval_register(/\s+/.test(word_head.childNodes[0].data) ? word_head.childNodes[1].childNodes[0].data : word_head.childNodes[0].data);
  },
- 28976: function($0) {
+ 29024: function($0) {
   return __emval_register(originalTextContent(requireHandle($0).querySelector("fanqie")).replace(/\s/g, ""));
  },
- 29744: function($0) {
+ 29792: function($0) {
   console.log(UTF8ToString($0));
  },
- 29792: function() {
+ 29840: function() {
   console.log("Repeat!");
  },
- 30416: function() {
+ 30464: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-pages"));
  },
- 30528: function() {
+ 30576: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-page"));
  },
- 30752: function() {
+ 30800: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-homophone"));
  },
- 30848: function($0, $1) {
+ 30896: function($0, $1) {
   requireHandle($0).append(UTF8ToString($1));
  },
- 30896: function($0, $1) {
+ 30944: function($0, $1) {
   requireHandle($0).append(requireHandle($1));
  },
- 30944: function($0) {
+ 30992: function($0) {
   document.body.append(requireHandle($0));
  }
 };
@@ -949,7 +950,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 35840;
+ var thrownBuf = 35888;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -980,7 +981,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 35840;
+ var thrownBuf = 35888;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];

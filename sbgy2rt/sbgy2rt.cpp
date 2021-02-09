@@ -611,6 +611,7 @@ int main() {
         R"js( document.body.append(requireHandle($0)); )js"_js_asm(reinterpret_cast<uint32_t&>(pages)); });
     R"js(
         let receiver = requireHandle($0);
+        let printer = requireHandle($1);
         fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
             return response.text(); }).then(function(sbgy_xml) {
             let sbgy = (new DOMParser()).parseFromString(sbgy_xml, "application/xml");
