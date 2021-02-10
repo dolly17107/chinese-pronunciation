@@ -596,8 +596,6 @@ int main() {
                 auto ghhh_呼s = magic_enum::enum_values<呼>();
                 std::for_each(ghhh_呼s.begin(), ghhh_呼s.end(), [ghhh_攝, ghhh_轉, pages](呼 ghhh_呼) {
                     emscripten::val page = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-page")); )js"_js_asm_int()));
-                    emscripten::val empty_cell = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-homophone")); )js"_js_asm_int()));
-                    R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(page), reinterpret_cast<uint32_t&>(empty_cell)); 
                     auto ghhh_字母s = magic_enum::enum_values<字母>();
                     std::for_each(ghhh_字母s.begin(), ghhh_字母s.end(), [page](字母 ghhh_字母) {
                         std::string column_name = std::string(magic_enum::enum_name(ghhh_字母));
@@ -615,10 +613,12 @@ int main() {
                                 emscripten::val homophone = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-homophone")); )js"_js_asm_int()));
                                 R"js( requireHandle($0).append(UTF8ToString($1)); )js"_js_asm(reinterpret_cast<uint32_t&>(homophone), reinterpret_cast<int>(button.c_str()));
                                 R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(page), reinterpret_cast<uint32_t&>(homophone)); });
-                            std::string row_name = std::string(magic_enum::enum_name(ghhh_等)) + std::string(magic_enum::enum_name(ghhh_四聲));
+                            std::string row_name = std::string(magic_enum::enum_name(ghhh_四聲)) + std::string(magic_enum::enum_name(ghhh_等));
                             emscripten::val row_header = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-homophone")); )js"_js_asm_int()));
                             R"js( requireHandle($0).append(UTF8ToString($1)); )js"_js_asm(reinterpret_cast<uint32_t&>(row_header), reinterpret_cast<int>(row_name.c_str()));
                             R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(page), reinterpret_cast<uint32_t&>(row_header)); }); });
+                    emscripten::val empty_cell = emscripten::val::take_ownership(reinterpret_cast<emscripten::internal::EM_VAL>(R"js( return __emval_register(document.createElement("dolly17107-rime-table-homophone")); )js"_js_asm_int()));
+                    R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(page), reinterpret_cast<uint32_t&>(empty_cell)); 
                     R"js( requireHandle($0).append(requireHandle($1)); )js"_js_asm(reinterpret_cast<uint32_t const&>(pages), reinterpret_cast<uint32_t&>(page)); }); }); });
         R"js( document.body.append(requireHandle($0)); )js"_js_asm(reinterpret_cast<uint32_t&>(pages)); });
     R"js(

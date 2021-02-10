@@ -747,14 +747,14 @@ var ASM_CONSTS = {
  30576: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-page"));
  },
- 30672: function() {
+ 30672: function($0, $1) {
+  requireHandle($0).append(UTF8ToString($1));
+ },
+ 30912: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-homophone"));
  },
- 30768: function($0, $1) {
+ 31008: function($0, $1) {
   requireHandle($0).append(requireHandle($1));
- },
- 30816: function($0, $1) {
-  requireHandle($0).append(UTF8ToString($1));
  },
  31056: function($0) {
   document.body.append(requireHandle($0));

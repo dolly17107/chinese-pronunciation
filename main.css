@@ -44,9 +44,10 @@ spinner- *:nth-child(6) { animation-delay: 900ms; }
     72.1% { transform: rotate(690deg); opacity: 0; }
     100% { transform: rotate(690deg); opacity: 0; } }
 dolly17107-rime-table-pages {
-    direction: rtl; }
+    direction: rtl;
+    line-height: 1; }
 dolly17107-rime-table-page {
     display: grid;
     grid: auto-flow / repeat(30, 1em) auto;
-    gap: 0.5em;
+    gap: 0.4em;
     margin-block-start: 1em; }
