@@ -750,10 +750,10 @@ var ASM_CONSTS = {
  30672: function($0, $1) {
   requireHandle($0).append(UTF8ToString($1));
  },
- 30912: function() {
+ 30720: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-homophone"));
  },
- 31008: function($0, $1) {
+ 30816: function($0, $1) {
   requireHandle($0).append(requireHandle($1));
  },
  31056: function($0) {
