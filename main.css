@@ -43,3 +43,9 @@ spinner- *:nth-child(6) { animation-delay: 900ms; }
     72% { transform: rotate(690deg); animation-timing-function: ease-out; }
     72.1% { transform: rotate(690deg); opacity: 0; }
     100% { transform: rotate(690deg); opacity: 0; } }
+dolly17107-rime-table-pages {
+    direction: rtl; }
+dolly17107-rime-table-page {
+    display: grid;
+    grid: auto-flow / auto repeat(30, 1fr);
+    margin-block-start: 1em; }
