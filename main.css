@@ -47,5 +47,6 @@ dolly17107-rime-table-pages {
     direction: rtl; }
 dolly17107-rime-table-page {
     display: grid;
-    grid: auto-flow / auto repeat(30, 1fr);
+    grid: auto-flow / repeat(30, 1em) auto;
+    gap: 0.5em;
     margin-block-start: 1em; }

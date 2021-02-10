@@ -422,7 +422,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 35904, DYNAMIC_BASE = 5278784, DYNAMICTOP_PTR = 35728;
+var STACK_MAX = 35968, DYNAMIC_BASE = 5278848, DYNAMICTOP_PTR = 35792;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -747,16 +747,16 @@ var ASM_CONSTS = {
  30576: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-page"));
  },
- 30800: function() {
+ 30672: function() {
   return __emval_register(document.createElement("dolly17107-rime-table-homophone"));
  },
- 30896: function($0, $1) {
-  requireHandle($0).append(UTF8ToString($1));
- },
- 30944: function($0, $1) {
+ 30768: function($0, $1) {
   requireHandle($0).append(requireHandle($1));
  },
- 30992: function($0) {
+ 30816: function($0, $1) {
+  requireHandle($0).append(UTF8ToString($1));
+ },
+ 31056: function($0) {
   document.body.append(requireHandle($0));
  }
 };
@@ -950,7 +950,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 35888;
+ var thrownBuf = 35952;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -981,7 +981,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 35888;
+ var thrownBuf = 35952;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -2590,7 +2590,7 @@ var asmLibraryArg = {
  "M": ___cxa_begin_catch,
  "ba": ___cxa_end_catch,
  "e": ___cxa_find_matching_catch_2,
- "g": ___cxa_find_matching_catch_3,
+ "h": ___cxa_find_matching_catch_3,
  "w": ___cxa_free_exception,
  "s": ___cxa_throw,
  "aa": ___cxa_uncaught_exceptions,
@@ -2602,7 +2602,7 @@ var asmLibraryArg = {
  "i": __embind_register_class_function,
  "_": __embind_register_emval,
  "L": __embind_register_float,
- "q": __embind_register_integer,
+ "r": __embind_register_integer,
  "p": __embind_register_memory_view,
  "K": __embind_register_std_string,
  "v": __embind_register_std_wstring,
@@ -2616,20 +2616,20 @@ var asmLibraryArg = {
  "T": __emval_new_cstring,
  "S": __emval_run_destructors,
  "R": __emval_take_value,
- "h": _emscripten_asm_const_iii,
+ "g": _emscripten_asm_const_iii,
  "Q": _emscripten_memcpy_big,
  "P": _emscripten_resize_heap,
  "d": _getTempRet0,
- "n": invoke_ii,
+ "m": invoke_ii,
  "l": invoke_iii,
- "r": invoke_iiii,
+ "q": invoke_iiii,
  "I": invoke_v,
  "a": invoke_vi,
  "o": invoke_vii,
  "u": invoke_viii,
  "b": invoke_viiii,
  "H": invoke_viiiii,
- "m": invoke_viiiiii,
+ "n": invoke_viiiiii,
  "G": invoke_viiiiiii,
  "F": invoke_viiiiiiii,
  "E": invoke_viiiiiiiii,
