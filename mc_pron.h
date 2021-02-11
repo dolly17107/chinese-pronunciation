@@ -2,6 +2,8 @@
 #include <array>
 #include <optional>
 #include <vector>
+#include <unordered_set>
+#include <unordered_map>
 #include <string>
 #include <regex>
 using namespace std::literals::string_literals;
@@ -395,9 +397,10 @@ std::string predict_prelmc(uint8_t init, uint8_t fina, uint8_t 四聲) {
     using namespace std;
     string initial = mc_initial_data[init].中唐長安.elsewhere;
     string final = mc_final_data[fina].prelmc.elsewhere;
+    bool α = mc_final_data[fina].prelmc_α && std::unordered_set<uint8_t>{13, 14, 15, 16, 17, 23, 24, 25, 27, 28, 26, 29}.count(init);
     if (mc_initial_data[init].中唐長安.triggered && mc_final_data[fina].prelmc.F && !(init == 3 && (mc_final_data[fina].韻圖.韻部 == mc_韻部::東B || mc_final_data[fina].韻圖.韻部 == mc_韻部::尤))) {
         initial = *mc_initial_data[init].中唐長安.triggered;
-        final = *mc_final_data[fina].prelmc.F; }
+        final = α ? *mc_final_data[fina].prelmc_α->F : *mc_final_data[fina].prelmc.F; }
     if (initial == "mb")
-        final = mc_final_data[fina].prelmc.m;
+        final = α ? mc_final_data[fina].prelmc_α->m : mc_final_data[fina].prelmc.m;
     return add_diacritic(initial + final, 四聲_classes[四聲].diacritic); }
