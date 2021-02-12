@@ -78,7 +78,7 @@ void select_phoneme(emscripten::val li) {
     list.call<void>("deleteContents");
     list.call<void>("insertNode", text); }
 void list_phonemes(emscripten::val ruby) {
-    std::string character = ruby["firstChild"]["data"].as<std::string>();
+    std::string character = ruby["childNodes"][1]["firstChild"]["data"].as<std::string>();
     auto er = bsoc_dictionary_by_字->equal_range(character);
     emscripten::val list = emscripten::val::global("document").call<emscripten::val>("createDocumentFragment");
     std::for_each(er.first, er.second, [list](std::pair<std::string, baxter_sagart_oc_entry> const& entry_pair) {
