@@ -98,7 +98,7 @@ emscripten::val character_to_ruby(std::string character) {
     emscripten::val rt = create_element("phoneme-");
     rt.call<emscripten::val>("appendChild", create_text_node(predict_鄴(entry.mc_initial, entry.mc_final, entry.mc_四聲)));
     rt.call<void>("addEventListener", std::string("focus"), js::bind([](emscripten::val event) {
-        list_phonemes(event["target"]["parentNode"]); },
+        list_phonemes(event["target"]["parentNode"]); emscripten::val::global("console").call<void>("log", event); },
         std::placeholders::_1));
     rt.call<void>("addEventListener", std::string("blur"), js::bind([](emscripten::val event) {
         select_phoneme(event["target"]["firstChild"]); },

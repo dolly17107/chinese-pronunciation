@@ -106,9 +106,9 @@
 105:std::__2::function<void\20\28\29>*\20emscripten::internal::operator_new<std::__2::function<void\20\28\29>\20>\28\29
 106:std::__2::__throw_bad_function_call\28\29
 107:std::__2::locale::id::__get\28\29
-108:std::__2::unique_ptr<unsigned\20char\2c\20void\20\28*\29\28void*\29>::unique_ptr<true\2c\20void>\28unsigned\20char*\2c\20std::__2::__dependent_type<std::__2::__unique_ptr_deleter_sfinae<void\20\28*\29\28void*\29>\2c\20true>::__good_rval_ref_type\29
-109:std::__2::locale::__imp::install\28std::__2::locale::facet*\2c\20long\29
-110:__cxa_guard_abort
+108:__cxa_guard_abort
+109:std::__2::unique_ptr<unsigned\20char\2c\20void\20\28*\29\28void*\29>::unique_ptr<true\2c\20void>\28unsigned\20char*\2c\20std::__2::__dependent_type<std::__2::__unique_ptr_deleter_sfinae<void\20\28*\29\28void*\29>\2c\20true>::__good_rval_ref_type\29
+110:std::__2::locale::__imp::install\28std::__2::locale::facet*\2c\20long\29
 111:std::__2::basic_regex<char\2c\20std::__2::regex_traits<char>\20>::__push_char\28char\29
 112:std::__2::__cloc\28\29
 113:std::__2::unique_ptr<unsigned\20char\2c\20void\20\28*\29\28void*\29>::reset\28unsigned\20char*\29
