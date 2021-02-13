@@ -159,7 +159,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "0ae61516-3bc0-482e-a6aa-7cbb9b2d134c"
+  "package_uuid": "75c71306-50d9-4bfb-a868-874c92ecaba2"
  });
 })();
 
@@ -385,8 +385,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 984,
- "maximum": 984 + 0,
+ "initial": 972,
+ "maximum": 972 + 0,
  "element": "anyfunc"
 });
 
@@ -613,7 +613,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 61616, DYNAMIC_BASE = 5304496, DYNAMICTOP_PTR = 61440;
+var STACK_MAX = 60576, DYNAMIC_BASE = 5303456, DYNAMICTOP_PTR = 60400;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -901,17 +901,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8112: function($0) {
-  let string_allocator = requireHandle($0);
-  fetch("https://raw.githubusercontent.com/cjkvi/cjkvi-dict/master/sbgy.xml").then(function(response) {
-   return response.arrayBuffer();
-  }).then(function(arrayBuffer) {
-   let charArray = new Uint8Array(arrayBuffer);
-   let stringData = string_allocator(charArray.length);
-   new Uint8Array(buffer, stringData, charArray.length).set(charArray);
-  });
- },
- 8880: function($0) {
+ 8432: function($0) {
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
    Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -932,7 +922,7 @@ var ASM_CONSTS = {
    });
   });
  },
- 9552: function() {
+ 9120: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -996,7 +986,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 12352: function() {
+ 11920: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1223,7 +1213,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 61600;
+ var thrownBuf = 60560;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1254,7 +1244,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 61600;
+ var thrownBuf = 60560;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -6002,13 +5992,13 @@ var asmLibraryArg = {
  "d": ___cxa_find_matching_catch_2,
  "i": ___cxa_find_matching_catch_3,
  "u": ___cxa_free_exception,
- "O": ___cxa_rethrow,
+ "N": ___cxa_rethrow,
  "r": ___cxa_throw,
  "Ga": ___cxa_uncaught_exceptions,
  "a": ___handle_stack_overflow,
  "Fa": ___map_file,
  "g": ___resumeException,
- "fa": ___sys_fcntl64,
+ "ea": ___sys_fcntl64,
  "Da": ___sys_ioctl,
  "Ca": ___sys_munmap,
  "Ea": ___sys_open,
@@ -6017,37 +6007,37 @@ var asmLibraryArg = {
  "o": __embind_register_class_constructor,
  "n": __embind_register_class_function,
  "xa": __embind_register_emval,
- "ca": __embind_register_float,
+ "ba": __embind_register_float,
  "B": __embind_register_integer,
  "z": __embind_register_memory_view,
- "ba": __embind_register_std_string,
- "N": __embind_register_std_wstring,
+ "aa": __embind_register_std_string,
+ "M": __embind_register_std_wstring,
  "wa": __embind_register_void,
- "aa": __emval_as,
- "L": __emval_call_method,
+ "va": __emval_as,
+ "K": __emval_call_method,
  "$": __emval_call_void_method,
- "va": __emval_decref,
+ "ua": __emval_decref,
  "_": __emval_get_global,
- "ua": __emval_get_method_caller,
- "ta": __emval_get_property,
- "K": __emval_incref,
+ "ta": __emval_get_method_caller,
+ "sa": __emval_get_property,
+ "J": __emval_incref,
  "G": __emval_new_cstring,
- "sa": __emval_run_destructors,
- "ra": __emval_set_property,
- "qa": __emval_take_value,
- "pa": _abort,
- "J": _emscripten_asm_const_iii,
- "oa": _emscripten_memcpy_big,
- "na": _emscripten_resize_heap,
+ "ra": __emval_run_destructors,
+ "qa": __emval_set_property,
+ "pa": __emval_take_value,
+ "oa": _abort,
+ "L": _emscripten_asm_const_iii,
+ "na": _emscripten_memcpy_big,
+ "ma": _emscripten_resize_heap,
  "Ba": _environ_get,
  "Aa": _environ_sizes_get,
- "ea": _fd_close,
+ "da": _fd_close,
  "za": _fd_read,
- "ka": _fd_seek,
- "da": _fd_write,
+ "ja": _fd_seek,
+ "ca": _fd_write,
  "c": _getTempRet0,
- "M": invoke_diii,
- "Z": invoke_fiii,
+ "Z": invoke_diii,
+ "Y": invoke_fiii,
  "t": invoke_i,
  "f": invoke_ii,
  "e": invoke_iii,
@@ -6055,35 +6045,35 @@ var asmLibraryArg = {
  "l": invoke_iiiii,
  "v": invoke_iiiiii,
  "w": invoke_iiiiiii,
- "Y": invoke_iiiiiiii,
+ "X": invoke_iiiiiiii,
  "y": invoke_iiiiiiiiiii,
  "I": invoke_iiiiiiiiiiii,
  "F": invoke_iiiiiiiiiiiii,
- "ja": invoke_iiji,
- "ia": invoke_jiiii,
+ "ia": invoke_iiji,
+ "ha": invoke_jiiii,
  "k": invoke_v,
  "b": invoke_vi,
  "h": invoke_vii,
  "m": invoke_viii,
  "j": invoke_viiii,
  "E": invoke_viiiii,
- "X": invoke_viiiiii,
+ "W": invoke_viiiiii,
  "x": invoke_viiiiiii,
- "W": invoke_viiiiiiii,
- "V": invoke_viiiiiiiii,
+ "V": invoke_viiiiiiii,
+ "U": invoke_viiiiiiiii,
  "C": invoke_viiiiiiiiii,
- "U": invoke_viiiiiiiiiii,
- "T": invoke_viiiiiiiiiiii,
- "S": invoke_viiiiiiiiiiiii,
- "R": invoke_viiiiiiiiiiiiii,
+ "T": invoke_viiiiiiiiiii,
+ "S": invoke_viiiiiiiiiiii,
+ "R": invoke_viiiiiiiiiiiii,
+ "Q": invoke_viiiiiiiiiiiiii,
  "D": invoke_viiiiiiiiiiiiiii,
- "Q": invoke_viiiiiiiiiiiiiiii,
- "ma": invoke_viiiiiiiiiiiiiiiii,
- "ha": invoke_viijii,
- "la": js_let_init,
+ "P": invoke_viiiiiiiiiiiiiiii,
+ "la": invoke_viiiiiiiiiiiiiiiii,
+ "ga": invoke_viijii,
+ "ka": js_let_init,
  "memory": wasmMemory,
- "P": _setTempRet0,
- "ga": _strftime_l,
+ "O": _setTempRet0,
+ "fa": _strftime_l,
  "table": wasmTable
 };
 
@@ -6597,17 +6587,6 @@ function invoke_iiiii(index, a1, a2, a3, a4) {
  }
 }
 
-function invoke_diii(index, a1, a2, a3) {
- var sp = stackSave();
- try {
-  return dynCall_diii(index, a1, a2, a3);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
 function invoke_iiiiiiii(index, a1, a2, a3, a4, a5, a6, a7) {
  var sp = stackSave();
  try {
@@ -6645,6 +6624,17 @@ function invoke_fiii(index, a1, a2, a3) {
  var sp = stackSave();
  try {
   return dynCall_fiii(index, a1, a2, a3);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_diii(index, a1, a2, a3) {
+ var sp = stackSave();
+ try {
+  return dynCall_diii(index, a1, a2, a3);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;

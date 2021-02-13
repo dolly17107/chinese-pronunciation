@@ -70,7 +70,7 @@ char32_t utf8_to_codepoint(std::string_view utf8) {
     return codepoint; }
 std::optional<std::vector<baxter_sagart_oc_entry>> bsoc_dictionary;
 std::optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>> bsoc_dictionary_by_字;
-std::optional<std::string> sbgy;
+/*std::optional<std::string> sbgy;*/
 void select_phoneme(emscripten::val li) {
     emscripten::val text = create_text_node(li["firstChild"]["data"].as<std::string>());
     emscripten::val list = emscripten::val::global("document").call<emscripten::val>("createRange");
@@ -149,7 +149,7 @@ void onbeforeinput(emscripten::val event) {
         replace_ranges_with_fragment(ruby, event.call<emscripten::val>("getTargetRanges"));
         event.call<void>("preventDefault"); } }
 int main() {
-    emscripten::val const string_allocator_val = js::bind([](emscripten::val length) {
+    /*emscripten::val const string_allocator_val = js::bind([](emscripten::val length) {
         sbgy = std::string(length.as<uint32_t>(), 0);
         return emscripten::val(reinterpret_cast<uintptr_t>(sbgy->data())); },
         std::placeholders::_1);
@@ -160,7 +160,7 @@ int main() {
             let charArray = new Uint8Array(arrayBuffer);
             let stringData = string_allocator(charArray.length);
             (new Uint8Array(buffer, stringData, charArray.length)).set(charArray); }); )js"_js_asm(
-        reinterpret_cast<uint32_t const&>(string_allocator_val));
+        reinterpret_cast<uint32_t const&>(string_allocator_val));*/
     bsoc_dictionary = deserialize<std::vector<baxter_sagart_oc_entry>>(file_to_string("BaxterSagartOC2015-10-13"));
     bsoc_dictionary_by_字 = std::make_optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>>();
     for (baxter_sagart_oc_entry const& entry : *bsoc_dictionary) {
