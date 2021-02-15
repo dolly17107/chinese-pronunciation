@@ -6,7 +6,7 @@ export class Dolly17107Select extends HTMLElement {
     constructor() {
         super();
         this.tabIndex = 0;
-        this.addEventListener("click", function(e) { this.focus(); this.dataset.expanded = ""; }); } }
+        this.addEventListener("click", function(e) { if (e.target == this) { this.focus(); this.dataset.expanded = ""; } }); } }
 export class Dolly17107Option extends HTMLElement {
     constructor() {
         super();
