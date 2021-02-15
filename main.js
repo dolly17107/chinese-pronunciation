@@ -159,7 +159,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "01808ec0-cec7-4466-8b9b-c8f25881e2db"
+  "package_uuid": "50464bfc-7b69-45ae-9987-7bf300d48162"
  });
 })();
 
@@ -385,8 +385,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 982,
- "maximum": 982 + 0,
+ "initial": 872,
+ "maximum": 872 + 0,
  "element": "anyfunc"
 });
 
@@ -613,7 +613,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 60880, DYNAMIC_BASE = 5303760, DYNAMICTOP_PTR = 60704;
+var STACK_MAX = 55824, DYNAMIC_BASE = 5298704, DYNAMICTOP_PTR = 55648;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -901,7 +901,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8560: function($0) {
+ 8528: function($0) {
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
    Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -922,11 +922,11 @@ var ASM_CONSTS = {
    });
   });
  },
- 9248: function($0) {
+ 9216: function($0) {
   const get_selected_dialect = requireHandle($0);
   document.getElementById("dialect").addEventListener("change", get_selected_dialect);
  },
- 9408: function() {
+ 9376: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -990,7 +990,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 12208: function() {
+ 12176: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1217,7 +1217,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 60864;
+ var thrownBuf = 55808;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1248,7 +1248,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 60864;
+ var thrownBuf = 55808;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -5990,16 +5990,16 @@ function intArrayFromString(stringy, dontAddNull, length) {
 }
 
 var asmLibraryArg = {
- "s": ___cxa_allocate_exception,
- "A": ___cxa_begin_catch,
- "I": ___cxa_end_catch,
+ "x": ___cxa_allocate_exception,
+ "w": ___cxa_begin_catch,
+ "H": ___cxa_end_catch,
  "d": ___cxa_find_matching_catch_2,
  "i": ___cxa_find_matching_catch_3,
- "u": ___cxa_free_exception,
- "M": ___cxa_rethrow,
- "r": ___cxa_throw,
+ "F": ___cxa_free_exception,
+ "L": ___cxa_rethrow,
+ "v": ___cxa_throw,
  "Ga": ___cxa_uncaught_exceptions,
- "a": ___handle_stack_overflow,
+ "b": ___handle_stack_overflow,
  "Fa": ___map_file,
  "g": ___resumeException,
  "ea": ___sys_fcntl64,
@@ -6012,25 +6012,25 @@ var asmLibraryArg = {
  "n": __embind_register_class_function,
  "xa": __embind_register_emval,
  "ba": __embind_register_float,
- "B": __embind_register_integer,
- "z": __embind_register_memory_view,
+ "z": __embind_register_integer,
+ "u": __embind_register_memory_view,
  "aa": __embind_register_std_string,
- "O": __embind_register_std_wstring,
+ "N": __embind_register_std_wstring,
  "wa": __embind_register_void,
  "va": __emval_as,
- "H": __emval_call_method,
+ "G": __emval_call_method,
  "$": __emval_call_void_method,
  "ua": __emval_decref,
- "N": __emval_get_global,
+ "M": __emval_get_global,
  "ta": __emval_get_method_caller,
  "sa": __emval_get_property,
- "L": __emval_incref,
- "G": __emval_new_cstring,
+ "K": __emval_incref,
+ "E": __emval_new_cstring,
  "ra": __emval_run_destructors,
  "qa": __emval_set_property,
  "pa": __emval_take_value,
  "oa": _abort,
- "K": _emscripten_asm_const_iii,
+ "J": _emscripten_asm_const_iii,
  "na": _emscripten_memcpy_big,
  "ma": _emscripten_resize_heap,
  "Ba": _environ_get,
@@ -6039,44 +6039,44 @@ var asmLibraryArg = {
  "za": _fd_read,
  "ja": _fd_seek,
  "ca": _fd_write,
- "b": _getTempRet0,
+ "c": _getTempRet0,
  "_": invoke_diii,
  "Z": invoke_fiii,
- "t": invoke_i,
+ "r": invoke_i,
  "f": invoke_ii,
  "e": invoke_iii,
  "q": invoke_iiii,
- "m": invoke_iiiii,
- "v": invoke_iiiiii,
- "w": invoke_iiiiiii,
+ "l": invoke_iiiii,
+ "y": invoke_iiiiii,
+ "B": invoke_iiiiiii,
  "Y": invoke_iiiiiiii,
- "y": invoke_iiiiiiiiiii,
- "J": invoke_iiiiiiiiiiii,
- "F": invoke_iiiiiiiiiiiii,
+ "t": invoke_iiiiiiiiiii,
+ "I": invoke_iiiiiiiiiiii,
+ "D": invoke_iiiiiiiiiiiii,
  "ia": invoke_iiji,
  "ha": invoke_jiiii,
  "k": invoke_v,
- "c": invoke_vi,
+ "a": invoke_vi,
  "h": invoke_vii,
- "l": invoke_viii,
+ "m": invoke_viii,
  "j": invoke_viiii,
- "E": invoke_viiiii,
- "X": invoke_viiiiii,
- "x": invoke_viiiiiii,
- "W": invoke_viiiiiiii,
- "V": invoke_viiiiiiiii,
- "C": invoke_viiiiiiiiii,
- "U": invoke_viiiiiiiiiii,
- "T": invoke_viiiiiiiiiiii,
- "S": invoke_viiiiiiiiiiiii,
- "R": invoke_viiiiiiiiiiiiii,
- "D": invoke_viiiiiiiiiiiiiii,
- "Q": invoke_viiiiiiiiiiiiiiii,
+ "X": invoke_viiiii,
+ "W": invoke_viiiiii,
+ "s": invoke_viiiiiii,
+ "V": invoke_viiiiiiii,
+ "U": invoke_viiiiiiiii,
+ "A": invoke_viiiiiiiiii,
+ "T": invoke_viiiiiiiiiii,
+ "S": invoke_viiiiiiiiiiii,
+ "R": invoke_viiiiiiiiiiiii,
+ "Q": invoke_viiiiiiiiiiiiii,
+ "C": invoke_viiiiiiiiiiiiiii,
+ "P": invoke_viiiiiiiiiiiiiiii,
  "la": invoke_viiiiiiiiiiiiiiiii,
  "ga": invoke_viijii,
  "ka": js_let_init,
  "memory": wasmMemory,
- "P": _setTempRet0,
+ "O": _setTempRet0,
  "fa": _strftime_l,
  "table": wasmTable
 };
@@ -6404,21 +6404,10 @@ function invoke_iiiiii(index, a1, a2, a3, a4, a5) {
  }
 }
 
-function invoke_iiiiiii(index, a1, a2, a3, a4, a5, a6) {
+function invoke_iiiii(index, a1, a2, a3, a4) {
  var sp = stackSave();
  try {
-  return dynCall_iiiiiii(index, a1, a2, a3, a4, a5, a6);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
-function invoke_iiii(index, a1, a2, a3) {
- var sp = stackSave();
- try {
-  return dynCall_iiii(index, a1, a2, a3);
+  return dynCall_iiiii(index, a1, a2, a3, a4);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
@@ -6430,6 +6419,17 @@ function invoke_vii(index, a1, a2) {
  var sp = stackSave();
  try {
   dynCall_vii(index, a1, a2);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_iiii(index, a1, a2, a3) {
+ var sp = stackSave();
+ try {
+  return dynCall_iiii(index, a1, a2, a3);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
@@ -6580,17 +6580,6 @@ function invoke_viiiiiiiiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a1
  }
 }
 
-function invoke_iiiii(index, a1, a2, a3, a4) {
- var sp = stackSave();
- try {
-  return dynCall_iiiii(index, a1, a2, a3, a4);
- } catch (e) {
-  stackRestore(sp);
-  if (e !== e + 0 && e !== "longjmp") throw e;
-  _setThrew(1, 0);
- }
-}
-
 function invoke_iiiiiiii(index, a1, a2, a3, a4, a5, a6, a7) {
  var sp = stackSave();
  try {
@@ -6650,6 +6639,17 @@ function invoke_i(index) {
  var sp = stackSave();
  try {
   return dynCall_i(index);
+ } catch (e) {
+  stackRestore(sp);
+  if (e !== e + 0 && e !== "longjmp") throw e;
+  _setThrew(1, 0);
+ }
+}
+
+function invoke_iiiiiii(index, a1, a2, a3, a4, a5, a6) {
+ var sp = stackSave();
+ try {
+  return dynCall_iiiiiii(index, a1, a2, a3, a4, a5, a6);
  } catch (e) {
   stackRestore(sp);
   if (e !== e + 0 && e !== "longjmp") throw e;
