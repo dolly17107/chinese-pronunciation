@@ -28,9 +28,9 @@ morpheme-.selection {
     color: #000000; }
 dolly17107-select {
     border: 3px solid rgb(82, 82, 214); }
-dolly17107-select:not(:focus) > * {
+dolly17107-select:not([data-expanded]) > * {
     position: absolute; }
-dolly17107-select:not(:focus) > :not([data-selected]) {
+dolly17107-select:not([data-expanded]) > :not([data-selected]) {
     display: none; }
 dolly17107-select:focus {
     display: flex;
