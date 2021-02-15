@@ -5,7 +5,8 @@ export class Dolly17107Select extends HTMLElement {
         this.dispatchEvent(new CustomEvent("change")); }
     constructor() {
         super();
-        this.tabIndex = 0; } }
+        this.tabIndex = 0;
+        this.addEventListener("click", function(e) { this.focus() }); } }
 export class Dolly17107Option extends HTMLElement {
     constructor() {
         super();
