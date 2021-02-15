@@ -27,7 +27,9 @@ morpheme-.selection {
     background-color: #ffffff;
     color: #000000; }
 dolly17107-select {
-    border: 3px solid rgb(82, 82, 214); }
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #999999; }
 dolly17107-select:not([data-expanded]) {
     display: grid; }
 dolly17107-select:not([data-expanded]) > * {
@@ -38,8 +40,7 @@ dolly17107-select:not([data-expanded]) > :not([data-selected]) {
     visibility: hidden; }
 dolly17107-select[data-expanded] {
     display: flex;
-    flex-flow: column nowrap;
-    pointer-events: none; }
+    flex-flow: column nowrap; }
 spinner- { display: block; position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 72px; height: 72px; margin: auto; }
 spinner- * { display: block; position: absolute; left: 0; right: 0; top: 0; bottom: 0; opacity: 0; animation-iteration-count: infinite; animation-name: orbit; animation-duration: 4s; }
 spinner- *:after { content: ''; display: block; position: absolute; bottom: 0; left: 0; right: 0; margin: 0 auto; width: 10%; height: 10%; border-radius: 50%; background: #c0c0c0; }
