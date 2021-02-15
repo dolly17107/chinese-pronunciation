@@ -159,7 +159,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "75c71306-50d9-4bfb-a868-874c92ecaba2"
+  "package_uuid": "3bf4c824-4294-4fa2-b119-b93885a89ffd"
  });
 })();
 
@@ -385,8 +385,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 972,
- "maximum": 972 + 0,
+ "initial": 991,
+ "maximum": 991 + 0,
  "element": "anyfunc"
 });
 
@@ -613,7 +613,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 60576, DYNAMIC_BASE = 5303456, DYNAMICTOP_PTR = 60400;
+var STACK_MAX = 61136, DYNAMIC_BASE = 5304016, DYNAMICTOP_PTR = 60960;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -901,7 +901,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8432: function($0) {
+ 8560: function($0) {
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
    Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -922,7 +922,11 @@ var ASM_CONSTS = {
    });
   });
  },
- 9120: function() {
+ 9248: function($0) {
+  const get_selected_dialect = requireHandle($0);
+  document.getElementById("dialect").addEventListener("change", get_selected_dialect);
+ },
+ 9408: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -986,7 +990,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 11920: function() {
+ 12208: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1213,7 +1217,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 60560;
+ var thrownBuf = 61120;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1244,7 +1248,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 60560;
+ var thrownBuf = 61120;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -5988,11 +5992,11 @@ function intArrayFromString(stringy, dontAddNull, length) {
 var asmLibraryArg = {
  "s": ___cxa_allocate_exception,
  "A": ___cxa_begin_catch,
- "H": ___cxa_end_catch,
+ "I": ___cxa_end_catch,
  "d": ___cxa_find_matching_catch_2,
  "i": ___cxa_find_matching_catch_3,
  "u": ___cxa_free_exception,
- "N": ___cxa_rethrow,
+ "M": ___cxa_rethrow,
  "r": ___cxa_throw,
  "Ga": ___cxa_uncaught_exceptions,
  "a": ___handle_stack_overflow,
@@ -6011,22 +6015,22 @@ var asmLibraryArg = {
  "B": __embind_register_integer,
  "z": __embind_register_memory_view,
  "aa": __embind_register_std_string,
- "M": __embind_register_std_wstring,
+ "O": __embind_register_std_wstring,
  "wa": __embind_register_void,
  "va": __emval_as,
- "K": __emval_call_method,
+ "H": __emval_call_method,
  "$": __emval_call_void_method,
  "ua": __emval_decref,
- "_": __emval_get_global,
+ "N": __emval_get_global,
  "ta": __emval_get_method_caller,
  "sa": __emval_get_property,
- "J": __emval_incref,
+ "L": __emval_incref,
  "G": __emval_new_cstring,
  "ra": __emval_run_destructors,
  "qa": __emval_set_property,
  "pa": __emval_take_value,
  "oa": _abort,
- "L": _emscripten_asm_const_iii,
+ "K": _emscripten_asm_const_iii,
  "na": _emscripten_memcpy_big,
  "ma": _emscripten_resize_heap,
  "Ba": _environ_get,
@@ -6035,44 +6039,44 @@ var asmLibraryArg = {
  "za": _fd_read,
  "ja": _fd_seek,
  "ca": _fd_write,
- "c": _getTempRet0,
- "Z": invoke_diii,
- "Y": invoke_fiii,
+ "b": _getTempRet0,
+ "_": invoke_diii,
+ "Z": invoke_fiii,
  "t": invoke_i,
  "f": invoke_ii,
  "e": invoke_iii,
  "q": invoke_iiii,
- "l": invoke_iiiii,
+ "m": invoke_iiiii,
  "v": invoke_iiiiii,
  "w": invoke_iiiiiii,
- "X": invoke_iiiiiiii,
+ "Y": invoke_iiiiiiii,
  "y": invoke_iiiiiiiiiii,
- "I": invoke_iiiiiiiiiiii,
+ "J": invoke_iiiiiiiiiiii,
  "F": invoke_iiiiiiiiiiiii,
  "ia": invoke_iiji,
  "ha": invoke_jiiii,
  "k": invoke_v,
- "b": invoke_vi,
+ "c": invoke_vi,
  "h": invoke_vii,
- "m": invoke_viii,
+ "l": invoke_viii,
  "j": invoke_viiii,
  "E": invoke_viiiii,
- "W": invoke_viiiiii,
+ "X": invoke_viiiiii,
  "x": invoke_viiiiiii,
- "V": invoke_viiiiiiii,
- "U": invoke_viiiiiiiii,
+ "W": invoke_viiiiiiii,
+ "V": invoke_viiiiiiiii,
  "C": invoke_viiiiiiiiii,
- "T": invoke_viiiiiiiiiii,
- "S": invoke_viiiiiiiiiiii,
- "R": invoke_viiiiiiiiiiiii,
- "Q": invoke_viiiiiiiiiiiiii,
+ "U": invoke_viiiiiiiiiii,
+ "T": invoke_viiiiiiiiiiii,
+ "S": invoke_viiiiiiiiiiiii,
+ "R": invoke_viiiiiiiiiiiiii,
  "D": invoke_viiiiiiiiiiiiiii,
- "P": invoke_viiiiiiiiiiiiiiii,
+ "Q": invoke_viiiiiiiiiiiiiiii,
  "la": invoke_viiiiiiiiiiiiiiiii,
  "ga": invoke_viijii,
  "ka": js_let_init,
  "memory": wasmMemory,
- "O": _setTempRet0,
+ "P": _setTempRet0,
  "fa": _strftime_l,
  "table": wasmTable
 };
