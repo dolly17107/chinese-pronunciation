@@ -71,7 +71,7 @@ char32_t utf8_to_codepoint(std::string_view utf8) {
     return codepoint; }
 enum class dialect {周, 南朝金陵, 北朝鄴, 中唐長安};
 dialect selected_dialect;
-void get_selected_dialect() {
+void get_selected_dialect(emscripten::val dummy) {
     std::string dialect_name = emscripten::val::global("document").call<emscripten::val>("querySelector", std::string("#dialect > [data-selected]"))["firstChild"]["data"].as<std::string>();
     auto dialect_names = magic_enum::enum_entries<dialect>();
     selected_dialect = std::get<0>(*std::find_if(dialect_names.begin(), dialect_names.end(), [dialect_name](auto entry) { return dialect_name == std::get<1>(entry); })); }
@@ -219,12 +219,12 @@ int main() {
             rubyizer.addEventListener("compositionend", function(event) {
                 rubyize(event.currentTarget); }); }); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(rubyize_text_val));
-    emscripten::val get_selected_dialect_val = js::bind(get_selected_dialect);
+    emscripten::val get_selected_dialect_val = js::bind(get_selected_dialect, std::placeholders::_1);
     R"js(
         const get_selected_dialect = requireHandle($0);
         document.getElementById("dialect").addEventListener("change", get_selected_dialect); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(get_selected_dialect_val));
-    get_selected_dialect();
+    get_selected_dialect(emscripten::val::undefined());
     R"js(
         const select = function(node, selection) {
             if (node instanceof Element && selection.containsNode(node)) {
