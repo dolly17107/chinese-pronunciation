@@ -369,7 +369,7 @@ std::string to_入聲(std::string fina) {
         return fina.replace(fina.size() + -std::string("ŋ").size(), std::string("ŋ").size(), std::string("k")); }
     return "???"; }
 std::string add_diacritic(std::string segmental, std::string diacritic) {
-    std::vector<std::string> vowels = {"æ̃", "æ", "ɑ̃", "ɑ", "ɛ", "ɐ", "œ", "ɔ", "ẽ", "e", "ɪ", "ə", "ɤ̃", "ɤ", "ø", "ʏ", "õ", "o", "ĩ", "i", "ɯ̃", "ɯ", "y", "ʉ", "ũ", "u"};
+    std::vector<std::string> vowels = {"æ̃", "æ", "ɑ̃", "ɑ", "ɛ", "ɐ", "œ", "ɔ", "ẽ", "e", "ɪ", "ə", "ɤ", "ø", "ʏ", "o", "i", "ɯ", "y", "ʉ", "u"};
     for (std::size_t i = 0; i < vowels.size(); i++) {
         std::size_t pos = segmental.find(vowels[i]);
         if (pos != std::string::npos) {

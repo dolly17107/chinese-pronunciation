@@ -159,7 +159,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "50464bfc-7b69-45ae-9987-7bf300d48162"
+  "package_uuid": "377a015c-dfc3-4d2d-b030-fb8d4d1d579e"
  });
 })();
 
@@ -613,7 +613,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 55824, DYNAMIC_BASE = 5298704, DYNAMICTOP_PTR = 55648;
+var STACK_MAX = 55808, DYNAMIC_BASE = 5298688, DYNAMICTOP_PTR = 55632;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -901,7 +901,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8528: function($0) {
+ 8512: function($0) {
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
    Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -922,11 +922,11 @@ var ASM_CONSTS = {
    });
   });
  },
- 9216: function($0) {
+ 9200: function($0) {
   const get_selected_dialect = requireHandle($0);
   document.getElementById("dialect").addEventListener("change", get_selected_dialect);
  },
- 9376: function() {
+ 9360: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -990,7 +990,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 12176: function() {
+ 12160: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1217,7 +1217,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 55808;
+ var thrownBuf = 55792;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1248,7 +1248,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 55808;
+ var thrownBuf = 55792;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
