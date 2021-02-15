@@ -36,7 +36,7 @@ dolly17107-select:not([data-expanded]) > * {
     pointer-events: none; }
 dolly17107-select:not([data-expanded]) > :not([data-selected]) {
     visibility: hidden; }
-dolly17107-select:focus {
+dolly17107-select[data-expanded] {
     display: flex;
     flex-flow: column nowrap;
     pointer-events: none; }
