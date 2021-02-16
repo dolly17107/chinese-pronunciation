@@ -222,7 +222,7 @@ int main() {
         const get_selected_dialect = requireHandle($1);
         const clear_all_annotation = function() {
             Array.from(document.querySelectorAll("rubyizer- > morpheme-")).forEach(function(morpheme) {
-                const grapheme = morpheme.querySelector("").firstChild.data;
+                const grapheme = morpheme.querySelector("grapheme-").firstChild.data;
                 morpheme.replaceWith(document.createTextNode(grapheme)); }); }
         const reset_all_rubyizer = function() {
             clear_all_annotation();
