@@ -159,7 +159,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "377a015c-dfc3-4d2d-b030-fb8d4d1d579e"
+  "package_uuid": "ff6427a0-6195-4057-9ad8-0434dda1e6b8"
  });
 })();
 
@@ -385,8 +385,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 872,
- "maximum": 872 + 0,
+ "initial": 881,
+ "maximum": 881 + 0,
  "element": "anyfunc"
 });
 
@@ -613,7 +613,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 55808, DYNAMIC_BASE = 5298688, DYNAMICTOP_PTR = 55632;
+var STACK_MAX = 56640, DYNAMIC_BASE = 5299520, DYNAMICTOP_PTR = 56464;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -901,7 +901,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8512: function($0) {
+ 8512: function($0, $1) {
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
    Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -921,12 +921,25 @@ var ASM_CONSTS = {
     rubyize(event.currentTarget);
    });
   });
+  const get_selected_dialect = requireHandle($1);
+  const clear_all_annotation = function() {
+   Array.from(document.querySelectorAll("rubyizer- > morpheme-")).forEach(function(morpheme) {
+    const grapheme = morpheme.querySelector("").firstChild.data;
+    morpheme.replaceWith(document.createTextNode(grapheme));
+   });
+  };
+  const reset_all_rubyizer = function() {
+   clear_all_annotation();
+   Array.from(document.getElementsByTagName("rubyizer-")).forEach(function(rubyizer) {
+    rubyize(rubyizer);
+   });
+  };
+  document.getElementById("dialect").addEventListener("change", function() {
+   get_selected_dialect();
+   reset_all_rubyizer();
+  });
  },
- 9200: function($0) {
-  const get_selected_dialect = requireHandle($0);
-  document.getElementById("dialect").addEventListener("change", get_selected_dialect);
- },
- 9360: function() {
+ 9936: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -990,7 +1003,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 12160: function() {
+ 12736: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1217,7 +1230,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 55792;
+ var thrownBuf = 56624;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1248,7 +1261,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 55792;
+ var thrownBuf = 56624;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -5996,7 +6009,7 @@ var asmLibraryArg = {
  "d": ___cxa_find_matching_catch_2,
  "i": ___cxa_find_matching_catch_3,
  "F": ___cxa_free_exception,
- "L": ___cxa_rethrow,
+ "K": ___cxa_rethrow,
  "v": ___cxa_throw,
  "Ga": ___cxa_uncaught_exceptions,
  "b": ___handle_stack_overflow,
@@ -6024,13 +6037,13 @@ var asmLibraryArg = {
  "M": __emval_get_global,
  "ta": __emval_get_method_caller,
  "sa": __emval_get_property,
- "K": __emval_incref,
+ "J": __emval_incref,
  "E": __emval_new_cstring,
  "ra": __emval_run_destructors,
  "qa": __emval_set_property,
  "pa": __emval_take_value,
  "oa": _abort,
- "J": _emscripten_asm_const_iii,
+ "L": _emscripten_asm_const_iii,
  "na": _emscripten_memcpy_big,
  "ma": _emscripten_resize_heap,
  "Ba": _environ_get,
