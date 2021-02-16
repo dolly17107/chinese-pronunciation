@@ -159,7 +159,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 268482,
-  "package_uuid": "1650c0bc-0fc7-48a0-ab79-b86ca8a72983"
+  "package_uuid": "74762085-b23a-4636-89cc-932579396f55"
  });
 })();
 
@@ -613,7 +613,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 56656, DYNAMIC_BASE = 5299536, DYNAMICTOP_PTR = 56480;
+var STACK_MAX = 56688, DYNAMIC_BASE = 5299568, DYNAMICTOP_PTR = 56512;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -902,6 +902,8 @@ var tempI64;
 
 var ASM_CONSTS = {
  8512: function($0, $1) {
+  const get_selected_dialect = requireHandle($1);
+  get_selected_dialect();
   const rubyize_text = requireHandle($0);
   const rubyize = function(rubyizer) {
    Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -921,7 +923,6 @@ var ASM_CONSTS = {
     rubyize(event.currentTarget);
    });
   });
-  const get_selected_dialect = requireHandle($1);
   const clear_all_annotation = function() {
    Array.from(document.querySelectorAll("rubyizer- > morpheme-")).forEach(function(morpheme) {
     const grapheme = morpheme.querySelector("grapheme-").firstChild.data;
@@ -939,7 +940,7 @@ var ASM_CONSTS = {
    reset_all_rubyizer();
   });
  },
- 9952: function() {
+ 9984: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -1003,7 +1004,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 12752: function() {
+ 12784: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1230,7 +1231,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 56640;
+ var thrownBuf = 56672;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1261,7 +1262,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 56640;
+ var thrownBuf = 56672;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];

@@ -205,8 +205,10 @@ int main() {
     for (baxter_sagart_oc_entry const& entry : *bsoc_dictionary) {
         bsoc_dictionary_by_字->insert(make_pair(entry.字, entry)); }
     emscripten::val const rubyize_text_val = js::bind(rubyize_text, std::placeholders::_1);
-    emscripten::val get_selected_dialect_val = js::bind(get_selected_dialect);
+    emscripten::val const get_selected_dialect_val = js::bind(get_selected_dialect);
     R"js(
+        const get_selected_dialect = requireHandle($1);
+        get_selected_dialect();
         const rubyize_text = requireHandle($0);
         const rubyize = function(rubyizer) {
             Array.from(rubyizer.childNodes).forEach(function(node) {
@@ -219,7 +221,6 @@ int main() {
                     rubyize(event.currentTarget); } });
             rubyizer.addEventListener("compositionend", function(event) {
                 rubyize(event.currentTarget); }); });
-        const get_selected_dialect = requireHandle($1);
         const clear_all_annotation = function() {
             Array.from(document.querySelectorAll("rubyizer- > morpheme-")).forEach(function(morpheme) {
                 const grapheme = morpheme.querySelector("grapheme-").firstChild.data;
@@ -233,7 +234,6 @@ int main() {
             reset_all_rubyizer(); }); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(rubyize_text_val),
         reinterpret_cast<uint32_t const&>(get_selected_dialect_val));
-    get_selected_dialect();
     R"js(
         const select = function(node, selection) {
             if (node instanceof Element && selection.containsNode(node)) {
