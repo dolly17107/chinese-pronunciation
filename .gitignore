@@ -4,3 +4,8 @@ BaxterSagartOC2015-10-13.xlsx
 load_baxter_sagart_oc_dictionary.cpp
 load_baxter_sagart_oc_dictionary.exe
 xlnt.*
+sbgy
+sbgy.xml
+load_sbgy.cpp
+load_sbgy.exe
+pugi*

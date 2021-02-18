@@ -65,6 +65,7 @@ static std::vector<mc_initial_datus> const mc_initial_data = {
 // { std::string("矣"), std::string("hj"), std::string(""), std::string("ɦ"), std::string("ʜ"), std::string("ɦ") }
 enum class mc_攝 {
     通, 江, 止, 遇, 蟹, 臻, 山, 效, 果, 假, 宕, 梗, 流, 深, 咸, 曾 };
+// 切韻韻部
 enum class mc_韻部 {
     東A, 東B, 冬, 鍾, 江, 支, 脂, 之, 微, 魚, 虞, 模, 泰, 齊, 祭, 佳, 皆, 夬, 灰, 咍, 廢, 眞, 臻, 文, 殷, 元, 魂, 痕, 寒, 刪, 山, 先, 仙, 蕭, 宵, 肴, 豪, 歌A, 歌B, 麻A, 麻B, 覃, 談, 陽, 唐, 庚A, 庚B, 耕, 清, 青, 尤, 侯, 幽, 侵, 鹽, 添, 蒸, 登, 咸, 銜, 嚴, 凡 };
 struct mc_韻部_datus {
@@ -152,6 +153,7 @@ struct mc_final_class {
     std::string sbgy;
     mc_final_prelmc_outcome prelmc;
     std::optional<mc_final_prelmc_outcome> prelmc_α; };
+// 切韻韻部 split by 等, 重紐, 呼, 入聲 (廣韻 split 真 to 真 and 諄, 寒 to 寒 and 桓, 歌 to 歌 and 戈) (Baxter is like 廣韻 but combines 真, 諄, and 臻 to -in)
 static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::東A, 1, 0, 0 }, "uwng", "uŋ", {"ɤwŋ", "oŋ"}},
     {"", { mc_韻部::東A, 1, 0, 1 }, "uwk", "uk", {"ɤwk", "ok"}},
@@ -201,18 +203,21 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::咍, 1, 0, 0 }, "oj", "ɒi", {"ɑj", "ɑj"}},
     {"", { mc_韻部::廢, 3, 0, 0 }, "joj", "ĭɐi", {"ej", "ej", "ej"}},
     {"", { mc_韻部::廢, 3, 1, 0 }, "jwoj", "ĭwɐi", {"wej", "wej", "ej"}},
-    {"眞𤣆新辰仁神親礥申㷠珍陳津瞋秦寅紉軫辴腎忍矤嶙紖盡㯸笉引濜屒震信刃𦙍遴敶愼眒賮晉鎭疢親臻莘𦿒𧤛齔櫬", { mc_韻部::眞, 3, 0, 0 }, "in", "ĭĕn", {"ɯn", "ɯn"}, {{"in", "in"}}},
-    {"質日實秩悉七暱逸抶栗窒疾失堲叱蛭㓼𪗨櫛瑟𪗨", { mc_韻部::眞, 3, 0, 1 }, "it", "ĭĕt", {"ɯt", "ɯt"}, {{"it", "it"}}},
-    {"筠殞諄椿䣩荀純犉脣淪屯逡遵春鷷勻旬準尹筍蝡蠢盾偆耣𣯍賰稕𡺲殉儁舜閠順", { mc_韻部::眞, 3, 1, 0 }, "win", "ĭwĕn", {"wɯn", "wɯn"}, {{"win", "win"}}},
-    {"䫻率茁術崒聿卒卹律黜㤕术出焌𠭴", { mc_韻部::眞, 3, 1, 1 }, "wit", "ĭwĕt", {"wɯt", "wɯt"}, {{"wit", "wit"}}},
+    // The Qièyùn has a single rhyme 真 Zhēn that the Guǎngyùn split into two rhymes, 真 Zhēn and 諄 Zhūn. The general pattern in the Guǎngyùn is that words with -in and grave-initial words with the division-III chóngniǔ final -win are included in 真 Zhēn, while acute-initial words in -win and division-IV chóngniǔ words in -jwin are placed in 諄 Zhūn
+    {"眞𤣆新辰仁神親礥申㷠珍陳津瞋秦寅紉軫辴腎忍矤嶙紖盡㯸笉引濜屒震信刃𦙍遴敶愼眒賮晉鎭疢親", { mc_韻部::眞, 3, 0, 0 }, "in", "ĭĕn", {"ɯn", "ɯn"}, {{"in", "in"}}},
+    {"質日實秩悉七暱逸抶栗窒疾失堲叱蛭", { mc_韻部::眞, 3, 0, 1 }, "it", "ĭĕt", {"ɯt", "ɯt"}, {{"it", "it"}}},
+    {"筠殞諄椿䣩荀純犉脣淪屯逡遵春鷷勻旬準尹筍蝡蠢盾偆耣𣯍賰稕𡺲殉儁舜閠順", { mc_韻部::眞, 3, 1, 0 }, "win", "ĭuĕn" /*ĭwĕn for 筠殞*/, {"wɯn", "wɯn"}, {{"win", "win"}}},
+    {"䫻率茁術崒聿卒卹律黜㤕术出焌𠭴", { mc_韻部::眞, 3, 1, 1 }, "wit", "ĭuĕt" /*ĭwĕt for 䫻*/, {"wɯt", "wɯt"}, {{"wit", "wit"}}},
     {"𥎊銀巾珉貧𪔗彬砏愍菣憗衅僅", { mc_韻部::眞, 5, 0, 0 }, "in", "ĭĕn", {"ɯn", "ɯn"}},
     {"姞密弼乙耴筆肸曁", { mc_韻部::眞, 5, 0, 1 }, "it", "ĭĕt", {"ɯt", "ɯt"}},
     {"麏囷贇窘", { mc_韻部::眞, 5, 1, 0 }, "win", "ĭwĕn", {"wɯn", "wɯn"}},
     {"䎉", { mc_韻部::眞, 5, 1, 1 }, "wit", "ĭwĕt", {"wɯt", "wɯt"}},
     {"因賔繽頻民𧼒緊牝釿泯螼脪儐印𣎵螼", { mc_韻部::眞, 6, 0, 0 }, "jin", "ĭĕn", {"in", "in"}},
     {"一匹吉詰欯蜜必邲", { mc_韻部::眞, 6, 0, 1 }, "jit", "ĭĕt", {"it", "it"}},
-    {"均𦃢呁", { mc_韻部::眞, 6, 1, 0 }, "jwin", "ĭwĕn", {"win", "win"}},
-    {"獝橘", { mc_韻部::眞, 6, 1, 1 }, "jwit", "ĭwĕt", {"wit", "wit"}},
+    {"均𦃢呁", { mc_韻部::眞, 6, 1, 0 }, "jwin", "ĭuĕn", {"win", "win"}},
+    {"獝橘", { mc_韻部::眞, 6, 1, 1 }, "jwit", "ĭuĕt", {"wit", "wit"}},
+    {"臻莘𦿒𧤛齔櫬", { mc_韻部::臻, 3, 0, 0 }, "in", "ĭen", {"ɯn", "ɯn"}, {{"in", "in"}}},
+    {"㓼𪗨櫛瑟𪗨", { mc_韻部::臻, 3, 0, 1 }, "it", "ĭet", {"ɯt", "ɯt"}, {{"it", "it"}}},
     {"", { mc_韻部::文, 3, 1, 0 }, "jun", "ĭuən", {"wɯn", "wɯn", "ɤn"}},
     {"", { mc_韻部::文, 3, 1, 1 }, "jut", "ĭuət", {"wɯt", "wɯt", "ɤt"}},
     {"", { mc_韻部::殷, 3, 0, 0 }, "j+n", "ĭən", {"ɯn", "ɯn", "ɤn"}},
@@ -293,11 +298,11 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::清, 3, 0, 0 }, "jeng", "ĭɛŋ", {"ẽj", "ẽj"}},
     {"", { mc_韻部::清, 3, 0, 1 }, "jek", "ĭɛk", {"ec", "ec"}},
     {"", { mc_韻部::清, 3, 1, 0 }, "jweng", "ĭwɛŋ", {"wẽj", "wẽj"}},
-    {"", { mc_韻部::清, 3, 1, 1 }, "jwek", "ĭwɛŋ", {"wec", "wec"}},
+    {"", { mc_韻部::清, 3, 1, 1 }, "jwek", "ĭwɛk", {"wec", "wec"}},
     {"", { mc_韻部::清, 6, 0, 0 }, "jieng", "ĭɛŋ", {"iẽj", "iẽj"}},
     {"", { mc_韻部::清, 6, 0, 1 }, "jiek", "ĭɛk", {"iec", "iec"}},
     {"", { mc_韻部::清, 6, 1, 0 }, "jwieng", "ĭwɛŋ", {"wiẽj", "wiẽj"}},
-    {"", { mc_韻部::清, 6, 1, 1 }, "jwiek", "ĭwɛŋ", {"wiec", "wiec"}},
+    {"", { mc_韻部::清, 6, 1, 1 }, "jwiek", "ĭwɛk", {"wiec", "wiec"}},
     {"", { mc_韻部::青, 4, 0, 0 }, "eng", "ieŋ", {"iẽj", "iẽj"}},
     {"", { mc_韻部::青, 4, 0, 1 }, "ek", "iek", {"iec", "iec"}},
     {"", { mc_韻部::青, 4, 1, 0 }, "weng", "iweŋ", {"wiẽj", "wiẽj"}},
@@ -329,8 +334,8 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::登, 1, 1, 1 }, "wok", "uək", {"wɤk", "wɤk"}},
     {"", { mc_韻部::咸, 2, 0, 0 }, "eam", "ɐm", {"æm", "æm"}},
     {"", { mc_韻部::咸, 2, 0, 1 }, "eap", "ɐp", {"æp", "æp"}},
-    {"", { mc_韻部::銜, 2, 1, 0 }, "aem", "ɐm", {"æm", "æm"}},
-    {"", { mc_韻部::銜, 2, 1, 1 }, "aep", "ɐp", {"æp", "æp"}},
+    {"", { mc_韻部::銜, 2, 1, 0 }, "aem", "am", {"æm", "æm"}},
+    {"", { mc_韻部::銜, 2, 1, 1 }, "aep", "ap", {"æp", "æp"}},
     {"", { mc_韻部::嚴, 3, 1, 0 }, "jaem", "ĭɐm", {"em", "em", "æm"}},
     {"", { mc_韻部::嚴, 3, 1, 1 }, "jaep", "ĭɐp", {"ep", "ep", "æp"}},
     {"", { mc_韻部::凡, 3, 1, 0 }, "jom", "ĭwɐm", {"em", "em", "æm"}},
