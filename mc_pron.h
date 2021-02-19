@@ -12,56 +12,59 @@ struct lattice_1 {
     std::optional<std::string> triggered;
     lattice_1(std::string value) { elsewhere = value; }
     lattice_1(std::string value, std::string value0) { elsewhere = value; triggered = value0; } };
+enum class αβ {β, α, αβ};
 struct mc_initial_datus {
     std::string name;
     std::string baxter_sagart;
     std::string sbgy;
+    std::optional<αβ> αβ;
     lattice_1 金陵;
     std::string 鄴;
     lattice_1 中唐長安; };
+enum class mc_initial {幫, 滂, 並, 明, 端, 透, 定, 泥, 來, 知, 徹, 澄, 娘, 精, 清, 從, 心, 邪, 莊, 初, 崇, 生, 俟, 章, 昌, 禪, 日, 書, 船, 以, 見, 溪, 群, 疑, 影, 曉, 匣, 云};
 static std::vector<mc_initial_datus> const mc_initial_data = {
-    { std::string("幫"), std::string("p"), std::string("p"),
+    { std::string("幫"), std::string("p"), std::string("p"), αβ::αβ,
         { std::string("p"), std::string("ɸ") }, std::string("p"), { std::string("p"), std::string("f") } },
-    { std::string("滂"), std::string("ph"), std::string("pʰ"),
+    { std::string("滂"), std::string("ph"), std::string("pʰ"), αβ::αβ,
         { std::string("ph"), std::string("ɸh") }, std::string("ph"), { std::string("ph"), std::string("f") } },
-    { std::string("並"), std::string("b"), std::string("bʰ"),
+    { std::string("並"), std::string("b"), std::string("bʰ"), αβ::αβ,
         { std::string("b"), std::string("β") }, std::string("b"), { std::string("b̤"), std::string("v̤") } },
-    { std::string("明"), std::string("m"), std::string("m"),
+    { std::string("明"), std::string("m"), std::string("m"), αβ::αβ,
         std::string("m"), std::string("m"), { std::string("mb"), std::string("w̃") } },
-    { std::string("端"), std::string("t"), std::string("t"), std::string("t"), std::string("t"), std::string("t") },
-    { std::string("透"), std::string("th"), std::string("tʰ"), std::string("th"), std::string("th"), std::string("th") },
-    { std::string("定"), std::string("d"), std::string("dʰ"), std::string("d"), std::string("d"), std::string("d̤") },
-    { std::string("泥"), std::string("n"), std::string("n"), std::string("n"), std::string("n"), std::string("nd") },
-    { std::string("來"), std::string("l"), std::string("l"), std::string("l"), std::string("l"), std::string("l") },
-    { std::string("知"), std::string("tr"), std::string("ţ"), std::string("t"), std::string("ʈ"), std::string("ʈ") },
-    { std::string("徹"), std::string("trh"), std::string("ţʰ"), std::string("th"), std::string("ʈh"), std::string("ʈh") },
-    { std::string("澄"), std::string("dr"), std::string("ɖʰ"), std::string("d"), std::string("ɖ"), std::string("ɖ̤") },
-    { std::string("娘"), std::string("nr"), std::string("ɳ"), std::string("n"), std::string("ɳ"), std::string("ɳɖ") },
-    { std::string("精"), std::string("ts"), std::string("ts"), std::string("tz"), std::string("tz"), std::string("tz") },
-    { std::string("清"), std::string("tsh"), std::string("tsʰ"), std::string("ts"), std::string("ts"), std::string("ts") },
-    { std::string("從"), std::string("dz"), std::string("dzʰ"), std::string("dz"), std::string("dz"), std::string("d̤z") },
-    { std::string("心"), std::string("s"), std::string("s"), std::string("s"), std::string("s"), std::string("s") },
-    { std::string("邪"), std::string("z"), std::string("z"), std::string("dz"), std::string("z"), std::string("z̤") },
-    { std::string("莊"), std::string("tsr"), std::string("ʧ"), std::string("ʈʐ"), std::string("ʈʐ"), std::string("ʈʐ") },
-    { std::string("初"), std::string("tsrh"), std::string("ʧʰ"), std::string("ʈʂ"), std::string("ʈʂ"), std::string("ʈʂ") },
-    { std::string("崇"), std::string("dzr"), std::string("dʒʰ"), std::string("ɖʐ"), std::string("ɖʐ"), std::string("ɖ̤ʐ") },
-    { std::string("生"), std::string("sr"), std::string("ʃ"), std::string("ʂ"), std::string("ʂ"), std::string("ʂ") },
-    { std::string("崇"), std::string("zr"), std::string("dʐʰ"), std::string("ʐ"), std::string("ʐ"), std::string("ɖ̤ʐ") },
-    { std::string("章"), std::string("tsy"), std::string("tɕ"), std::string("cʑ"), std::string("cʑ"), std::string("cʑ") },
-    { std::string("昌"), std::string("tsyh"), std::string("tɕʰ"), std::string("cɕ"), std::string("cɕ"), std::string("cɕ") },
-    { std::string("禪"), std::string("dzy"), std::string("ʑ"), std::string("ɟʑ"), std::string("ɟʑ"), std::string("ɟ̤ʑ") },
-    { std::string("日"), std::string("ny"), std::string("nʑ"), std::string("ɲ"), std::string("ɲ"), std::string("ɲɟʑ") },
-    { std::string("書"), std::string("sy"), std::string("ɕ"), std::string("ɕ"), std::string("ɕ"), std::string("ɕ") },
-    { std::string("船"), std::string("zy"), std::string("dʑʰ"), std::string("ɟʑ"), std::string("ʑ"), std::string("ʑ̤") },
-    { std::string("以"), std::string("y"), std::string("j"), std::string("j"), std::string("j"), std::string("j") },
-    { std::string("見"), std::string("k"), std::string("k"), std::string("k"), std::string("k"), std::string("k") },
-    { std::string("溪"), std::string("kh"), std::string("kʰ"), std::string("kh"), std::string("kh"), std::string("kh") },
-    { std::string("群"), std::string("g"), std::string("gʰ"), std::string("g"), std::string("g"), std::string("g̤") },
-    { std::string("疑"), std::string("ng"), std::string("ŋ"), std::string("ŋ"), std::string("ŋ"), std::string("ŋg") },
-    { std::string("影"), std::string("'"), std::string("ʔ"), std::string("ʔ"), std::string("ʔ"), std::string("ʔ") },
-    { std::string("曉"), std::string("x"), std::string("x"), std::string("h"), std::string("x"), std::string("x") },
-    { std::string("匣"), std::string("h"), std::string("ɣ"), std::string("ɦ"), std::string("ɣ"), std::string("ɣ̤") },
-    { std::string("云"), std::string("hj"), std::string(""), std::string("ɦ"), std::string("w"), std::string("ɦ") } };
+    { std::string("端"), std::string("t"), std::string("t"), std::nullopt, std::string("t"), std::string("t"), std::string("t") },
+    { std::string("透"), std::string("th"), std::string("tʰ"), std::nullopt, std::string("th"), std::string("th"), std::string("th") },
+    { std::string("定"), std::string("d"), std::string("dʰ"), std::nullopt, std::string("d"), std::string("d"), std::string("d̤") },
+    { std::string("泥"), std::string("n"), std::string("n"), std::nullopt, std::string("n"), std::string("n"), std::string("nd") },
+    { std::string("來"), std::string("l"), std::string("l"), αβ::β, std::string("l"), std::string("l"), std::string("l") },
+    { std::string("知"), std::string("tr"), std::string("ţ"), αβ::β, std::string("t"), std::string("ʈ"), std::string("ʈ") },
+    { std::string("徹"), std::string("trh"), std::string("ţʰ"), αβ::β, std::string("th"), std::string("ʈh"), std::string("ʈh") },
+    { std::string("澄"), std::string("dr"), std::string("ɖʰ"), αβ::β, std::string("d"), std::string("ɖ"), std::string("ɖ̤") },
+    { std::string("娘"), std::string("nr"), std::string("ɳ"), αβ::β, std::string("n"), std::string("ɳ"), std::string("ɳɖ") },
+    { std::string("精"), std::string("ts"), std::string("ts"), αβ::α, std::string("tz"), std::string("tz"), std::string("tz") },
+    { std::string("清"), std::string("tsh"), std::string("tsʰ"), αβ::α, std::string("ts"), std::string("ts"), std::string("ts") },
+    { std::string("從"), std::string("dz"), std::string("dzʰ"), αβ::α, std::string("dz"), std::string("dz"), std::string("d̤z") },
+    { std::string("心"), std::string("s"), std::string("s"), αβ::α, std::string("s"), std::string("s"), std::string("s") },
+    { std::string("邪"), std::string("z"), std::string("z"), αβ::α, std::string("dz"), std::string("z"), std::string("z̤") },
+    { std::string("莊"), std::string("tsr"), std::string("ʧ"), αβ::β, std::string("ʈʐ"), std::string("ʈʐ"), std::string("ʈʐ") },
+    { std::string("初"), std::string("tsrh"), std::string("ʧʰ"), αβ::β, std::string("ʈʂ"), std::string("ʈʂ"), std::string("ʈʂ") },
+    { std::string("崇"), std::string("dzr"), std::string("dʒʰ"), αβ::β, std::string("ɖʐ"), std::string("ɖʐ"), std::string("ɖ̤ʐ") },
+    { std::string("生"), std::string("sr"), std::string("ʃ"), αβ::β, std::string("ʂ"), std::string("ʂ"), std::string("ʂ") },
+    { std::string("俟"), std::string("zr"), std::string("dʐʰ"), αβ::β, std::string("ɖʐ"), std::string("ʐ"), std::string("ʐ") }, // merged with 崇 in 廣韻
+    { std::string("章"), std::string("tsy"), std::string("tɕ"), αβ::α, std::string("cʑ"), std::string("cʑ"), std::string("cʑ") },
+    { std::string("昌"), std::string("tsyh"), std::string("tɕʰ"), αβ::α, std::string("cɕ"), std::string("cɕ"), std::string("cɕ") },
+    { std::string("禪"), std::string("dzy"), std::string("ʑ"), αβ::α, std::string("ɟʑ"), std::string("ɟʑ"), std::string("ɟ̤ʑ") },
+    { std::string("日"), std::string("ny"), std::string("nʑ"), αβ::α, std::string("ɲ"), std::string("ɲ"), std::string("ɲɟʑ") },
+    { std::string("書"), std::string("sy"), std::string("ɕ"), αβ::α, std::string("ɕ"), std::string("ɕ"), std::string("ɕ") },
+    { std::string("船"), std::string("zy"), std::string("dʑʰ"), αβ::α, std::string("ɟʑ"), std::string("ʑ"), std::string("ʑ̤") },
+    { std::string("以"), std::string("y"), std::string("j"), αβ::α, std::string("j"), std::string("j"), std::string("j") }, // written as 羊 in 陳以信's paper
+    { std::string("見"), std::string("k"), std::string("k"), αβ::αβ, std::string("k"), std::string("k"), std::string("k") },
+    { std::string("溪"), std::string("kh"), std::string("kʰ"), αβ::αβ, std::string("kh"), std::string("kh"), std::string("kh") },
+    { std::string("群"), std::string("g"), std::string("gʰ"), αβ::αβ, std::string("g"), std::string("g"), std::string("g̤") },
+    { std::string("疑"), std::string("ng"), std::string("ŋ"), αβ::αβ, std::string("ŋ"), std::string("ŋ"), std::string("ŋg") },
+    { std::string("影"), std::string("'"), std::string("ʔ"), αβ::αβ, std::string("ʔ"), std::string("ʔ"), std::string("ʔ") },
+    { std::string("曉"), std::string("x"), std::string("x"), αβ::αβ, std::string("h"), std::string("x"), std::string("x") },
+    { std::string("匣"), std::string("h"), std::string("ɣ"), std::nullopt, std::string("ɦ"), std::string("ɣ"), std::string("ɣ̤") },
+    { std::string("云"), std::string("hj"), std::string(""), αβ::β, std::string("ɦ"), std::string("w"), std::string("ɦ") } };
 // { std::string("矣"), std::string("hj"), std::string(""), std::string("ɦ"), std::string("ʜ"), std::string("ɦ") }
 enum class mc_攝 {
     通, 江, 止, 遇, 蟹, 臻, 山, 效, 果, 假, 宕, 梗, 流, 深, 咸, 曾 };
@@ -409,7 +412,7 @@ std::string predict_prelmc(uint8_t init, uint8_t fina, uint8_t 四聲) {
     using namespace std;
     string initial = mc_initial_data[init].中唐長安.elsewhere;
     string final = mc_final_data[fina].prelmc.elsewhere;
-    bool α = mc_final_data[fina].prelmc_α && std::unordered_set<uint8_t>{13, 14, 15, 16, 17, 23, 24, 25, 27, 28, 26, 29}.count(init);
+    bool α = mc_final_data[fina].prelmc_α && mc_initial_data[init].αβ == αβ::α;
     if (mc_initial_data[init].中唐長安.triggered && mc_final_data[fina].prelmc.F && !(init == 3 && (mc_final_data[fina].韻圖.韻部 == mc_韻部::東B || mc_final_data[fina].韻圖.韻部 == mc_韻部::尤))) {
         initial = *mc_initial_data[init].中唐長安.triggered;
         final = α ? *mc_final_data[fina].prelmc_α->F : *mc_final_data[fina].prelmc.F; }
