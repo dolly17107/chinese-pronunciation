@@ -174,7 +174,7 @@ static std::vector<mc_final_class> const mc_final_data{
     {"嬀𪎮逶虧危毀委跪詭硊跪䞈餧僞毀", { mc_韻部::支, 5, 1, 0 }, "jwe", "ĭwe", {"wɯj", "wɯj"}},
     {"祇卑陴彌詑𤿎𢔌渳婢諀企枳避臂譬企縊馶", { mc_韻部::支, 6, 0, 0 }, "jie", "ĭe", {"ij", "ij"}},
     {"隓闚𩓸跬觖恚瞡孈", { mc_韻部::支, 6, 1, 0 }, "jwie", "ĭwe", {"wij", "wij"}},
-    {"脂姨師咨鴟絺郪茨尼墀私尸棃胝旨視兕𡛷矢雉死履柅黹𡳭𧿲至嗜利膩致緻杘二恣次四地肄示自痓屍", { mc_韻部::脂, 3, 0, 0 }, "ij", "i", {"ɯj", "ɯj"}, {{"ij", "ij"}}},
+    {"脂姨師咨鴟絺郪茨尼墀私尸棃胝旨視兕𡛷矢雉死履柅黹𡳭𧿲至嗜利膩致緻杘二恣次四地肄示自痓屍", { mc_韻部::脂, 3, 0, 0 }, "ij", "i", {"ɯj", "ɯj"}, {{"ij", "ij"}}}, // FIXME: Is 地 α or β?
     {"追蕤衰惟㶟綏錐誰帷鎚推嶉洧水壘趡㠑蕊唯濢位遂醉邃類帥翠萃墜出遺轛㿷㽷", { mc_韻部::脂, 3, 1, 0 }, "wij", "wi", {"wɯj", "wɯj"}, {{"wij", "wij"}}},
     {"飢鬐眉悲邳丕狋美鄙几否嚭㰻跽郿祕濞備劓冀臮懿器齂", { mc_韻部::脂, 5, 0, 0 }, "ij", "i", {"ɯj", "ɯj"}},
     {"龜逵巋軌䣀巋匱媿喟豷", { mc_韻部::脂, 5, 1, 0 }, "wij", "wi", {"wɯj", "wɯj"}},
@@ -410,9 +410,9 @@ std::string predict_金陵(uint8_t init, uint8_t fina, uint8_t 四聲) {
     return add_diacritic(initial + medial + rhyme, tone); }
 std::string predict_prelmc(uint8_t init, uint8_t fina, uint8_t 四聲) {
     using namespace std;
-    string initial = mc_initial_data[init].中唐長安.elsewhere;
-    string final = mc_final_data[fina].prelmc.elsewhere;
     bool α = mc_final_data[fina].prelmc_α && mc_initial_data[init].αβ == αβ::α;
+    string initial = mc_initial_data[init].中唐長安.elsewhere;
+    string final = α ? mc_final_data[fina].prelmc_α->elsewhere : mc_final_data[fina].prelmc.elsewhere;
     if (mc_initial_data[init].中唐長安.triggered && mc_final_data[fina].prelmc.F && !(init == 3 && (mc_final_data[fina].韻圖.韻部 == mc_韻部::東B || mc_final_data[fina].韻圖.韻部 == mc_韻部::尤))) {
         initial = *mc_initial_data[init].中唐長安.triggered;
         final = α ? *mc_final_data[fina].prelmc_α->F : *mc_final_data[fina].prelmc.F; }
