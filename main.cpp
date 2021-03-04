@@ -160,7 +160,7 @@ void list_phonemes(emscripten::val ruby) {
 emscripten::val character_to_ruby(std::string character) {
     emscripten::val rb = create_element("grapheme-");
     rb.call<emscripten::val>("appendChild", create_text_node(character));
-    baxter_sagart_oc_entry const& entry = std::get<1>(*std::get<0>(bsoc_dictionary_by_字->equal_range(character)));
+    //baxter_sagart_oc_entry const& entry = std::get<1>(*std::get<0>(bsoc_dictionary_by_字->equal_range(character)));
     emscripten::val rt = create_element("phoneme-");
     rt.call<emscripten::val>("appendChild", create_text_node(std::get<0>(predict(character)[0])));
     rt.call<void>("addEventListener", std::string("focus"), js::bind([](emscripten::val event) {
@@ -178,7 +178,7 @@ emscripten::val character_to_ruby(std::string character) {
 emscripten::val text_to_rubys(std::string text) {
     emscripten::val fragment = emscripten::val::global("document").call<emscripten::val>("createDocumentFragment");
     for (utf8_iterator iterator(text); iterator.valid(); ) {
-        if (0 == bsoc_dictionary_by_字->count(std::string(*iterator))) {
+        if (0 == predict_count(std::string(*iterator))) {
             utf8_iterator begin = iterator;
             while (iterator.valid() && 0 == predict_count(std::string(*iterator))) {
                 ++iterator; }
