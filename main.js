@@ -157,9 +157,14 @@ Module.expectedDataFileDownloads++;
    "start": 0,
    "end": 268482,
    "audio": 0
+  }, {
+   "filename": "/sbgy",
+   "start": 268482,
+   "end": 1321579,
+   "audio": 0
   } ],
-  "remote_package_size": 268482,
-  "package_uuid": "5427946e-d8de-4c9e-99d9-0eb654cbf862"
+  "remote_package_size": 1321579,
+  "package_uuid": "146d90c9-cbd4-4eea-9667-97985303bef9"
  });
 })();
 
@@ -385,8 +390,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 879,
- "maximum": 879 + 0,
+ "initial": 885,
+ "maximum": 885 + 0,
  "element": "anyfunc"
 });
 
@@ -613,7 +618,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 56720, DYNAMIC_BASE = 5299600, DYNAMICTOP_PTR = 56544;
+var STACK_MAX = 57008, DYNAMIC_BASE = 5299888, DYNAMICTOP_PTR = 56832;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -901,7 +906,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8544: function($0, $1) {
+ 8800: function($0, $1) {
   const get_selected_dialect = requireHandle($1);
   get_selected_dialect();
   const rubyize_text = requireHandle($0);
@@ -940,7 +945,7 @@ var ASM_CONSTS = {
    reset_all_rubyizer();
   });
  },
- 10016: function() {
+ 10272: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -1004,7 +1009,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 12816: function() {
+ 13072: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1231,7 +1236,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 56704;
+ var thrownBuf = 56992;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1262,7 +1267,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 56704;
+ var thrownBuf = 56992;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];

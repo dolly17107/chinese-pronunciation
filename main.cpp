@@ -77,7 +77,8 @@ void get_selected_dialect() {
     selected_dialect = std::get<0>(*std::find_if(dialect_names.begin(), dialect_names.end(), [dialect_name](auto entry) { return dialect_name == std::get<1>(entry); })); }
 std::optional<std::vector<baxter_sagart_oc_entry>> bsoc_dictionary;
 std::optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>> bsoc_dictionary_by_字;
-/*std::optional<std::string> sbgy;*/
+std::optional<std::vector<sbgy_entry>> sbgy;
+std::optional<std::unordered_multimap<std::string, sbgy_entry>> sbgy_by_字;
 std::size_t predict_count(std::string character) {
     return bsoc_dictionary_by_字->count(character); }
 std::vector<std::tuple<std::string, std::string>> predict(std::string character) {
@@ -93,21 +94,21 @@ std::vector<std::tuple<std::string, std::string>> predict(std::string character)
         std::vector<std::tuple<std::string, std::string>> pron_list;
         std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
             baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
-            return std::make_tuple(predict_金陵(entry.mc_initial, entry.mc_final, entry.mc_四聲), entry.gloss); });
+            return std::make_tuple(predict_金陵(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); });
         return pron_list; }
     if (selected_dialect == dialect::北朝鄴) {
         auto er = bsoc_dictionary_by_字->equal_range(character);
         std::vector<std::tuple<std::string, std::string>> pron_list;
         std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
             baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
-            return std::make_tuple(predict_鄴(entry.mc_initial, entry.mc_final, entry.mc_四聲), entry.gloss); });
+            return std::make_tuple(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); });
         return pron_list; }
     if (selected_dialect == dialect::中唐長安) {
         auto er = bsoc_dictionary_by_字->equal_range(character);
         std::vector<std::tuple<std::string, std::string>> pron_list;
         std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
             baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
-            return std::make_tuple(predict_prelmc(entry.mc_initial, entry.mc_final, entry.mc_四聲), entry.gloss); });
+            return std::make_tuple(predict_prelmc(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); });
         return pron_list; }
     throw; }
 void select_phoneme(emscripten::val li) {
@@ -123,7 +124,7 @@ void list_phonemes(emscripten::val ruby) {
     std::for_each(er.first, er.second, [list](std::pair<std::string, baxter_sagart_oc_entry> const& entry_pair) {
         baxter_sagart_oc_entry const& entry = std::get<1>(entry_pair);
         emscripten::val span = create_element("span");
-        span.call<emscripten::val>("appendChild", create_text_node(predict_鄴(entry.mc_initial, entry.mc_final, entry.mc_四聲)));
+        span.call<emscripten::val>("appendChild", create_text_node(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲)));
         span.call<void>("addEventListener", std::string("click"), js::bind([](emscripten::val event) {
             select_phoneme(event["target"]); },
             std::placeholders::_1));
@@ -204,6 +205,10 @@ int main() {
     bsoc_dictionary_by_字 = std::make_optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>>();
     for (baxter_sagart_oc_entry const& entry : *bsoc_dictionary) {
         bsoc_dictionary_by_字->insert(make_pair(entry.字, entry)); }
+    sbgy = deserialize<std::vector<sbgy_entry>>(file_to_string("sbgy"));
+    sbgy_by_字 = std::make_optional<std::unordered_multimap<std::string, sbgy_entry>>();
+    for (sbgy_entry const& entry : *sbgy) {
+        sbgy_by_字->insert(make_pair(entry.字, entry)); }
     emscripten::val const rubyize_text_val = js::bind(rubyize_text, std::placeholders::_1);
     emscripten::val const get_selected_dialect_val = js::bind(get_selected_dialect);
     R"js(

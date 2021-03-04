@@ -172,9 +172,9 @@ static std::vector<mc_final_class> const mc_final_data{
     {"爲鬌𡍮羸吹隨眭䪎痿劑衰腄䮔䔺髓絫蔿觜蘂捶揣𤢍䓈惢菙惴爲累縋吹睡䄲䅗娷瓗諉", { mc_韻部::支, 3, 1, 0 }, "jwe", "ĭwe", {"wɯj", "wɯj"}, {{"wij", "wij"}}},
     {"糜鈹陂竒犧㩻宜皮羈漪靡彼被技倚掎綺螘㱟𪖪帔賁髲寄芰議倚戲㞆", { mc_韻部::支, 5, 0, 0 }, "je", "ĭe", {"ɯj", "ɯj"}},
     {"嬀𪎮逶虧危毀委跪詭硊跪䞈餧僞毀", { mc_韻部::支, 5, 1, 0 }, "jwe", "ĭwe", {"wɯj", "wɯj"}},
-    {"祇卑陴彌詑𤿎𢔌渳婢諀企枳避臂譬企縊馶", { mc_韻部::支, 6, 0, 0 }, "jie", "ĭe", {"ij", "ij"}},
+    {"祇𤰞陴彌詑𤿎𢔌渳婢諀企枳避臂譬企縊馶", { mc_韻部::支, 6, 0, 0 }, "jie", "ĭe", {"ij", "ij"}},
     {"隓闚𩓸跬觖恚瞡孈", { mc_韻部::支, 6, 1, 0 }, "jwie", "ĭwe", {"wij", "wij"}},
-    {"脂姨師咨鴟絺郪茨尼墀私尸棃胝旨視兕𡛷矢雉死履柅黹𡳭𧿲至嗜利膩致緻杘二恣次四地肄示自痓屍", { mc_韻部::脂, 3, 0, 0 }, "ij", "i", {"ɯj", "ɯj"}, {{"ij", "ij"}}}, // FIXME: Is 地 α or β?
+    {"脂姨師咨鴟絺郪茨尼墀私尸棃胝旨視兕𡛷矢雉死履柅黹𡳭𧿲至嗜利膩𦤶緻杘二恣次四地肄示自痓屍", { mc_韻部::脂, 3, 0, 0 }, "ij", "i", {"ɯj", "ɯj"}, {{"ij", "ij"}}}, // FIXME: Is 地 α or β?
     {"追蕤衰惟㶟綏錐誰帷鎚推嶉洧水壘趡㠑蕊唯濢位遂醉邃類帥翠萃墜出遺轛㿷㽷", { mc_韻部::脂, 3, 1, 0 }, "wij", "wi", {"wɯj", "wɯj"}, {{"wij", "wij"}}},
     {"飢鬐眉悲邳丕狋美鄙几否嚭㰻跽郿祕濞備劓冀臮懿器齂", { mc_韻部::脂, 5, 0, 0 }, "ij", "i", {"ɯj", "ɯj"}},
     {"龜逵巋軌䣀巋匱媿喟豷", { mc_韻部::脂, 5, 1, 0 }, "wij", "wi", {"wɯj", "wɯj"}},
@@ -190,8 +190,8 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::泰, 1, 1, 0 }, "waj", "uɑi", {"wɑj", "wɑj"}},
     {"", { mc_韻部::齊, 4, 0, 0 }, "ej", "iei", {"iej", "iej"}},
     {"", { mc_韻部::齊, 4, 1, 0 }, "wej", "iwei", {"wiej", "wiej"}},
-    {"祭㡜掣制逝曵滯例丗㿃跇", { mc_韻部::祭, 3, 0, 0 }, "jej", "ĭɛi", {"ej", "ej"}, {{"iej", "iej"}}},
-    {"歲衞芮贅𠻜毳銳綴稅㯔篲啜𨮱蕝", { mc_韻部::祭, 3, 1, 0 }, "jwej", "ĭwɛi", {"wej", "wej"}, {{"wiej", "wiej"}}},
+    {"祭㡜掣制逝曳滯例丗㿃跇", { mc_韻部::祭, 3, 0, 0 }, "jej", "ĭɛi", {"ej", "ej"}, {{"iej", "iej"}}},
+    {"歳衞芮贅𠻜毳銳綴稅㯔篲啜𨮱蕝", { mc_韻部::祭, 3, 1, 0 }, "jwej", "ĭwɛi", {"wej", "wej"}, {{"wiej", "wiej"}}},
     {"䋵憩猘偈㓷", { mc_韻部::祭, 5, 0, 0 }, "jej", "ĭɛi", {"ej", "ej"}},
     {"劌", { mc_韻部::祭, 5, 1, 0 }, "jwej", "ĭwɛi", {"wej", "wej"}},
     {"𡚁蔽袂藝潎", { mc_韻部::祭, 6, 0, 0 }, "jiej", "ĭɛi", {"iej", "iej"}},
@@ -208,10 +208,10 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::廢, 3, 1, 0 }, "jwoj", "ĭwɐi", {"wej", "wej", "ej"}},
     // The Qièyùn has a single rhyme 真 Zhēn that the Guǎngyùn split into two rhymes, 真 Zhēn and 諄 Zhūn. The general pattern in the Guǎngyùn is that words with -in and grave-initial words with the division-III chóngniǔ final -win are included in 真 Zhēn, while acute-initial words in -win and division-IV chóngniǔ words in -jwin are placed in 諄 Zhūn
     {"眞𤣆新辰仁神親礥申㷠珍陳津瞋秦寅紉軫辴腎忍矤嶙紖盡㯸笉引濜屒震信刃𦙍遴敶愼眒賮晉鎭疢親", { mc_韻部::眞, 3, 0, 0 }, "in", "ĭĕn", {"ɯn", "ɯn"}, {{"in", "in"}}},
-    {"質日實秩悉七暱逸抶栗窒疾失堲叱蛭", { mc_韻部::眞, 3, 0, 1 }, "it", "ĭĕt", {"ɯt", "ɯt"}, {{"it", "it"}}},
+    {"質日實秩悉七暱逸抶栗窒疾失堲𠮟蛭", { mc_韻部::眞, 3, 0, 1 }, "it", "ĭĕt", {"ɯt", "ɯt"}, {{"it", "it"}}},
     {"筠殞諄椿䣩荀純犉脣淪屯逡遵春鷷勻旬準尹筍蝡蠢盾偆耣𣯍賰稕𡺲殉儁舜閠順", { mc_韻部::眞, 3, 1, 0 }, "win", "ĭuĕn" /*ĭwĕn for 筠殞*/, {"wɯn", "wɯn"}, {{"win", "win"}}},
     {"䫻率茁術崒聿卒卹律黜㤕术出焌𠭴", { mc_韻部::眞, 3, 1, 1 }, "wit", "ĭuĕt" /*ĭwĕt for 䫻*/, {"wɯt", "wɯt"}, {{"wit", "wit"}}},
-    {"𥎊銀巾珉貧𪔗彬砏愍菣憗衅僅", { mc_韻部::眞, 5, 0, 0 }, "in", "ĭĕn", {"ɯn", "ɯn"}},
+    {"𥎊銀巾珉貧𪔗彬砏愍菣憖衅僅", { mc_韻部::眞, 5, 0, 0 }, "in", "ĭĕn", {"ɯn", "ɯn"}},
     {"姞密弼乙耴筆肸曁", { mc_韻部::眞, 5, 0, 1 }, "it", "ĭĕt", {"ɯt", "ɯt"}},
     {"麏囷贇窘", { mc_韻部::眞, 5, 1, 0 }, "win", "ĭwĕn", {"wɯn", "wɯn"}},
     {"䎉", { mc_韻部::眞, 5, 1, 1 }, "wit", "ĭwĕt", {"wɯt", "wɯt"}},
@@ -251,20 +251,20 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::先, 4, 1, 1 }, "wet", "iwet", {"wiet", "wiet"}},
     {"仙錢遷煎然延𩜾邅潺羶脠鋋纏連㳄漹燀獮演踐展𦗢趁淺闡善翦蹨𦆀輦搌㒄邅棧線戰繕𩥇箭硟扇賤羨輾衍邅𤹨", { mc_韻部::仙, 3, 0, 0 }, "jen", "ĭɛn", {"en", "en"}, {{"ien", "ien"}}},
     {"薛列哲熱晢舌折轍設蠽榝屮㔍掣抴𨵊", { mc_韻部::仙, 3, 0, 1 }, "jet", "ĭɛt", {"et", "et"}, {{"iet", "iet"}}},
-    {"全宣鐫堧穿沿旋船詮專遄貟恮栓猭椽攣𡰝臇雋兖臠轉輭舛膞篆剸選撰瑗釧掾𤲬戀猭𨏉縓㳬選籑孨傳𢮨囀剸", { mc_韻部::仙, 3, 1, 0 }, "jwen", "ĭwɛn", {"wen", "wen"}, {{"wien", "wien"}}},
-    {"絕蕝雪𤿫悅爇說拙歠輟劣㕞呐茁膬啜㿱", { mc_韻部::仙, 3, 1, 1 }, "jwet", "ĭwɛt", {"wet", "wet"}, {{"wiet", "wiet"}}},
-    {"乾愆焉蹇齴件辯辡免鴘㫃彥變卞", { mc_韻部::仙, 5, 0, 0 }, "jen", "ĭɛn", {"en", "en"}},
-    {"傑孼朅别䇷孑焆娎", { mc_韻部::仙, 5, 0, 1 }, "jet", "ĭɛt", {"et", "et"}},
+    {"全宣鐫堧穿沿旋船詮專遄貟恮栓猭椽攣𡰝臇雋兖臠轉輭舛膞篆剸選撰瑗釧掾𤲬戀猭𨏉縓㳬選䉵孨傳𢮨囀剸", { mc_韻部::仙, 3, 1, 0 }, "jwen", "ĭwɛn", {"wen", "wen"}, {{"wien", "wien"}}},
+    {"絕蕝雪𤿫恱𤑔說拙歠輟劣㕞呐茁膬啜㿱", { mc_韻部::仙, 3, 1, 1 }, "jwet", "ĭwɛt", {"wet", "wet"}, {{"wiet", "wiet"}}},
+    {"乾愆焉蹇齴件辯辡免鴘㫃彦變卞", { mc_韻部::仙, 5, 0, 0 }, "jen", "ĭɛn", {"en", "en"}},
+    {"傑孼朅別䇷𡤼焆娎", { mc_韻部::仙, 5, 0, 1 }, "jet", "ĭɛt", {"et", "et"}},
     {"權弮嬽勬卷圈眷倦𥛁", { mc_韻部::仙, 5, 1, 0 }, "jwen", "ĭwɛn", {"wen", "wen"}},
     {"噦𥄎蹶", { mc_韻部::仙, 5, 1, 1 }, "jwet", "ĭwɛt", {"wet", "wet"}},
     {"甄嘕篇便緜鞭遣緬褊楩譴面躽騗便", { mc_韻部::仙, 6, 0, 0 }, "jien", "ĭɛn", {"ien", "ien"}},
     {"滅鷩瞥", { mc_韻部::仙, 6, 0, 1 }, "jiet", "ĭɛt", {"iet", "iet"}},
-    {"翾娟蜎蠉絹", { mc_韻部::仙, 6, 1, 0 }, "jwien", "ĭwɛn", {"wien", "wien"}},
+    {"翾姢蜎蠉絹", { mc_韻部::仙, 6, 1, 0 }, "jwien", "ĭwɛn", {"wien", "wien"}},
     {"缺妜", { mc_韻部::仙, 6, 1, 1 }, "jwiet", "ĭwɛt", {"wiet", "wiet"}},
     {"", { mc_韻部::蕭, 4, 0, 0 }, "ew", "ieu", {"iew", "iew"}},
-    {"宵超朝𪓙樵焦饒燒遙韶昭鴞鍫怊燎小肇沼巐少擾𪍑紹鷕悄𠞰繚𥬇照燿召邵噍陗𤊽醮少朓饒", { mc_韻部::宵, 3, 0, 0 }, "jew", "ĭɛu", {"ew", "ew"}, {{"iew", "iew"}}},
+    {"宵超朝⿱日黽樵焦饒燒遥韶昭鴞鍫怊燎小肈沼巐少擾𪍑紹鷕悄𠟿繚𥬇照燿召邵噍陗𤊽醮少脁饒", { mc_韻部::宵, 3, 0, 0 }, "jew", "ĭɛu", {"ew", "ew"}, {{"iew", "iew"}}},
     {"嚻驕鑣苗喬妖趫夭矯表藨𨲭麃嶠趬𧇠廟裱", { mc_韻部::宵, 5, 0, 0 }, "jew", "ĭɛu", {"ew", "ew"}},
-    {"飊瓢蜱要蹻爂翹摽縹眇褾闄要剽妙驃翹", { mc_韻部::宵, 6, 0, 0 }, "jiew", "ĭɛu", {"iew", "iew"}},
+    {"飊瓢蜱要蹻𤐫翹摽縹眇褾闄要剽妙驃翹", { mc_韻部::宵, 6, 0, 0 }, "jiew", "ĭɛu", {"iew", "iew"}},
     {"", { mc_韻部::肴, 2, 0, 0 }, "aew", "au", {"æw", "æw"}},
     {"", { mc_韻部::豪, 1, 0, 0 }, "aw", "ɑu", {"ɑw", "ɑw"}},
     {"", { mc_韻部::歌A, 1, 0, 0 }, "a", "ɑ", {"ɑ", "ɑ"}},
@@ -298,14 +298,14 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::耕, 2, 0, 1 }, "eak", "æk", {"æc", "æc"}},
     {"", { mc_韻部::耕, 2, 1, 0 }, "weang", "wæŋ", {"wæ̃j", "wæ̃j"}},
     {"", { mc_韻部::耕, 2, 1, 1 }, "weak", "wæk", {"wæc", "wæc"}},
-    {"", { mc_韻部::清, 3, 0, 0 }, "jeng", "ĭɛŋ", {"ẽj", "ẽj"}},
-    {"", { mc_韻部::清, 3, 0, 1 }, "jek", "ĭɛk", {"ec", "ec"}},
-    {"", { mc_韻部::清, 3, 1, 0 }, "jweng", "ĭwɛŋ", {"wẽj", "wẽj"}},
-    {"", { mc_韻部::清, 3, 1, 1 }, "jwek", "ĭwɛk", {"wec", "wec"}},
-    {"", { mc_韻部::清, 6, 0, 0 }, "jieng", "ĭɛŋ", {"iẽj", "iẽj"}},
-    {"", { mc_韻部::清, 6, 0, 1 }, "jiek", "ĭɛk", {"iec", "iec"}},
-    {"", { mc_韻部::清, 6, 1, 0 }, "jwieng", "ĭwɛŋ", {"wiẽj", "wiẽj"}},
-    {"", { mc_韻部::清, 6, 1, 1 }, "jwiek", "ĭwɛk", {"wiec", "wiec"}},
+    {"淸情精盈貞檉成呈聲征跉𩛿靜整逞郢領丼請省徎倩政聖鄭遉性令淨盛精", { mc_韻部::清, 3, 0, 0 }, "jeng", "ĭɛŋ", {"ẽj", "ẽj"}},
+    {"昔積繹釋尺石隻擲皵席籍麝𪐏彳", { mc_韻部::清, 3, 0, 1 }, "jek", "ĭɛk", {"ec", "ec"}},
+    {"營騂潁", { mc_韻部::清, 3, 1, 0 }, "jweng", "ĭwɛŋ", {"wẽj", "wẽj"}},
+    {"役𦳮𥄎", { mc_韻部::清, 3, 1, 1 }, "jwek", "ĭwɛk", {"wec", "wec"}},
+    {"嬰輕名并頸痙頸餅廮眳勁聘摒偋詺輕𣢝", { mc_韻部::清, 6, 0, 0 }, "jieng", "ĭɛŋ", {"iẽj", "iẽj"}},
+    {"益擗辟僻", { mc_韻部::清, 6, 0, 1 }, "jiek", "ĭɛk", {"iec", "iec"}},
+    {"傾縈瓊𧵣頃夐", { mc_韻部::清, 6, 1, 0 }, "jwieng", "ĭwɛŋ", {"wiẽj", "wiẽj"}},
+    {"瞁", { mc_韻部::清, 6, 1, 1 }, "jwiek", "ĭwɛk", {"wiec", "wiec"}}, // 碧 is 清 重紐三等
     {"", { mc_韻部::青, 4, 0, 0 }, "eng", "ieŋ", {"iẽj", "iẽj"}},
     {"", { mc_韻部::青, 4, 0, 1 }, "ek", "iek", {"iec", "iec"}},
     {"", { mc_韻部::青, 4, 1, 0 }, "weng", "iweŋ", {"wiẽj", "wiẽj"}},
@@ -315,7 +315,7 @@ static std::vector<mc_final_class> const mc_final_data{
     {"", { mc_韻部::幽, 6, 0, 0 }, "jiw", "iəu", {"iw", "iw"}},
     {"侵尋林琛斟沈碪諶任深淫心祲𩷒䛘森岑兂嵾𧡪寑朕廩罧踸䤐荏枕沈葚甚瀋墋拰蕈㾕戡潭𩒣沁浸妊鴆枕賃滲闖譖讖揕臨甚䫴深", { mc_韻部::侵, 3, 1, 0 }, "im", "ĭĕm", {"ɯm", "ɯm"}, {{"im", "im"}}},
     {"緝十執習集入溼㗱蟄縶立𩎕歰戢湁煜熠孨霵㞚卙", { mc_韻部::侵, 3, 1, 1 }, "ip", "ĭĕp", {"ɯp", "ɯp"}, {{"ip", "ip"}}},
-    {"琴欽吟歆金音噤錦僸稟㱃品𩖄廞𦧈禁蔭吟", { mc_韻部::侵, 5, 1, 0 }, "im", "ĭĕm", {"ɯm", "ɯm"}},
+    {"琴欽吟歆金音噤錦僸稟㱃品𩖄廞𦧈禁䕃吟", { mc_韻部::侵, 5, 1, 0 }, "im", "ĭĕm", {"ɯm", "ɯm"}},
     {"及急岌泣吸邑𩾳鵖", { mc_韻部::侵, 5, 1, 1 }, "ip", "ĭĕp", {"ɯp", "ɯp"}},
     {"愔坅", { mc_韻部::侵, 6, 1, 0 }, "jim", "ĭĕm", {"im", "im"}},
     {"揖", { mc_韻部::侵, 6, 1, 1 }, "jip", "ĭĕp", {"ip", "ip"}},
@@ -352,21 +352,44 @@ std::array<四聲_class, 4> 四聲_classes = {{
     {"X", {"˥", "˥"}, "\xcc\x81"},
     {"H", {"˩˥", "˩˥"}, "\xcc\x80"},
     {"", {"", ""}, ""}}};
+struct mc_syllable {
+    uint8_t initial;
+    uint8_t final;
+    uint8_t 四聲;
+    template<class archive>
+    void serialize(archive& ar) {
+        ar(initial);
+        ar(final);
+        ar(四聲); } };
 struct baxter_sagart_oc_entry {
-    std::string gloss;
     std::string oc_str;
-    uint8_t mc_initial;
-    uint8_t mc_final;
-    uint8_t mc_四聲;
+    mc_syllable mc_pron;
     std::string 字;
+    std::string gloss;
+    template<class archive>
+    void serialize(archive& ar) {
+        ar(oc_str);
+        ar(mc_pron);
+        ar(字);
+        ar(gloss); } };
+struct sbgy_entry {
+    mc_syllable mc_pron;
+    std::string 字;
+    std::string gloss;
+    template<class archive>
+    void serialize(archive& ar) {
+        ar(mc_pron);
+        ar(字);
+        ar(gloss); } };
+/*struct dictionary_entry {
+    std::string gloss;
+    std::variant<std::tuple<std::string, mc_syllable>, mc_syllable> pron;
+    std::string character;
     template<class archive>
     void serialize(archive& ar) {
         ar(gloss);
-        ar(oc_str);
-        ar(mc_initial);
-        ar(mc_final);
-        ar(mc_四聲);
-        ar(字); } };
+        ar(pron);
+        ar(character); } };*/
 std::string to_入聲(std::string fina) {
     using namespace std;
     if (std::string("m") == fina.substr(fina.size() + -std::string("m").size(), std::string("m").size())) {
@@ -383,9 +406,7 @@ std::string add_diacritic(std::string segmental, std::string diacritic) {
         if (pos != std::string::npos) {
             segmental.insert(pos + vowels[i].size(), diacritic);
             return segmental; } }
-    return "????";
-    std::regex vowel("ɔ|ɐ|œ|ɛ|o|ʏ|ə|ø|ɪ|e|u|ʉ|y|i");
-    return std::regex_replace(segmental, vowel, "$0" + diacritic); }
+    return "????"; }
 std::string predict_鄴(uint8_t init, uint8_t fina, uint8_t 四聲) {
     using namespace std;
     string initial = mc_initial_data[init].鄴;
