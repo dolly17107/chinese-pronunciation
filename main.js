@@ -160,11 +160,11 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/sbgy",
    "start": 268482,
-   "end": 1321579,
+   "end": 1309936,
    "audio": 0
   } ],
-  "remote_package_size": 1321579,
-  "package_uuid": "098be4cb-b84a-44c9-b1b4-226b69d2b859"
+  "remote_package_size": 1309936,
+  "package_uuid": "aab4a65b-38da-4ecc-b08d-dd3c6dd4822a"
  });
 })();
 
