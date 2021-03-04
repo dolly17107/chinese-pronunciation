@@ -164,7 +164,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 1321579,
-  "package_uuid": "146d90c9-cbd4-4eea-9667-97985303bef9"
+  "package_uuid": "098be4cb-b84a-44c9-b1b4-226b69d2b859"
  });
 })();
 
@@ -390,8 +390,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 885,
- "maximum": 885 + 0,
+ "initial": 887,
+ "maximum": 887 + 0,
  "element": "anyfunc"
 });
 
@@ -6011,11 +6011,11 @@ function intArrayFromString(stringy, dontAddNull, length) {
 var asmLibraryArg = {
  "x": ___cxa_allocate_exception,
  "w": ___cxa_begin_catch,
- "H": ___cxa_end_catch,
+ "I": ___cxa_end_catch,
  "d": ___cxa_find_matching_catch_2,
  "i": ___cxa_find_matching_catch_3,
  "F": ___cxa_free_exception,
- "K": ___cxa_rethrow,
+ "H": ___cxa_rethrow,
  "v": ___cxa_throw,
  "Ga": ___cxa_uncaught_exceptions,
  "b": ___handle_stack_overflow,
@@ -6043,7 +6043,7 @@ var asmLibraryArg = {
  "M": __emval_get_global,
  "ta": __emval_get_method_caller,
  "sa": __emval_get_property,
- "J": __emval_incref,
+ "K": __emval_incref,
  "E": __emval_new_cstring,
  "ra": __emval_run_destructors,
  "qa": __emval_set_property,
@@ -6070,7 +6070,7 @@ var asmLibraryArg = {
  "B": invoke_iiiiiii,
  "Y": invoke_iiiiiiii,
  "t": invoke_iiiiiiiiiii,
- "I": invoke_iiiiiiiiiiii,
+ "J": invoke_iiiiiiiiiiii,
  "D": invoke_iiiiiiiiiiiii,
  "ia": invoke_iiji,
  "ha": invoke_jiiii,

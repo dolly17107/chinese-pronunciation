@@ -80,35 +80,61 @@ std::optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>> bsoc
 std::optional<std::vector<sbgy_entry>> sbgy;
 std::optional<std::unordered_multimap<std::string, sbgy_entry>> sbgy_by_字;
 std::size_t predict_count(std::string character) {
-    return bsoc_dictionary_by_字->count(character); }
+    if (selected_dialect == dialect::周) {
+        return bsoc_dictionary_by_字->count(character); }
+    if (selected_dialect == dialect::南朝金陵) {
+        return bsoc_dictionary_by_字->count(character) + sbgy_by_字->count(character); }
+    if (selected_dialect == dialect::北朝鄴) {
+        return bsoc_dictionary_by_字->count(character) + sbgy_by_字->count(character); }
+    if (selected_dialect == dialect::中唐長安) {
+        return bsoc_dictionary_by_字->count(character) + sbgy_by_字->count(character); }
+    throw; }
 std::vector<std::tuple<std::string, std::string>> predict(std::string character) {
     if (selected_dialect == dialect::周) {
-        auto er = bsoc_dictionary_by_字->equal_range(character);
         std::vector<std::tuple<std::string, std::string>> pron_list;
+        auto er = bsoc_dictionary_by_字->equal_range(character);
         std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
             baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
             return std::make_tuple(entry.oc_str, entry.gloss); });
         return pron_list; }
     if (selected_dialect == dialect::南朝金陵) {
-        auto er = bsoc_dictionary_by_字->equal_range(character);
         std::vector<std::tuple<std::string, std::string>> pron_list;
-        std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-            baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
-            return std::make_tuple(predict_金陵(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); });
+        {
+            auto er = bsoc_dictionary_by_字->equal_range(character);
+            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
+                baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_金陵(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
+        {
+            auto er = sbgy_by_字->equal_range(character);
+            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
+                sbgy_entry entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_金陵(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
         return pron_list; }
     if (selected_dialect == dialect::北朝鄴) {
-        auto er = bsoc_dictionary_by_字->equal_range(character);
         std::vector<std::tuple<std::string, std::string>> pron_list;
-        std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-            baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
-            return std::make_tuple(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); });
+        {
+            auto er = bsoc_dictionary_by_字->equal_range(character);
+            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
+                baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
+        {
+            auto er = sbgy_by_字->equal_range(character);
+            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
+                sbgy_entry entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
         return pron_list; }
     if (selected_dialect == dialect::中唐長安) {
-        auto er = bsoc_dictionary_by_字->equal_range(character);
         std::vector<std::tuple<std::string, std::string>> pron_list;
-        std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-            baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
-            return std::make_tuple(predict_prelmc(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); });
+        {
+            auto er = bsoc_dictionary_by_字->equal_range(character);
+            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
+                baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_prelmc(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
+        {
+            auto er = sbgy_by_字->equal_range(character);
+            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
+                sbgy_entry entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_prelmc(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
         return pron_list; }
     throw; }
 void select_phoneme(emscripten::val li) {
