@@ -164,7 +164,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 1309936,
-  "package_uuid": "a6bc984a-3866-47b0-95ce-69abc8897098"
+  "package_uuid": "3fb0bda8-e7fb-4f48-8679-47462f84c99d"
  });
 })();
 
@@ -390,8 +390,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 887,
- "maximum": 887 + 0,
+ "initial": 886,
+ "maximum": 886 + 0,
  "element": "anyfunc"
 });
 

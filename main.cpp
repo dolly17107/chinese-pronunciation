@@ -190,7 +190,7 @@ emscripten::val text_to_rubys(std::string text) {
 void rubyize_text(emscripten::val text) {
     std::string str = text["data"].as<std::string>();
     utf8_iterator alphanumeric_start(str);
-    while (alphanumeric_start.valid() && 0 == bsoc_dictionary_by_字->count(std::string(*alphanumeric_start))) {
+    while (alphanumeric_start.valid() && 0 == predict_count(std::string(*alphanumeric_start))) {
         ++alphanumeric_start; }
     if (alphanumeric_start.valid()) {
         text.call<void>("replaceWith", text_to_rubys(str)); } }
