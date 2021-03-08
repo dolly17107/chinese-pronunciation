@@ -1,11 +1,10 @@
 .*/*
 BaxterSagartOC2015-10-13
 BaxterSagartOC2015-10-13.xlsx
-load_bsoc.cpp
 load_bsoc.exe
 xlnt.*
 sbgy
 sbgy.xml
-load_sbgy.cpp
 load_sbgy.exe
 pugi*
+compile_dictionary.exe

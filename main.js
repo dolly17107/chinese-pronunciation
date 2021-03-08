@@ -153,18 +153,13 @@ Module.expectedDataFileDownloads++;
  };
  loadPackage({
   "files": [ {
-   "filename": "/BaxterSagartOC2015-10-13",
+   "filename": "/dictionary",
    "start": 0,
-   "end": 268482,
-   "audio": 0
-  }, {
-   "filename": "/sbgy",
-   "start": 268482,
-   "end": 1309936,
+   "end": 2125187,
    "audio": 0
   } ],
-  "remote_package_size": 1309936,
-  "package_uuid": "5a75df82-2596-4b09-aa7e-95f48e1dc26b"
+  "remote_package_size": 2125187,
+  "package_uuid": "ce7f2d8f-8406-4462-98ec-e50169e9c02c"
  });
 })();
 
@@ -390,8 +385,8 @@ if (typeof WebAssembly !== "object") {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 886,
- "maximum": 886 + 0,
+ "initial": 896,
+ "maximum": 896 + 0,
  "element": "anyfunc"
 });
 
@@ -618,7 +613,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 56944, DYNAMIC_BASE = 5299824, DYNAMICTOP_PTR = 56768;
+var STACK_MAX = 57152, DYNAMIC_BASE = 5300032, DYNAMICTOP_PTR = 56976;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -906,7 +901,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8800: function($0, $1) {
+ 8880: function($0, $1) {
   const get_selected_dialect = requireHandle($1);
   get_selected_dialect();
   const rubyize_text = requireHandle($0);
@@ -945,7 +940,7 @@ var ASM_CONSTS = {
    reset_all_rubyizer();
   });
  },
- 10272: function() {
+ 10352: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -1009,7 +1004,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 13072: function() {
+ 13152: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1236,7 +1231,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 56928;
+ var thrownBuf = 57136;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1267,7 +1262,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 56928;
+ var thrownBuf = 57136;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -6009,14 +6004,14 @@ function intArrayFromString(stringy, dontAddNull, length) {
 }
 
 var asmLibraryArg = {
- "x": ___cxa_allocate_exception,
- "w": ___cxa_begin_catch,
- "I": ___cxa_end_catch,
+ "v": ___cxa_allocate_exception,
+ "x": ___cxa_begin_catch,
+ "H": ___cxa_end_catch,
  "d": ___cxa_find_matching_catch_2,
  "i": ___cxa_find_matching_catch_3,
- "F": ___cxa_free_exception,
- "H": ___cxa_rethrow,
- "v": ___cxa_throw,
+ "C": ___cxa_free_exception,
+ "K": ___cxa_rethrow,
+ "u": ___cxa_throw,
  "Ga": ___cxa_uncaught_exceptions,
  "b": ___handle_stack_overflow,
  "Fa": ___map_file,
@@ -6032,7 +6027,7 @@ var asmLibraryArg = {
  "xa": __embind_register_emval,
  "ba": __embind_register_float,
  "z": __embind_register_integer,
- "u": __embind_register_memory_view,
+ "w": __embind_register_memory_view,
  "aa": __embind_register_std_string,
  "N": __embind_register_std_wstring,
  "wa": __embind_register_void,
@@ -6043,8 +6038,8 @@ var asmLibraryArg = {
  "M": __emval_get_global,
  "ta": __emval_get_method_caller,
  "sa": __emval_get_property,
- "K": __emval_incref,
- "E": __emval_new_cstring,
+ "J": __emval_incref,
+ "F": __emval_new_cstring,
  "ra": __emval_run_destructors,
  "qa": __emval_set_property,
  "pa": __emval_take_value,
@@ -6070,8 +6065,8 @@ var asmLibraryArg = {
  "B": invoke_iiiiiii,
  "Y": invoke_iiiiiiii,
  "t": invoke_iiiiiiiiiii,
- "J": invoke_iiiiiiiiiiii,
- "D": invoke_iiiiiiiiiiiii,
+ "I": invoke_iiiiiiiiiiii,
+ "E": invoke_iiiiiiiiiiiii,
  "ia": invoke_iiji,
  "ha": invoke_jiiii,
  "k": invoke_v,
@@ -6089,7 +6084,7 @@ var asmLibraryArg = {
  "S": invoke_viiiiiiiiiiii,
  "R": invoke_viiiiiiiiiiiii,
  "Q": invoke_viiiiiiiiiiiiii,
- "C": invoke_viiiiiiiiiiiiiii,
+ "D": invoke_viiiiiiiiiiiiiii,
  "P": invoke_viiiiiiiiiiiiiiii,
  "la": invoke_viiiiiiiiiiiiiiiii,
  "ga": invoke_viijii,

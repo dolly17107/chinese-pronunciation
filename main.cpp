@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <cereal/archives/binary.hpp>
 #include <cereal/types/string.hpp>
+#include <cereal/types/optional.hpp>
+#include <cereal/types/variant.hpp>
 #include <cereal/types/vector.hpp>
 #include <magic_enum.hpp>
 #include <buffer.h>
@@ -75,66 +77,51 @@ void get_selected_dialect() {
     std::string dialect_name = emscripten::val::global("document").call<emscripten::val>("querySelector", std::string("#dialect > [data-selected]"))["firstChild"]["data"].as<std::string>();
     auto dialect_names = magic_enum::enum_entries<dialect>();
     selected_dialect = std::get<0>(*std::find_if(dialect_names.begin(), dialect_names.end(), [dialect_name](auto entry) { return dialect_name == std::get<1>(entry); })); }
-std::optional<std::vector<bsoc_entry>> bsoc;
-std::optional<std::unordered_multimap<std::string, bsoc_entry>> bsoc_by_字;
-std::optional<std::vector<sbgy_entry>> sbgy;
-std::optional<std::unordered_multimap<std::string, sbgy_entry>> sbgy_by_字;
+std::optional<chinese_dictionary> dict;
+std::optional<std::unordered_multimap<std::string, morpheme_data>> oc_by_字;
+std::optional<std::unordered_multimap<std::string, morpheme_data>> mc_by_字;
 std::size_t predict_count(std::string character) {
     if (selected_dialect == dialect::周) {
-        return bsoc_by_字->count(character); }
+        return oc_by_字->count(character); }
     if (selected_dialect == dialect::南朝金陵) {
-        return bsoc_by_字->count(character) + sbgy_by_字->count(character); }
+        return mc_by_字->count(character); }
     if (selected_dialect == dialect::北朝鄴) {
-        return bsoc_by_字->count(character) + sbgy_by_字->count(character); }
+        return mc_by_字->count(character); }
     if (selected_dialect == dialect::中唐長安) {
-        return bsoc_by_字->count(character) + sbgy_by_字->count(character); }
+        return mc_by_字->count(character); }
     throw; }
 std::vector<std::tuple<std::string, std::string>> predict(std::string character) {
     if (selected_dialect == dialect::周) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
-        auto er = bsoc_by_字->equal_range(character);
-        std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-            bsoc_entry entry = std::get<1>(entry_pair);
-            return std::make_tuple(entry.oc_str, entry.gloss); });
+        {
+            auto er = oc_by_字->equal_range(character);
+            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
+                morpheme_data entry = std::get<1>(entry_pair);
+                return std::make_tuple(std::get<std::string>(entry.form.phoneme), entry.meaning); }); }
         return pron_list; }
     if (selected_dialect == dialect::南朝金陵) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
         {
-            auto er = bsoc_by_字->equal_range(character);
+            auto er = mc_by_字->equal_range(character);
             std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                bsoc_entry entry = std::get<1>(entry_pair);
-                return std::make_tuple(predict_金陵(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
-        {
-            auto er = sbgy_by_字->equal_range(character);
-            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                sbgy_entry entry = std::get<1>(entry_pair);
-                return std::make_tuple(predict_金陵(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
+                morpheme_data entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_金陵(std::get<mc_syllable>(entry.form.phoneme).initial, std::get<mc_syllable>(entry.form.phoneme).final, std::get<mc_syllable>(entry.form.phoneme).四聲), entry.meaning); }); }
         return pron_list; }
     if (selected_dialect == dialect::北朝鄴) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
         {
-            auto er = bsoc_by_字->equal_range(character);
+            auto er = mc_by_字->equal_range(character);
             std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                bsoc_entry entry = std::get<1>(entry_pair);
-                return std::make_tuple(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
-        {
-            auto er = sbgy_by_字->equal_range(character);
-            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                sbgy_entry entry = std::get<1>(entry_pair);
-                return std::make_tuple(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
+                morpheme_data entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_鄴(std::get<mc_syllable>(entry.form.phoneme).initial, std::get<mc_syllable>(entry.form.phoneme).final, std::get<mc_syllable>(entry.form.phoneme).四聲), entry.meaning); }); }
         return pron_list; }
     if (selected_dialect == dialect::中唐長安) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
         {
-            auto er = bsoc_by_字->equal_range(character);
+            auto er = mc_by_字->equal_range(character);
             std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                bsoc_entry entry = std::get<1>(entry_pair);
-                return std::make_tuple(predict_prelmc(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
-        {
-            auto er = sbgy_by_字->equal_range(character);
-            std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                sbgy_entry entry = std::get<1>(entry_pair);
-                return std::make_tuple(predict_prelmc(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
+                morpheme_data entry = std::get<1>(entry_pair);
+                return std::make_tuple(predict_prelmc(std::get<mc_syllable>(entry.form.phoneme).initial, std::get<mc_syllable>(entry.form.phoneme).final, std::get<mc_syllable>(entry.form.phoneme).四聲), entry.meaning); }); }
         return pron_list; }
     throw; }
 void select_phoneme(emscripten::val li) {
@@ -145,12 +132,12 @@ void select_phoneme(emscripten::val li) {
     list.call<void>("insertNode", text); }
 void list_phonemes(emscripten::val ruby) {
     std::string character = ruby["childNodes"][1]["firstChild"]["data"].as<std::string>();
-    auto er = bsoc_by_字->equal_range(character);
+    auto er = mc_by_字->equal_range(character);
     emscripten::val list = emscripten::val::global("document").call<emscripten::val>("createDocumentFragment");
-    std::for_each(er.first, er.second, [list](std::pair<std::string, bsoc_entry> const& entry_pair) {
-        bsoc_entry const& entry = std::get<1>(entry_pair);
+    std::for_each(er.first, er.second, [list](std::pair<std::string, morpheme_data> const& entry_pair) {
+        morpheme_data const& entry = std::get<1>(entry_pair);
         emscripten::val span = create_element("span");
-        span.call<emscripten::val>("appendChild", create_text_node(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲)));
+        span.call<emscripten::val>("appendChild", create_text_node(predict_鄴(std::get<mc_syllable>(entry.form.phoneme).initial, std::get<mc_syllable>(entry.form.phoneme).final, std::get<mc_syllable>(entry.form.phoneme).四聲)));
         span.call<void>("addEventListener", std::string("click"), js::bind([](emscripten::val event) {
             select_phoneme(event["target"]); },
             std::placeholders::_1));
@@ -226,14 +213,13 @@ int main() {
             let stringData = string_allocator(charArray.length);
             (new Uint8Array(buffer, stringData, charArray.length)).set(charArray); }); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(string_allocator_val));*/
-    bsoc = deserialize<std::vector<bsoc_entry>>(file_to_string("BaxterSagartOC2015-10-13"));
-    bsoc_by_字 = std::make_optional<std::unordered_multimap<std::string, bsoc_entry>>();
-    for (bsoc_entry const& entry : *bsoc) {
-        bsoc_by_字->insert(make_pair(entry.字, entry)); }
-    sbgy = deserialize<std::vector<sbgy_entry>>(file_to_string("sbgy"));
-    sbgy_by_字 = std::make_optional<std::unordered_multimap<std::string, sbgy_entry>>();
-    for (sbgy_entry const& entry : *sbgy) {
-        sbgy_by_字->insert(make_pair(entry.字, entry)); }
+    dict = deserialize<chinese_dictionary>(file_to_string("dictionary"));
+    oc_by_字 = std::make_optional<std::unordered_multimap<std::string, morpheme_data>>();
+    for (morpheme_data const& entry : dict->old_chinese) {
+        oc_by_字->insert(make_pair(entry.form.grapheme, entry)); }
+    mc_by_字 = std::make_optional<std::unordered_multimap<std::string, morpheme_data>>();
+    for (morpheme_data const& entry : dict->middle_chinese) {
+        mc_by_字->insert(make_pair(entry.form.grapheme, entry)); }
     emscripten::val const rubyize_text_val = js::bind(rubyize_text, std::placeholders::_1);
     emscripten::val const get_selected_dialect_val = js::bind(get_selected_dialect);
     R"js(

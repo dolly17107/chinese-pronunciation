@@ -362,26 +362,6 @@ struct mc_syllable {
         ar(initial);
         ar(final);
         ar(四聲); } };
-struct bsoc_entry {
-    std::string oc_str;
-    mc_syllable mc_pron;
-    std::string 字;
-    std::string gloss;
-    template<class archive>
-    void serialize(archive& ar) {
-        ar(oc_str);
-        ar(mc_pron);
-        ar(字);
-        ar(gloss); } };
-struct sbgy_entry {
-    mc_syllable mc_pron;
-    std::string 字;
-    std::string gloss;
-    template<class archive>
-    void serialize(archive& ar) {
-        ar(mc_pron);
-        ar(字);
-        ar(gloss); } };
 /* A tuple of (syllable) phoneme and (character) grapheme. Not necessarily a morpheme. */
 struct morpheme {
     std::variant<std::string, mc_syllable> phoneme;
@@ -390,15 +370,41 @@ struct morpheme {
     void serialize(archive& ar) {
         ar(phoneme);
         ar(grapheme); } };
-struct morpheme_history {
-    morpheme current;
-    std::optional<morpheme> ancestor;
-    std::optional<morpheme> descendant;
+struct morpheme_data {
+    morpheme form;
+    std::string meaning;
+    std::vector<morpheme> ancestors;
+    std::vector<morpheme> descendants;
     template<class archive>
     void serialize(archive& ar) {
-        ar(current);
-        ar(ancestor);
-        ar(descendant); } };
+        ar(form);
+        ar(meaning);
+        ar(ancestors);
+        ar(descendants); } };
+bool operator==(mc_syllable const & a, mc_syllable const & b) {
+    return a.initial == b.initial && a.final == b.final && a.四聲 == b.四聲; }
+bool operator==(morpheme const & a, morpheme const & b) {
+    return a.phoneme == b.phoneme && a.grapheme == b.grapheme; }
+namespace std {
+template <> struct hash<mc_syllable> {
+    std::size_t operator()(mc_syllable const & x) const {
+        return std::hash<std::string>{}(std::string{char(x.initial), char(x.final), char(x.四聲)}); } };
+template <> struct hash<morpheme> {
+    std::size_t operator()(morpheme const & x) const {
+        std::size_t seed = 0;
+        if (std::holds_alternative<std::string>(x.phoneme)) {
+            seed ^= std::hash<std::string>{}(std::get<std::string>(x.phoneme)) + 0xc6a4a7935bd1e995 + (seed << 6) + (seed >> 2); }
+        if (std::holds_alternative<mc_syllable>(x.phoneme)) {
+            seed ^= std::hash<mc_syllable>{}(std::get<mc_syllable>(x.phoneme)) + 0xc6a4a7935bd1e995 + (seed << 6) + (seed >> 2); }
+        seed ^= std::hash<std::string>{}(x.grapheme) + 0xc6a4a7935bd1e995 + (seed << 6) + (seed >> 2);
+        return seed; } }; }
+struct chinese_dictionary {
+    std::vector<morpheme_data> old_chinese;
+    std::vector<morpheme_data> middle_chinese;
+    template<class archive>
+    void serialize(archive& ar) {
+        ar(old_chinese);
+        ar(middle_chinese); } };
 std::string to_入聲(std::string fina) {
     using namespace std;
     if (std::string("m") == fina.substr(fina.size() + -std::string("m").size(), std::string("m").size())) {
