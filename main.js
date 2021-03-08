@@ -123,9 +123,7 @@ Module.expectedDataFileDownloads++;
     assert(arrayBuffer, "Loading data file failed.");
     assert(arrayBuffer instanceof ArrayBuffer, "bad input to processPackageData");
     var byteArray = new Uint8Array(arrayBuffer);
-    var ptr = Module["getMemory"](byteArray.length);
-    Module["HEAPU8"].set(byteArray, ptr);
-    DataRequest.prototype.byteArray = Module["HEAPU8"].subarray(ptr, ptr + byteArray.length);
+    DataRequest.prototype.byteArray = byteArray;
     var files = metadata["files"];
     for (var i = 0; i < files.length; ++i) {
      DataRequest.prototype.requests[files[i].filename].onload();
@@ -159,7 +157,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 2125187,
-  "package_uuid": "ce7f2d8f-8406-4462-98ec-e50169e9c02c"
+  "package_uuid": "abc872d3-98e7-42ea-896f-a6c59c2e4ae4"
  });
 })();
 
@@ -599,6 +597,13 @@ function writeAsciiToMemory(str, buffer, dontAddNull) {
 
 var WASM_PAGE_SIZE = 65536;
 
+function alignUp(x, multiple) {
+ if (x % multiple > 0) {
+  x += multiple - x % multiple;
+ }
+ return x;
+}
+
 var buffer, HEAP8, HEAPU8, HEAP16, HEAPU16, HEAP32, HEAPU32, HEAPF32, HEAPF64;
 
 function updateGlobalBufferAndViews(buf) {
@@ -622,7 +627,7 @@ if (Module["wasmMemory"]) {
 } else {
  wasmMemory = new WebAssembly.Memory({
   "initial": INITIAL_INITIAL_MEMORY / WASM_PAGE_SIZE,
-  "maximum": INITIAL_INITIAL_MEMORY / WASM_PAGE_SIZE
+  "maximum": 2147483648 / WASM_PAGE_SIZE
  });
 }
 
@@ -1185,9 +1190,7 @@ function ___cxa_begin_catch(ptr) {
 var exceptionLast = 0;
 
 function ___cxa_free_exception(ptr) {
- try {
-  return _free(new ExceptionInfo(ptr).ptr);
- } catch (e) {}
+ return _free(new ExceptionInfo(ptr).ptr);
 }
 
 function exception_decRef(info) {
@@ -1810,6 +1813,9 @@ var MEMFS = {
    return size;
   },
   write: function(stream, buffer, offset, length, position, canOwn) {
+   if (buffer.buffer === HEAP8.buffer) {
+    canOwn = false;
+   }
    if (!length) return 0;
    var node = stream.node;
    node.timestamp = Date.now();
@@ -5473,13 +5479,37 @@ function _emscripten_memcpy_big(dest, src, num) {
  HEAPU8.copyWithin(dest, src, src + num);
 }
 
-function abortOnCannotGrowMemory(requestedSize) {
- abort("OOM");
+function _emscripten_get_heap_size() {
+ return HEAPU8.length;
+}
+
+function emscripten_realloc_buffer(size) {
+ try {
+  wasmMemory.grow(size - buffer.byteLength + 65535 >>> 16);
+  updateGlobalBufferAndViews(wasmMemory.buffer);
+  return 1;
+ } catch (e) {}
 }
 
 function _emscripten_resize_heap(requestedSize) {
  requestedSize = requestedSize >>> 0;
- abortOnCannotGrowMemory(requestedSize);
+ var oldSize = _emscripten_get_heap_size();
+ var PAGE_MULTIPLE = 65536;
+ var maxHeapSize = 2147483648;
+ if (requestedSize > maxHeapSize) {
+  return false;
+ }
+ var minHeapSize = 16777216;
+ for (var cutDown = 1; cutDown <= 4; cutDown *= 2) {
+  var overGrownHeapSize = oldSize * (1 + .2 / cutDown);
+  overGrownHeapSize = Math.min(overGrownHeapSize, requestedSize + 100663296);
+  var newSize = Math.min(maxHeapSize, alignUp(Math.max(minHeapSize, requestedSize, overGrownHeapSize), PAGE_MULTIPLE));
+  var replacement = emscripten_realloc_buffer(newSize);
+  if (replacement) {
+   return true;
+  }
+ }
+ return false;
 }
 
 var ENV = {};
