@@ -19,7 +19,10 @@ morpheme- > grapheme- {
 morpheme- > phoneme- {
     order: 1;
     font-size: 0.5em;
-    flex: 0 0 auto; }
+    flex: 0 0 auto;
+    margin-inline-start: 0.1em;
+    margin-inline-end: 0.1em;
+    font-family: 'Segoe UI', system-ui; /* for Chinese versions of Windows*/ }
 morpheme-::selection, morpheme- *::selection {
     background-color: unset;
     color: unset; }
