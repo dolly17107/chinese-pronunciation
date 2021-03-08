@@ -75,34 +75,34 @@ void get_selected_dialect() {
     std::string dialect_name = emscripten::val::global("document").call<emscripten::val>("querySelector", std::string("#dialect > [data-selected]"))["firstChild"]["data"].as<std::string>();
     auto dialect_names = magic_enum::enum_entries<dialect>();
     selected_dialect = std::get<0>(*std::find_if(dialect_names.begin(), dialect_names.end(), [dialect_name](auto entry) { return dialect_name == std::get<1>(entry); })); }
-std::optional<std::vector<baxter_sagart_oc_entry>> bsoc_dictionary;
-std::optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>> bsoc_dictionary_by_字;
+std::optional<std::vector<bsoc_entry>> bsoc;
+std::optional<std::unordered_multimap<std::string, bsoc_entry>> bsoc_by_字;
 std::optional<std::vector<sbgy_entry>> sbgy;
 std::optional<std::unordered_multimap<std::string, sbgy_entry>> sbgy_by_字;
 std::size_t predict_count(std::string character) {
     if (selected_dialect == dialect::周) {
-        return bsoc_dictionary_by_字->count(character); }
+        return bsoc_by_字->count(character); }
     if (selected_dialect == dialect::南朝金陵) {
-        return bsoc_dictionary_by_字->count(character) + sbgy_by_字->count(character); }
+        return bsoc_by_字->count(character) + sbgy_by_字->count(character); }
     if (selected_dialect == dialect::北朝鄴) {
-        return bsoc_dictionary_by_字->count(character) + sbgy_by_字->count(character); }
+        return bsoc_by_字->count(character) + sbgy_by_字->count(character); }
     if (selected_dialect == dialect::中唐長安) {
-        return bsoc_dictionary_by_字->count(character) + sbgy_by_字->count(character); }
+        return bsoc_by_字->count(character) + sbgy_by_字->count(character); }
     throw; }
 std::vector<std::tuple<std::string, std::string>> predict(std::string character) {
     if (selected_dialect == dialect::周) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
-        auto er = bsoc_dictionary_by_字->equal_range(character);
+        auto er = bsoc_by_字->equal_range(character);
         std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-            baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
+            bsoc_entry entry = std::get<1>(entry_pair);
             return std::make_tuple(entry.oc_str, entry.gloss); });
         return pron_list; }
     if (selected_dialect == dialect::南朝金陵) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
         {
-            auto er = bsoc_dictionary_by_字->equal_range(character);
+            auto er = bsoc_by_字->equal_range(character);
             std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
+                bsoc_entry entry = std::get<1>(entry_pair);
                 return std::make_tuple(predict_金陵(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
         {
             auto er = sbgy_by_字->equal_range(character);
@@ -113,9 +113,9 @@ std::vector<std::tuple<std::string, std::string>> predict(std::string character)
     if (selected_dialect == dialect::北朝鄴) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
         {
-            auto er = bsoc_dictionary_by_字->equal_range(character);
+            auto er = bsoc_by_字->equal_range(character);
             std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
+                bsoc_entry entry = std::get<1>(entry_pair);
                 return std::make_tuple(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
         {
             auto er = sbgy_by_字->equal_range(character);
@@ -126,9 +126,9 @@ std::vector<std::tuple<std::string, std::string>> predict(std::string character)
     if (selected_dialect == dialect::中唐長安) {
         std::vector<std::tuple<std::string, std::string>> pron_list;
         {
-            auto er = bsoc_dictionary_by_字->equal_range(character);
+            auto er = bsoc_by_字->equal_range(character);
             std::transform(std::get<0>(er), std::get<1>(er), std::back_inserter(pron_list), [](auto entry_pair) {
-                baxter_sagart_oc_entry entry = std::get<1>(entry_pair);
+                bsoc_entry entry = std::get<1>(entry_pair);
                 return std::make_tuple(predict_prelmc(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲), entry.gloss); }); }
         {
             auto er = sbgy_by_字->equal_range(character);
@@ -145,10 +145,10 @@ void select_phoneme(emscripten::val li) {
     list.call<void>("insertNode", text); }
 void list_phonemes(emscripten::val ruby) {
     std::string character = ruby["childNodes"][1]["firstChild"]["data"].as<std::string>();
-    auto er = bsoc_dictionary_by_字->equal_range(character);
+    auto er = bsoc_by_字->equal_range(character);
     emscripten::val list = emscripten::val::global("document").call<emscripten::val>("createDocumentFragment");
-    std::for_each(er.first, er.second, [list](std::pair<std::string, baxter_sagart_oc_entry> const& entry_pair) {
-        baxter_sagart_oc_entry const& entry = std::get<1>(entry_pair);
+    std::for_each(er.first, er.second, [list](std::pair<std::string, bsoc_entry> const& entry_pair) {
+        bsoc_entry const& entry = std::get<1>(entry_pair);
         emscripten::val span = create_element("span");
         span.call<emscripten::val>("appendChild", create_text_node(predict_鄴(entry.mc_pron.initial, entry.mc_pron.final, entry.mc_pron.四聲)));
         span.call<void>("addEventListener", std::string("click"), js::bind([](emscripten::val event) {
@@ -160,7 +160,6 @@ void list_phonemes(emscripten::val ruby) {
 emscripten::val character_to_ruby(std::string character) {
     emscripten::val rb = create_element("grapheme-");
     rb.call<emscripten::val>("appendChild", create_text_node(character));
-    //baxter_sagart_oc_entry const& entry = std::get<1>(*std::get<0>(bsoc_dictionary_by_字->equal_range(character)));
     emscripten::val rt = create_element("phoneme-");
     rt.call<emscripten::val>("appendChild", create_text_node(std::get<0>(predict(character)[0])));
     rt.call<void>("addEventListener", std::string("focus"), js::bind([](emscripten::val event) {
@@ -227,10 +226,10 @@ int main() {
             let stringData = string_allocator(charArray.length);
             (new Uint8Array(buffer, stringData, charArray.length)).set(charArray); }); )js"_js_asm(
         reinterpret_cast<uint32_t const&>(string_allocator_val));*/
-    bsoc_dictionary = deserialize<std::vector<baxter_sagart_oc_entry>>(file_to_string("BaxterSagartOC2015-10-13"));
-    bsoc_dictionary_by_字 = std::make_optional<std::unordered_multimap<std::string, baxter_sagart_oc_entry>>();
-    for (baxter_sagart_oc_entry const& entry : *bsoc_dictionary) {
-        bsoc_dictionary_by_字->insert(make_pair(entry.字, entry)); }
+    bsoc = deserialize<std::vector<bsoc_entry>>(file_to_string("BaxterSagartOC2015-10-13"));
+    bsoc_by_字 = std::make_optional<std::unordered_multimap<std::string, bsoc_entry>>();
+    for (bsoc_entry const& entry : *bsoc) {
+        bsoc_by_字->insert(make_pair(entry.字, entry)); }
     sbgy = deserialize<std::vector<sbgy_entry>>(file_to_string("sbgy"));
     sbgy_by_字 = std::make_optional<std::unordered_multimap<std::string, sbgy_entry>>();
     for (sbgy_entry const& entry : *sbgy) {

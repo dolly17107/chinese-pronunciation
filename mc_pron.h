@@ -1,6 +1,7 @@
 #include <cinttypes>
 #include <array>
 #include <optional>
+#include <variant>
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
@@ -361,7 +362,7 @@ struct mc_syllable {
         ar(initial);
         ar(final);
         ar(四聲); } };
-struct baxter_sagart_oc_entry {
+struct bsoc_entry {
     std::string oc_str;
     mc_syllable mc_pron;
     std::string 字;
@@ -381,15 +382,23 @@ struct sbgy_entry {
         ar(mc_pron);
         ar(字);
         ar(gloss); } };
-/*struct dictionary_entry {
-    std::string gloss;
-    std::variant<std::tuple<std::string, mc_syllable>, mc_syllable> pron;
-    std::string character;
+/* A tuple of (syllable) phoneme and (character) grapheme. Not necessarily a morpheme. */
+struct morpheme {
+    std::variant<std::string, mc_syllable> phoneme;
+    std::string grapheme;
     template<class archive>
     void serialize(archive& ar) {
-        ar(gloss);
-        ar(pron);
-        ar(character); } };*/
+        ar(phoneme);
+        ar(grapheme); } };
+struct morpheme_history {
+    morpheme current;
+    std::optional<morpheme> ancestor;
+    std::optional<morpheme> descendant;
+    template<class archive>
+    void serialize(archive& ar) {
+        ar(current);
+        ar(ancestor);
+        ar(descendant); } };
 std::string to_入聲(std::string fina) {
     using namespace std;
     if (std::string("m") == fina.substr(fina.size() + -std::string("m").size(), std::string("m").size())) {

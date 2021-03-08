@@ -1,8 +1,8 @@
 .*/*
 BaxterSagartOC2015-10-13
 BaxterSagartOC2015-10-13.xlsx
-load_baxter_sagart_oc_dictionary.cpp
-load_baxter_sagart_oc_dictionary.exe
+load_bsoc.cpp
+load_bsoc.exe
 xlnt.*
 sbgy
 sbgy.xml
