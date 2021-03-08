@@ -157,7 +157,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 2125187,
-  "package_uuid": "abc872d3-98e7-42ea-896f-a6c59c2e4ae4"
+  "package_uuid": "cddd0c1b-6cc1-4d3b-8661-c29abf32a988"
  });
 })();
 
@@ -618,7 +618,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_MAX = 57152, DYNAMIC_BASE = 5300032, DYNAMICTOP_PTR = 56976;
+var STACK_MAX = 57040, DYNAMIC_BASE = 5299920, DYNAMICTOP_PTR = 56864;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -906,7 +906,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 8880: function($0, $1) {
+ 8768: function($0, $1) {
   const get_selected_dialect = requireHandle($1);
   get_selected_dialect();
   const rubyize_text = requireHandle($0);
@@ -945,7 +945,7 @@ var ASM_CONSTS = {
    reset_all_rubyizer();
   });
  },
- 10352: function() {
+ 10240: function() {
   const select = function(node, selection) {
    if (node instanceof Element && selection.containsNode(node)) {
     if (!node.classList.contains("selection")) {
@@ -1009,7 +1009,7 @@ var ASM_CONSTS = {
    event.stopPropagation();
   });
  },
- 13152: function() {
+ 13040: function() {
   document.getElementsByTagName("spinner-")[0].remove();
  }
 };
@@ -1234,7 +1234,7 @@ function ___cxa_find_matching_catch_2() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 57136;
+ var thrownBuf = 57024;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
@@ -1265,7 +1265,7 @@ function ___cxa_find_matching_catch_3() {
   return (setTempRet0(0), catchInfo.ptr) | 0;
  }
  var typeArray = Array.prototype.slice.call(arguments);
- var thrownBuf = 57136;
+ var thrownBuf = 57024;
  HEAP32[thrownBuf >> 2] = thrown;
  for (var i = 0; i < typeArray.length; i++) {
   var caughtType = typeArray[i];
