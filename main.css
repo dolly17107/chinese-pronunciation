@@ -4,6 +4,8 @@
     display: flex;
     flex-flow: column nowrap;
     font-family: system-ui; }
+:focus {
+    outline: unset; }
 #textarea {
     font-size: 60px;
     overflow: auto;
