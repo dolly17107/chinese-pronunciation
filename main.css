@@ -1,6 +1,4 @@
 :scope {
-    background: #ff6a00;
-    color: white;
     display: flex;
     flex-flow: column nowrap;
     font-family: system-ui; }
@@ -9,7 +7,10 @@
 #textarea {
     font-size: 60px;
     overflow: auto;
-    touch-action: pan-y; }
+    touch-action: pan-y;
+    border: 2px solid #999999; }
+#textarea:focus {
+    border-color: #ff6a00; }
 morpheme- {
     display: inline-flex;
     flex-flow: column-reverse nowrap;
@@ -28,11 +29,10 @@ morpheme-::selection, morpheme- *::selection {
     background-color: unset;
     color: unset; }
 morpheme-.selection {
-    background-color: #ffffff;
-    color: #000000; }
+    background-color: var(--foreground-color);
+    color: var(--background-color); }
 dolly17107-select {
-    background: #ffffff;
-    color: #000000;
+    background: var(--background-color);
     border: 2px solid #999999; }
 dolly17107-select:not([data-expanded]) {
     display: grid; }
