@@ -5,8 +5,6 @@
 :scope {
     --accent-color: #ff6a00;
     --accent-background: #ff6a004c; }
-:focus {
-    outline: unset; }
 #textarea {
     font-size: 60px;
     overflow: auto;

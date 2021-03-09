@@ -1,0 +1,8 @@
+/* CSS reset; waiting for :where().... */
+@namespace svg "http://www.w3.org/2000/svg";
+body, body :not(svg|*), body ::before, body ::after {
+    all: unset;
+    box-sizing: border-box;
+    overflow: hidden; }
+style, script {
+    display: none; }
