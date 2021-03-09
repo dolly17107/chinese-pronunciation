@@ -1,0 +1,6 @@
+/* Viewport fix. Currently no support for this syntax though. */
+@viewport {
+    zoom: 1;
+    user-zoom: fixed; }
+html {
+    height: 100%; }
