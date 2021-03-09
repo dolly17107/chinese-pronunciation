@@ -1,7 +1,8 @@
 :scope {
     display: flex;
     flex-flow: column nowrap;
-    font-family: system-ui; }
+    font-family: system-ui;
+    padding: 16px; }
 :scope {
     --accent-color: #ff6a00;
     --accent-background: #ff6a004c; }
@@ -9,7 +10,8 @@
     font-size: 60px;
     overflow: auto;
     touch-action: pan-y;
-    border: 2px solid #999999; }
+    border: 2px solid #999999;
+    flex: 1 1 auto; }
 #textarea:focus {
     border-color: var(--accent-color); }
 morpheme- {
