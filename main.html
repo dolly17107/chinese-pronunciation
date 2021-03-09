@@ -4,15 +4,20 @@
         <meta charset="UTF-8" />
         <title>漢語發音</title>
         <meta name="viewport" content="initial-scale=1, user-scalable=no">
+        <script src="https://samthor.github.io/scoped/scoped.js"></script>
+        <link rel=stylesheet href="dolly17107.viewport.css" />
+        <meta name=viewport content="initial-scale=1, user-scalable=no" />
         <script type=module src="dolly17107.select.js"></script>
         <link rel="stylesheet" href="main.css" />
         <script src="main.js" defer></script></head>
     <body>
+        <script defer>document.currentScript.parentNode.dataset.platform = navigator.platform;</script>
+        <style scoped>
+            @import url(dark.css);
+            @import url(main.css);</style>
         <spinner-><div></div><div></div><div></div><div></div><div></div><div></div></spinner->
         <nav>
-            <a><rubyizer- lang="zh-HANT">切韻</rubyizer-></a>
-            <a><rubyizer- lang="zh-HANT">字母</rubyizer-></a>
-            <a><rubyizer- lang="zh-HANT">韻圖</rubyizer-></a>
+            <a>Phonology</a>
             <dolly17107-select id=dialect>
                 <dolly17107-option>周</dolly17107-option>
                 <dolly17107-option>南朝金陵</dolly17107-option>
