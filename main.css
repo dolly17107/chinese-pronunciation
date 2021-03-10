@@ -17,7 +17,7 @@ aside {
     touch-action: pan-y;
     border: 2px solid #999999;
     flex: 1 1 auto;
-    margin: 1em; }
+    margin: 1rem; }
 #textarea:focus {
     border-color: var(--accent-color); }
 morpheme- {
