@@ -4,20 +4,20 @@
 :scope {
     --accent-color: #ff6a00;
     --accent-background: #ff6a004c; }
-@media(max-width: 600px) {
+/*@media(max-width: 600px) {
 :scope {
     flex-flow: column nowrap; }
-:scope :not(:first-child) {
+:scope > :not(:first-child) {
     margin-block-start: 0.5rem; }
-:scope :not(:last-child) {
+:scope > :not(:last-child) {
     margin-block-end: 0.5rem; } }
 @media(min-width: 600px) {
 :scope {
     flex-flow: row nowrap; }
-:scope :not(:first-child) {
+:scope > :not(:first-child) {
     margin-inline-start: 0.5rem; }
-:scope :not(:last-child) {
-    margin-inline-end: 0.5rem; } }
+:scope > :not(:last-child) {
+    margin-inline-end: 0.5rem; } }*/
 aside {
     flex: 0 0 auto;
     margin: 1em; }
@@ -32,10 +32,14 @@ aside {
     border-color: var(--accent-color); }
 @media(max-width: 600px) {
 #textarea {
-    margin-block-start: 0.5rem; } }
+    margin-block-start: 0.5rem; }
+aside {
+    margin-block-end: 0.5rem; } }
 @media(min-width: 600px) {
 #textarea {
-    margin-inline-start: 0.5rem; } }
+    margin-inline-start: 0.5rem; }
+aside {
+    margin-inline-end: 0.5rem; } }
 morpheme- {
     display: inline-flex;
     flex-flow: column-reverse nowrap;
