@@ -30,6 +30,12 @@ aside {
     margin: 1rem; }
 #textarea:focus {
     border-color: var(--accent-color); }
+@media(max-width: 600px) {
+#textarea {
+    margin-block-start: 0.5rem; } }
+@media(min-width: 600px) {
+#textarea {
+    margin-inline-start: 0.5rem; } }
 morpheme- {
     display: inline-flex;
     flex-flow: column-reverse nowrap;
