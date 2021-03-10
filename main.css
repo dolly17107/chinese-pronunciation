@@ -63,7 +63,8 @@ dolly17107-select:not([data-expanded]) > :not([data-selected]) {
     visibility: hidden; }
 dolly17107-select[data-expanded] {
     display: flex;
-    flex-flow: column nowrap; }
+    flex-flow: column nowrap;
+    border-color: var(--accent-color); }
 spinner- { display: block; position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 72px; height: 72px; margin: auto; }
 spinner- * { display: block; position: absolute; left: 0; right: 0; top: 0; bottom: 0; opacity: 0; animation-iteration-count: infinite; animation-name: orbit; animation-duration: 4s; }
 spinner- *:after { content: ''; display: block; position: absolute; bottom: 0; left: 0; right: 0; margin: 0 auto; width: 10%; height: 10%; border-radius: 50%; background: #c0c0c0; }
