@@ -1,17 +1,23 @@
 :scope {
     display: flex;
     flex-flow: column nowrap;
-    font-family: system-ui;
-    padding: 16px; }
+    font-family: system-ui; }
 :scope {
     --accent-color: #ff6a00;
     --accent-background: #ff6a004c; }
+@media(min-width: 600px) {
+:scope {
+    flex-flow: row nowrap; } }
+aside {
+    flex: 0 0 auto;
+    margin: 1em; }
 #textarea {
     font-size: 60px;
     overflow: auto;
     touch-action: pan-y;
     border: 2px solid #999999;
-    flex: 1 1 auto; }
+    flex: 1 1 auto;
+    margin: 1em; }
 #textarea:focus {
     border-color: var(--accent-color); }
 morpheme- {
